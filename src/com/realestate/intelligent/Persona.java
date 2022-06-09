@@ -3,7 +3,7 @@ package com.realestate.intelligent;
 public class Persona {
 
 	//Codigo en espera
-	
+
 	private String nombre1;
 	private String nombre2;
 	private String apellidoMaterno;
@@ -11,17 +11,22 @@ public class Persona {
 	private String edad;
 	private String correo;
 	private String celular;
-	
+	protected Direccion direccion;
+
+	public Persona() {
+	}
+
 	public Persona(String nombre1, String nombre2, String apellidoMaterno, String apellidoPaterno, String edad,
-			String correo, String celular) {
+			String correo, String celular, Direccion direccion) {
 		super();
 		this.nombre1 = nombre1;
-		this.nombre2 = "";
+		this.nombre2 = nombre2;
 		this.apellidoMaterno = apellidoMaterno;
 		this.apellidoPaterno = apellidoPaterno;
 		this.edad = edad;
 		this.correo = correo;
 		this.celular = celular;
+		this.direccion = direccion;
 	}
 
 	public String getNombre1() {
@@ -61,7 +66,13 @@ public class Persona {
 	}
 
 	public void setEdad(String edad) {
-			this.edad = edad;
+		try {
+			if(Integer.parseInt(this.edad) > 0 && Integer.parseInt(this.edad) < 100) {
+				this.edad = edad;
+			}
+		}catch(NumberFormatException e) {
+			System.out.println("Edad erronea..");
+		}
 	}
 
 	public String getCorreo() {
@@ -77,9 +88,19 @@ public class Persona {
 	}
 
 	public void setCelular(String celular) {
+
 		this.celular = celular;
 	}
-	
-	
+
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
 }
 

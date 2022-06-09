@@ -4,8 +4,8 @@ public class Arrendatario extends Persona{
 
 	//Constructor que herada con los datos de Persona
 	public Arrendatario(String nombre1, String nombre2, String apellidoMaterno, String apellidoPaterno, String edad,
-			String correo, String celular) {
-		super(nombre1, nombre2, apellidoMaterno, apellidoPaterno, edad, correo, celular);
+			String correo, String celular,Direccion direccion) {
+		super(nombre1, nombre2, apellidoMaterno, apellidoPaterno, edad, correo, celular, direccion);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -16,6 +16,5 @@ public class Arrendatario extends Persona{
 		System.out.println("Correo: "+getCorreo());
 		System.out.println("Celular: "+getCelular());
 	}
-	
-}
 
+}
