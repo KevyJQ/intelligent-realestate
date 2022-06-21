@@ -57,7 +57,6 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		return num;
 	}
 
-
 	private void llenarPersona(Persona persona, boolean isDireccionMandatory) {	
 
 		System.out.print("Dame tu primer nombre: ");
@@ -136,8 +135,8 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 	@Override
 	public Arrendador pedirArrendador() {
 		Arrendador arrendador = new Arrendador();
-		llenarPersona(arrendador, true);
-		//llenarDireccion(arrendador);
+		boolean isDireccionMandator = true;
+		llenarPersona(arrendador, isDireccionMandator);
 		return arrendador;
 	}
 

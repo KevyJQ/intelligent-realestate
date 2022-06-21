@@ -12,18 +12,6 @@ public class Direccion {
 	public Direccion() {
 	}
 
-	public Direccion(String direccion1, String direccion2,
-			String pais, String ciudad, String estado, String codigoPostal) {
-		super();
-		this.direccion1 = direccion1;
-		this.direccion2 = direccion2;
-		this.pais = pais;
-		this.ciudad = ciudad;
-		this.estado = estado;
-		this.codigoPostal = codigoPostal;
-		
-	}
-
 	public String getDireccion1() {
 		return direccion1;
 	}

@@ -8,11 +8,6 @@ public class RealEstate {
 	public RealEstate() {
 	}
 
-	public RealEstate(Direccion direccion, TypeRealEstate realEstateType) {
-		this.direccion = direccion;
-		this.realEstateType = realEstateType;
-	}
-
 	public Direccion getDireccion() {
 		return direccion;
 	}

@@ -17,20 +17,6 @@ public class Persona {
 	public Persona() {
 	}
 
-	public Persona(String nombre1, String nombre2, String apellidoMaterno, String apellidoPaterno, int edad,
-			String correo, String celular, Direccion direccion, RealEstate realEstate) {
-		super();
-		this.nombre1 = nombre1;
-		this.nombre2 = nombre2;
-		this.apellidoMaterno = apellidoMaterno;
-		this.apellidoPaterno = apellidoPaterno;
-		this.edad = edad;
-		this.correo = correo;
-		this.celular = celular;
-		this.direccion = direccion;
-		this.realEstate = realEstate;
-	}
-
 	public String getNombre1() {
 		return nombre1;
 	}
