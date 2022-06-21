@@ -32,3 +32,13 @@ $ git branch -va
 
 > Nota: Para mover todos los archivos de una carpeta a la direcion pasada se usa el comando:
 	$ mv * ../
+
+## Para compilarlo y ejecutarlo
+
+```shell
+$ cd intelligent-realestate	//ingresamos al directorio
+$ java -cp target/intelligent_RealEstate-0.0.1-SNAPSHOT.jar com.intelligent.realestate.main.IntelligentRealEstateMain
+```
+> Nota: com.intelligent.realestate.main  -> es el package donde se encuentra
+	IntelligentRealEstateMain	-> es el nombre de tu archivo Main
+ 
