@@ -8,6 +8,7 @@ import com.intelligent.realestate.services.impl.IntelligentRealEstateScannerServ
 public class IntelligentRealEstateMain {
 
 	public static void main(String[] args) {
+		//System.out.println("Testing");
 		IntelligentRealEstateScannerService scannerService = new IntelligentRealEstateScannerServiceImpl();
 		IntelligentRealEstateMenuService menuService = new IntelligentRealEstateMenuServiceImpl(scannerService);
 		menuService.mostrarMenuPrincipal();

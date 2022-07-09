@@ -84,7 +84,7 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		persona.setCorreo(correo);
 
 		System.out.print("Dame tu celular: ");
-		String celular = scanner.nextLine();
+		int celular = pedirNumero(" ", "Numero no valido,ingrese nuevamente..");
 		persona.setCelular(celular);
 
 		if (isDireccionMandatory) {
@@ -92,9 +92,9 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		}else  {
 			System.out.print("Cuentas con residencia actual\n1.Si\n2.No\nOpcion: ");
 			int opcion = pedirNumeroEntreRango("", "Numero no valido", 1, 2);
-					if(opcion == 1) {
-						pedirDireccion();
-					}
+			if(opcion == 1) {
+				pedirDireccion();
+			}
 		}
 	}
 
@@ -124,6 +124,7 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		String codigoPostal = scanner.nextLine();
 		direccion.setCodigoPostal(codigoPostal);
 	}
+
 
 	@Override
 	public Direccion pedirDireccion() {

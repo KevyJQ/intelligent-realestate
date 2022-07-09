@@ -1,5 +1,9 @@
 package com.intelligent.realestate.services.impl;
 
+import java.sql.SQLException;
+
+import com.intelligent.realestate.jdbc.ArrendadorDao;
+import com.intelligent.realestate.jdbc.DbConnnection;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
@@ -29,7 +33,6 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 	}
 
 	private int menuSecundario() {	//Menu Agregar biene raices
-
 		boolean Vali = true;
 		do {
 			System.out.println("==================================================================");
@@ -74,6 +77,47 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		return tipoRealEstate;
 	}
 
+	private void menuDao() throws SQLException {
+		int opcion;
+		System.out.print("1.Ya estoy registrado\n2.Soy nuevo\nOpcion: ");
+		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
+		if(opcion == 1) {
+			menuArrendador();
+		}else {
+			System.out.println("Ok..Ingresemos tus datos.");
+			Arrendador arrendador = new Arrendador();
+			arrendador.setDireccion(new Direccion());
+			arrendador.setRealEstate(new RealEstate());
+			scannerService.pedirArrendador();
+			menuSecundario();
+		}
+	}
+	
+	public void menuArrendador() throws SQLException{
+		
+		System.out.println("==================================================================");
+		
+		ArrendadorDao arrendadordao = new ArrendadorDao(DbConnnection.getConnection());
+		
+		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"
+				+ "\n3.Buscar por Real Estate\nOpcion: ");
+		
+		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 3);
+		switch(opcion) {
+		case 1:
+			System.out.print("Me puedes indicar cual es tu ID: ");
+			long id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
+			arrendadordao.findById(id);
+			break;
+		case 2:
+			//Buscar por Nombre y apellidos
+			break;
+		case 3:
+			//Buscar por Real Estate
+			break;
+		}
+	}
+	
 	@Override
 	public void mostrarMenuPrincipal() {		
 		System.out.println("---Bienvenido a mi sistema---");
@@ -85,24 +129,20 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			switch(opcion) {
 			case 1:	//Propietario
 				// Crear clase MenuArrendador que maneje todas las opciones del arrendador.
-				System.out.println("\n\n\n\n\n\n");
+				//System.out.println("\n\n\n\n\n\n");
 				System.out.println("==================================================================");
 				System.out.println("Menu Arrendador");
 				System.out.println("==================================================================");
-
-				Arrendador arrendador = new Arrendador();
-				arrendador.setDireccion(new Direccion());
-				arrendador.setRealEstate(new RealEstate());
-				scannerService.pedirArrendador();	//Pedir los datos del arrendador
-				//System.out.println(arrendador);	//Impresion del toString para hacer puebas
-
-				menuSecundario();
-
+				try {
+					menuDao();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 				break;
 
 			case 2:	//Inquilino
 				// Crear clase MenuArrendatario que maneje todas las opciones del arrendatario.
-				System.out.println("\n\n\n\n\n\n");
+				//System.out.println("\n\n\n\n\n\n");
 				System.out.println("==================================================================");
 				System.out.println("Menu Arrendatario");
 				System.out.println("==================================================================");
