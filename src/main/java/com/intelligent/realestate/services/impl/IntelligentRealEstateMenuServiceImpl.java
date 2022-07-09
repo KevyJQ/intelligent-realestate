@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.intelligent.realestate.jdbc.ArrendadorDao;
 import com.intelligent.realestate.jdbc.DbConnnection;
+import com.intelligent.realestate.jdbc.DbInsert;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
@@ -87,18 +88,21 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			menuArrendador();
 			menuSecundario();
 		}else {
+			
 			System.out.println("Ok..Ingresemos tus datos.");
+			DbInsert insert = new DbInsert(DbConnnection.getConnection());
 			Arrendador arrendador = new Arrendador();
-			arrendador.setDireccion(new Direccion());
-			arrendador.setRealEstate(new RealEstate());
-			scannerService.pedirArrendador();
+			insert.insertData(arrendador);
+//			arrendador.setDireccion(new Direccion());
+//			arrendador.setRealEstate(new RealEstate());
+//			scannerService.pedirArrendador();
 			menuSecundario();
 		}
 	}
 	
 	public void menuArrendador() throws SQLException{
 		
-		System.out.println("==================================================================");
+		//System.out.println("==================================================================");
 		
 		ArrendadorDao arrendadordao = new ArrendadorDao(DbConnnection.getConnection());
 		
