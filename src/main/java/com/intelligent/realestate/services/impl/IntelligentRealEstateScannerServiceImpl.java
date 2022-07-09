@@ -84,7 +84,7 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		persona.setCorreo(correo);
 
 		System.out.print("Dame tu celular: ");
-		int celular = pedirNumero(" ", "Numero no valido,ingrese nuevamente..");
+		String celular = scanner.nextLine();
 		persona.setCelular(celular);
 
 		if (isDireccionMandatory) {

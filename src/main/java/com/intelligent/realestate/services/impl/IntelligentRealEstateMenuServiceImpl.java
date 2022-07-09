@@ -1,6 +1,7 @@
 package com.intelligent.realestate.services.impl;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import com.intelligent.realestate.jdbc.ArrendadorDao;
 import com.intelligent.realestate.jdbc.DbConnnection;
@@ -82,7 +83,9 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		System.out.print("1.Ya estoy registrado\n2.Soy nuevo\nOpcion: ");
 		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
 		if(opcion == 1) {
+			System.out.println("==================================================================");
 			menuArrendador();
+			menuSecundario();
 		}else {
 			System.out.println("Ok..Ingresemos tus datos.");
 			Arrendador arrendador = new Arrendador();
@@ -100,9 +103,9 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		ArrendadorDao arrendadordao = new ArrendadorDao(DbConnnection.getConnection());
 		
 		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"
-				+ "\n3.Buscar por Real Estate\nOpcion: ");
+				+ "\nOpcion: ");
 		
-		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 3);
+		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
 		switch(opcion) {
 		case 1:
 			System.out.print("Me puedes indicar cual es tu ID: ");
@@ -110,10 +113,14 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			arrendadordao.findById(id);
 			break;
 		case 2:
-			//Buscar por Nombre y apellidos
-			break;
-		case 3:
-			//Buscar por Real Estate
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Cual es tu nombre o primer nombre:");
+			String nombre1 = sc.nextLine();
+			System.out.print("Cual es tu apellido paterno:");
+			String apellidoPaterno = sc.nextLine();
+			System.out.print("Cual es tu apellido materno:");
+			String apellidoMaterno = sc.nextLine();
+			arrendadordao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
 			break;
 		}
 	}

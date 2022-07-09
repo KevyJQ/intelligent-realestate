@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.intelligent.realestate.model.Arrendador;
+import com.intelligent.realestate.model.RealEstate;
 
 public class ArrendadorDao {
 
@@ -37,14 +38,14 @@ public class ArrendadorDao {
 				arrendador.setApellidoMaterno(myRs.getString(4));
 				arrendador.setEdad(myRs.getInt(5));
 				arrendador.setCorreo(myRs.getString(6));
-				arrendador.setCelular(7);
+				arrendador.setCelular(myRs.getString(7));
 
 			}
 			System.out.println("ID: "+arrendadorId+"\nNombre: "+myRs.getString(1)
 			+" "+myRs.getString(2)+" "+myRs.getString(3)+" "+myRs.getString(4)
 			+"\nEdad: "+myRs.getInt(5)+"\nCorreo: "+myRs.getString(6)+"\nCelular: "
 			+myRs.getString(7));
-			
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -57,10 +58,10 @@ public class ArrendadorDao {
 
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>();
 
-		instruccionSQL = "SELECT nombre1,nombres2,apellidoPaterno,"
+		instruccionSQL = "SELECT nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular FROM arrendador "
-				+ "WHERE name = '?' AND apellidoPaterno = '?' AND apellidoMaterno = '?' ;";
-		//Arrendador arrendador = null;
+				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+
 		try {
 			PreparedStatement myStmt;
 			myStmt = oConnection.prepareStatement(instruccionSQL);
@@ -68,19 +69,30 @@ public class ArrendadorDao {
 			myStmt.setString(2,apellidoPaterno);
 			myStmt.setString(3,apelledoMaterno);
 			ResultSet myRs = myStmt.executeQuery();
+			Arrendador arrendador = new Arrendador();
+			
 			while (myRs.next()) {
-				Arrendador arrendador = new Arrendador();
-
 				arrendador.setNombre1(myRs.getString(1));
 				arrendador.setNombre2(myRs.getString(2));
 				arrendador.setApellidoPaterno(myRs.getString(3));
 				arrendador.setApellidoMaterno(myRs.getString(4));
 				arrendador.setEdad(myRs.getInt(5));
 				arrendador.setCorreo(myRs.getString(6));
-				arrendador.setCelular(7);
-
+				arrendador.setCelular(myRs.getString(7));
 				arrendadores.add(arrendador);
 			}
+			
+			//System.out.println("SIZE " + arrendadores.size());
+			for(Arrendador arre : arrendadores) {
+				System.out.print("Nombre: "+arre.getNombre1());
+				System.out.print(" "+arre.getNombre2());
+				System.out.print(" "+arre.getApellidoPaterno());
+				System.out.print(" "+arre.getApellidoMaterno());
+				System.out.print("\nEdad: "+arre.getEdad());
+				System.out.print("\nCorreo: "+arre.getCorreo());
+				System.out.print("\nCelular: "+arre.getCelular());
+			}
+
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -88,7 +100,48 @@ public class ArrendadorDao {
 		return arrendadores;
 	}
 
-	public List<Arrendador> findByRealEstate(long arrendadorId){
-		return null;
-	}
+	/*
+	public List<RealEstate> findByRealEstate(long arrendadorId){
+		
+		List<RealEstate> arrendadores = new ArrayList<RealEstate>();
+		
+		instruccionSQL = "SELECT nombre1,nombre2,apellidoPaterno,"
+				+ "apellidoMaterno,edad,correo,celular FROM arrendador,real_estate re "
+				+ "WHERE re.id_realestate= ?";
+
+//		try {
+//			PreparedStatement myStmt;
+//			myStmt = oConnection.prepareStatement(instruccionSQL);
+//			myStmt.setLong(1,arrendadorId);
+//			ResultSet myRs = myStmt.executeQuery();
+//			Arrendador arrendador = new Arrendador();
+//			
+//			while (myRs.next()) {
+//				arrendador.setNombre1(myRs.getString(1));
+//				arrendador.setNombre2(myRs.getString(2));
+//				arrendador.setApellidoPaterno(myRs.getString(3));
+//				arrendador.setApellidoMaterno(myRs.getString(4));
+//				arrendador.setEdad(myRs.getInt(5));
+//				arrendador.setCorreo(myRs.getString(6));
+//				arrendador.setCelular(myRs.getLong(7));
+//				arrendadores.add(arrendador);
+//			}
+//			
+//			//System.out.println("SIZE " + arrendadores.size());
+//			for(Arrendador arre : arrendadores) {
+//				System.out.print("Nombre: "+arre.getNombre1());
+//				System.out.print(" "+arre.getNombre2());
+//				System.out.print(" "+arre.getApellidoPaterno());
+//				System.out.print(" "+arre.getApellidoMaterno());
+//				System.out.print("\nEdad: "+arre.getEdad());
+//				System.out.print("\nCorreo: "+arre.getCorreo());
+//				System.out.print("\nCelular: "+arre.getCelular());
+//			}
+//
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}
+		
+		return arrendadores;
+	}*/
 }

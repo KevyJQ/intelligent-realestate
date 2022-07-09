@@ -10,7 +10,7 @@ public class Persona {
 	private String apellidoPaterno;
 	private int edad;
 	private String correo;
-	private int celular;
+	private String celular;
 	private Direccion direccion;
 	private RealEstate realEstate;	
 	
@@ -66,13 +66,13 @@ public class Persona {
 		this.correo = correo;
 	}
 
-	public int getCelular() {
+	public String getCelular() {
 		return celular;
 	}
 
-	public void setCelular(int celular) {
+	public void setCelular(String string) {
 
-		this.celular = celular;
+		this.celular = string;
 	}
 
 	public Direccion getDireccion() {
