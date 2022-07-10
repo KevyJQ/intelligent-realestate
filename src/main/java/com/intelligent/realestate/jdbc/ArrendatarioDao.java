@@ -15,7 +15,7 @@ public class ArrendatarioDao {
 		this.oConnection = conn;
 	}
 	
-	public void guardarArrendador(Arrendatario arrendatario){
+	public void guardarArrendatario(Arrendatario arrendatario){
 		
 		System.out.print("Primer nombre:");
 		arrendatario.setNombre1(scanner.nextLine());

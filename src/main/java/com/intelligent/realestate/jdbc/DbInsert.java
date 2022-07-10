@@ -51,18 +51,18 @@ public class DbInsert {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void insertArrendatario(Arrendatario arrendatario) throws SQLException {
-		
+
 		instruccionSQL = "INSERT INTO arrendatario(nombre1,nombre2,apellidoPaterno,apellidoMaterno,"
 				+ "edad,correo,celular) VALUE (?,?,?,?,?,?,?)";
-		
+
 		ArrendatarioDao arrendatariodao = new ArrendatarioDao(DbConnnection.getConnection());
-		
+
 		try {
 			PreparedStatement myStmt;
 			myStmt = oConnection.prepareStatement(instruccionSQL);
-			arrendatariodao.guardarArrendador(arrendatario);
+			arrendatariodao.guardarArrendatario(arrendatario);
 			myStmt.setString(1, arrendatario.getNombre1());
 			myStmt.setString(2, arrendatario.getNombre2());
 			myStmt.setString(3, arrendatario.getApellidoPaterno());
@@ -86,7 +86,7 @@ public class DbInsert {
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 }
