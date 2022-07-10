@@ -79,7 +79,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		return tipoRealEstate;
 	}
 
-	private void menuDao() throws SQLException {
+	private void menuArrendadorDao() throws SQLException {
 		int opcion;
 		System.out.print("1.Ya estoy registrado\n2.Soy nuevo\nOpcion: ");
 		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
@@ -87,28 +87,48 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			System.out.println("==================================================================");
 			menuArrendador();
 			menuSecundario();
-		}else {
-			
+		}else {	
 			System.out.println("Ok..Ingresemos tus datos.");
 			DbInsert insert = new DbInsert(DbConnnection.getConnection());
 			Arrendador arrendador = new Arrendador();
-			insert.insertData(arrendador);
-//			arrendador.setDireccion(new Direccion());
-//			arrendador.setRealEstate(new RealEstate());
-//			scannerService.pedirArrendador();
+			insert.insertArrendador(arrendador);
+			//			arrendador.setDireccion(new Direccion());
+			//			arrendador.setRealEstate(new RealEstate());
+			//			scannerService.pedirArrendador();
 			menuSecundario();
 		}
 	}
-	
+
+	public void menuArrendatarioDao() throws SQLException {
+		int opcion;
+		System.out.print("1.Arrendatario existente\n2.Arrendatarionuevo\nOpcion: ");
+		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
+		switch(opcion) {
+		case 1:
+			//Buscar arrendatario
+			break;
+		case 2:
+			//Ingresar al nuevo arrendatario
+			System.out.println("Bienvenido..Ingresemos tus datos.");
+			DbInsert insert = new DbInsert(DbConnnection.getConnection());
+			Arrendatario arrendatario = new Arrendatario();
+			//arrendatario.setDireccion(new Direccion());
+			insert.insertArrendatario(arrendatario);
+			//scannerService.pedirArrendatario();
+			menuRealEstate();
+			break;
+		}
+	}
+
 	public void menuArrendador() throws SQLException{
-		
+
 		//System.out.println("==================================================================");
-		
+
 		ArrendadorDao arrendadordao = new ArrendadorDao(DbConnnection.getConnection());
-		
+
 		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"
 				+ "\nOpcion: ");
-		
+
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
 		switch(opcion) {
 		case 1:
@@ -128,7 +148,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			break;
 		}
 	}
-	
+
 	@Override
 	public void mostrarMenuPrincipal() {		
 		System.out.println("---Bienvenido a mi sistema---");
@@ -145,7 +165,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 				System.out.println("Menu Arrendador");
 				System.out.println("==================================================================");
 				try {
-					menuDao();
+					menuArrendadorDao();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -157,12 +177,17 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 				System.out.println("==================================================================");
 				System.out.println("Menu Arrendatario");
 				System.out.println("==================================================================");
-
-				Arrendatario arrendatario = new Arrendatario();
-				arrendatario.setDireccion(new Direccion());
-
-				scannerService.pedirArrendatario();
-				menuRealEstate();
+				try {
+					menuArrendatarioDao();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//				Arrendatario arrendatario = new Arrendatario();
+//				arrendatario.setDireccion(new Direccion());
+//
+//				scannerService.pedirArrendatario();
+//				menuRealEstate();
 				break;
 
 			case 3:
