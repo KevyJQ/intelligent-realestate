@@ -36,9 +36,30 @@ $ git branch -va
 ## Para compilarlo y ejecutarlo
 
 ```shell
+# Compilarlo
+$ mvn package
+
+# Ver archivos en el jar
+$ jar tf ./target/intelligent_RealEstate-0.0.1-SNAPSHOT.jar
+
 $ cd intelligent-realestate	//ingresamos al directorio
 $ java -cp target/intelligent_RealEstate-0.0.1-SNAPSHOT.jar com.intelligent.realestate.main.IntelligentRealEstateMain
 ```
 > Nota: com.intelligent.realestate.main  -> es el package donde se encuentra
-	IntelligentRealEstateMain	-> es el nombre de tu archivo Main
+>	IntelligentRealEstateMain	-> es el nombre de tu archivo Main
  
+
+> Note: Las dependencias de maven estan en:
+>
+> Windows: C:\Users\<User_Name>\.m2
+
+## Como conectarse a la base de datos
+
+```shell
+# Ver la version the Maria DB
+$ mysql --version
+
+# Conectarse a la base de datos
+$ mysql -u root -p
+```
+
