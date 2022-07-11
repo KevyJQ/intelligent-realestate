@@ -6,7 +6,7 @@ import java.util.Scanner;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.jdbc.ArrendadorDaoImpl;
 import com.intelligent.realestate.jdbc.DbConnnection;
-import com.intelligent.realestate.jdbc.DbInsert;
+
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
@@ -112,11 +112,12 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			break;
 		case 2:
 			//Ingresar al nuevo arrendatario
-			System.out.println("Bienvenido..Ingresemos tus datos.");
-			DbInsert insert = new DbInsert(DbConnnection.getConnection());
 			Arrendatario arrendatario = new Arrendatario();
+			System.out.println("Bienvenido..Ingresemos tus datos.");
+			//arrendadorDao.insertArrendador(null);
+			
 			//arrendatario.setDireccion(new Direccion());
-			insert.insertArrendatario(arrendatario);
+			//insert.insertArrendatario(arrendatario);
 			//scannerService.pedirArrendatario();
 			menuRealEstate();
 			break;

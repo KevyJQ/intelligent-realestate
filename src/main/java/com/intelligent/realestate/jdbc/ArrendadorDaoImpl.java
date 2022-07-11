@@ -7,15 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 
 
 public class ArrendadorDaoImpl implements ArrendadorDao {
-
-	Scanner scanner = new Scanner(System.in);
 	Connection connection;
 
 	public ArrendadorDaoImpl(Connection conn) {
@@ -23,31 +20,35 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	}
 
 	public Arrendador findById(long arrendadorId) {
+
+		Arrendador arrendador = null;
+		PreparedStatement pstmt;
+		ResultSet rs;
+
 		final String instruccionSQL = "SELECT nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular FROM arrendador "
 				+ "WHERE id_arrendador = ? ;";
-		Arrendador arrendador = null;
-		try {
-			PreparedStatement myStmt;
-			myStmt = connection.prepareStatement(instruccionSQL);
-			myStmt.setLong(1, arrendadorId);
-			ResultSet myRs = myStmt.executeQuery();
 
-			if (myRs.next()) {
+		try {
+			pstmt = connection.prepareStatement(instruccionSQL);
+			pstmt.setLong(1, arrendadorId);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
 				arrendador = new Arrendador();
-				arrendador.setNombre1(myRs.getString(1));
-				arrendador.setNombre2(myRs.getString(2));
-				arrendador.setApellidoPaterno(myRs.getString(3));
-				arrendador.setApellidoMaterno(myRs.getString(4));
-				arrendador.setEdad(myRs.getInt(5));
-				arrendador.setCorreo(myRs.getString(6));
-				arrendador.setCelular(myRs.getString(7));
+				arrendador.setNombre1(rs.getString(1));
+				arrendador.setNombre2(rs.getString(2));
+				arrendador.setApellidoPaterno(rs.getString(3));
+				arrendador.setApellidoMaterno(rs.getString(4));
+				arrendador.setEdad(rs.getInt(5));
+				arrendador.setCorreo(rs.getString(6));
+				arrendador.setCelular(rs.getString(7));
 
 			}
-			System.out.println("ID: "+arrendadorId+"\nNombre: "+myRs.getString(1)
-			+" "+myRs.getString(2)+" "+myRs.getString(3)+" "+myRs.getString(4)
-			+"\nEdad: "+myRs.getInt(5)+"\nCorreo: "+myRs.getString(6)+"\nCelular: "
-			+myRs.getString(7));
+			System.out.println("ID: "+arrendadorId+"\nNombre: "+rs.getString(1)
+			+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)
+			+"\nEdad: "+rs.getInt(5)+"\nCorreo: "+rs.getString(6)+"\nCelular: "
+			+rs.getString(7));
 
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -56,36 +57,39 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		return arrendador;
 	}
 
-	public List<Arrendador> findByNameAndLasName(String name, String apelledoMaterno, String apellidoPaterno){
+	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno){
 
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>();
+		Arrendador arrendador = new Arrendador();
+
+		PreparedStatement pstmt;
+		ResultSet rs;
+
+		int ID = 0;
 
 		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular FROM arrendador "
 				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
-		try {
-			PreparedStatement myStmt;
-			myStmt = connection.prepareStatement(instruccionSQL);
-			myStmt.setString(1,name);
-			myStmt.setString(2,apellidoPaterno);
-			myStmt.setString(3,apelledoMaterno);
-			ResultSet myRs = myStmt.executeQuery();
-			Arrendador arrendador = new Arrendador();
-			int ID = 0;
-			while (myRs.next()) {
-				ID = myRs.getInt(1);
-				arrendador.setNombre1(myRs.getString(2));
-				arrendador.setNombre2(myRs.getString(3));
-				arrendador.setApellidoPaterno(myRs.getString(4));
-				arrendador.setApellidoMaterno(myRs.getString(5));
-				arrendador.setEdad(myRs.getInt(6));
-				arrendador.setCorreo(myRs.getString(7));
-				arrendador.setCelular(myRs.getString(8));
+		try {			
+			pstmt = connection.prepareStatement(instruccionSQL);
+			pstmt.setString(1,name);
+			pstmt.setString(2,apellidoPaterno);
+			pstmt.setString(3,apellidoMaterno);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ID = rs.getInt(1);
+				arrendador.setNombre1(rs.getString(2));
+				arrendador.setNombre2(rs.getString(3));
+				arrendador.setApellidoPaterno(rs.getString(4));
+				arrendador.setApellidoMaterno(rs.getString(5));
+				arrendador.setEdad(rs.getInt(6));
+				arrendador.setCorreo(rs.getString(7));
+				arrendador.setCelular(rs.getString(8));
 				arrendadores.add(arrendador);
 			}
 
-			//System.out.println("SIZE " + arrendadores.size());
 			for(Arrendador arre : arrendadores) {
 				System.out.print("ID: "+ID);
 				System.out.print("\nNombre: "+arre.getNombre1());
@@ -105,13 +109,15 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	}
 
 	public void insertArrendador(Arrendador arrendador) {
+
 		PreparedStatement pstmt;
 		ResultSet rs;
+
 		final String instruccionSQL = "INSERT INTO arrendador"
 				+ "(nombre1, nombre2, apellidoPaterno, apellidoMaterno, edad, correo, celular) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try {
-			
+
 			pstmt = connection.prepareStatement(instruccionSQL, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, arrendador.getNombre1());
 			pstmt.setString(2, arrendador.getNombre2());
@@ -122,16 +128,13 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 			pstmt.setString(7, arrendador.getCelular());
 			pstmt.executeUpdate();
 
-			int autoIncKeyFromApi = -1;
+			rs = pstmt.getGeneratedKeys();
+			if (rs.next()) {
+				arrendador.setIdArrendador(rs.getInt(1));
+			} else {
+				// TODO: throw an exception from here
+			}
 
-		    rs = pstmt.getGeneratedKeys();
-		    if (rs.next()) {
-		        arrendador.setIdArrendador(rs.getInt(1));
-		    } else {
-		    	// TODO: throw an exception from here
-		    }
-		    
-			System.out.println("\nInsert exitoso..");
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
