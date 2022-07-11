@@ -183,11 +183,11 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-//				Arrendatario arrendatario = new Arrendatario();
-//				arrendatario.setDireccion(new Direccion());
-//
-//				scannerService.pedirArrendatario();
-//				menuRealEstate();
+				//				Arrendatario arrendatario = new Arrendatario();
+				//				arrendatario.setDireccion(new Direccion());
+				//
+				//				scannerService.pedirArrendatario();
+				//				menuRealEstate();
 				break;
 
 			case 3:
