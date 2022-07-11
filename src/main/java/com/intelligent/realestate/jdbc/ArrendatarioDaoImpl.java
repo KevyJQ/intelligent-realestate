@@ -11,11 +11,11 @@ import java.util.List;
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendatario;
 
-public class ArrendatarioDaoImp implements ArrendatarioDao {
+public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	Connection connection;
 
-	public ArrendatarioDaoImp(Connection conn) {
+	public ArrendatarioDaoImpl(Connection conn) {
 		this.connection = conn;
 	}
 

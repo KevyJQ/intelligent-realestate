@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
+import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.jdbc.ArrendadorDaoImpl;
 import com.intelligent.realestate.jdbc.DbConnnection;
 
@@ -18,10 +19,12 @@ import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
 public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEstateMenuService {
 
 	private ArrendadorDao arrendadorDao;
+	private ArrendatarioDao arrendatarioDao;
 	private IntelligentRealEstateScannerService scannerService;
 
-	public IntelligentRealEstateMenuServiceImpl(ArrendadorDao arrendadorDao, IntelligentRealEstateScannerService scannerService) {
+	public IntelligentRealEstateMenuServiceImpl(ArrendadorDao arrendadorDao,ArrendatarioDao arrendatarioDao, IntelligentRealEstateScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
+		this.arrendatarioDao = arrendatarioDao;
 		this.scannerService = scannerService;
 	}
 
@@ -83,63 +86,58 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 	}
 
 	private void menuArrendadorDao() throws SQLException {
+		
+		Arrendador arrendador = new Arrendador();
+		
 		int opcion;
-		System.out.print("1.Ya estoy registrado\n2.Soy nuevo\nOpcion: ");
+		
+		System.out.print("1.Arrendador existente\n2.Arrendador nuevo\nOpcion: ");
 		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
+		
 		if(opcion == 1) {
 			System.out.println("==================================================================");
 			menuArrendador();
 			menuSecundario();
 		}else {	
 			System.out.println("Ok..Ingresemos tus datos.");
-	
-			Arrendador arrendador = new Arrendador();
-			arrendadorDao.insertArrendador(arrendador);
+			arrendadorDao.insertArrendador(scannerService.pedirArrendador());
 			//			arrendador.setDireccion(new Direccion());
 			//			arrendador.setRealEstate(new RealEstate());
-			//			scannerService.pedirArrendador();
 			menuSecundario();
 		}
 	}
 
 	public void menuArrendatarioDao() throws SQLException {
-		int opcion;
-		System.out.print("1.Arrendatario existente\n2.Arrendatarionuevo\nOpcion: ");
-		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
-		switch(opcion) {
-		case 1:
-			//Buscar arrendatario
-			break;
-		case 2:
-			//Ingresar al nuevo arrendatario
-			Arrendatario arrendatario = new Arrendatario();
+
+		Arrendatario arrendatario = new Arrendatario();
+
+		System.out.print("1.Arrendatario existente\n2.Arrendatario nuevo\nOpcion: ");
+		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
+
+		if(opcion == 1) {
+			menuArrendatario();	//Buscar arrendatario
+		}else {
 			System.out.println("Bienvenido..Ingresemos tus datos.");
-			//arrendadorDao.insertArrendador(null);
-			
+			arrendatarioDao.insertArrendatario(scannerService.pedirArrendatario());//Ingresar al nuevo arrendatario
 			//arrendatario.setDireccion(new Direccion());
 			//insert.insertArrendatario(arrendatario);
-			//scannerService.pedirArrendatario();
 			menuRealEstate();
-			break;
 		}
 	}
 
-	public void menuArrendador() throws SQLException{
+	public void menuArrendador() {
 
-		//System.out.println("==================================================================");
-
-		ArrendadorDaoImpl arrendadordao = new ArrendadorDaoImpl(DbConnnection.getConnection());
-
-		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"
-				+ "\nOpcion: ");
-
+		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"+ "\nOpcion: ");
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
+
 		switch(opcion) {
 		case 1:
 			System.out.print("Me puedes indicar cual es tu ID: ");
 			long id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
-			arrendadordao.findById(id);
+
+			arrendadorDao.findById(id);
 			break;
+
 		case 2:
 			Scanner sc = new Scanner(System.in);
 			System.out.print("Cual es tu nombre o primer nombre:");
@@ -148,7 +146,35 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			String apellidoPaterno = sc.nextLine();
 			System.out.print("Cual es tu apellido materno:");
 			String apellidoMaterno = sc.nextLine();
-			arrendadordao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
+
+			arrendadorDao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
+			break;
+		}
+	}
+
+	public void menuArrendatario() {
+
+		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"+ "\nOpcion: ");
+		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
+
+		switch(opcion) {
+		case 1:
+			System.out.print("Me puedes indicar cual es tu ID: ");
+			long id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
+
+			arrendatarioDao.findById(id);
+			break;
+
+		case 2:
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Cual es tu nombre o primer nombre:");
+			String nombre1 = sc.nextLine();
+			System.out.print("Cual es tu apellido paterno:");
+			String apellidoPaterno = sc.nextLine();
+			System.out.print("Cual es tu apellido materno:");
+			String apellidoMaterno = sc.nextLine();
+
+			arrendatarioDao.findByNameAndLasName(nombre1, apellidoPaterno, apellidoMaterno);
 			break;
 		}
 	}

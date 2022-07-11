@@ -18,7 +18,7 @@ public class ArrendatarioDaoTest {
 
 	@Before
 	public void setup() throws SQLException {
-		arrendatarioDao = new ArrendatarioDaoImp(DbConnnection.getConnection());
+		arrendatarioDao = new ArrendatarioDaoImpl(DbConnnection.getConnection());
 	}
 
 	public Arrendatario crearArrendatario() {
@@ -43,13 +43,13 @@ public class ArrendatarioDaoTest {
 
 		// Ejecutar test case.
 		//--Pueba del metodo insertArrendatario
-		//arrendatarioDao.insertArrendatario(arrendatario);
+		arrendatarioDao.insertArrendatario(arrendatario);
 		//--Prueba del metodo findById de Arrendatario
-		arrendatarioDao.findById(1);
+		//arrendatarioDao.findById(1);
 
 		System.out.println("Id arrendatario: " + arrendatario.getIdArrendatario());
 
 		// Evaluar assertions.
-		//assertNotNull(arrendatario.getIdArrendatario());
+		assertNotNull(arrendatario.getIdArrendatario());
 	}
 }
