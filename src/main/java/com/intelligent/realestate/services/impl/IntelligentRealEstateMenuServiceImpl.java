@@ -1,12 +1,11 @@
 package com.intelligent.realestate.services.impl;
 
+import java.awt.Container;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.ArrendatarioDao;
-import com.intelligent.realestate.jdbc.ArrendadorDaoImpl;
-import com.intelligent.realestate.jdbc.DbConnnection;
 
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
@@ -86,14 +85,12 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 	}
 
 	private void menuArrendadorDao() throws SQLException {
-		
-		Arrendador arrendador = new Arrendador();
-		
+
 		int opcion;
-		
+
 		System.out.print("1.Arrendador existente\n2.Arrendador nuevo\nOpcion: ");
 		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
-		
+
 		if(opcion == 1) {
 			System.out.println("==================================================================");
 			menuArrendador();
@@ -109,7 +106,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 
 	public void menuArrendatarioDao() throws SQLException {
 
-		Arrendatario arrendatario = new Arrendatario();
+		//Arrendatario arrendatario = new Arrendatario();
 
 		System.out.print("1.Arrendatario existente\n2.Arrendatario nuevo\nOpcion: ");
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
@@ -125,17 +122,33 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		}
 	}
 
-	public void menuArrendador() {
+	public void menuArrendador() throws SQLException {
 
 		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"+ "\nOpcion: ");
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
 
 		switch(opcion) {
-		case 1:
-			System.out.print("Me puedes indicar cual es tu ID: ");
-			long id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
+		case 1:	
+			boolean loop = true;
+			while(loop) {
+				long id;
+				System.out.print("Me puedes indicar cual es tu ID: ");
+				id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
 
-			arrendadorDao.findById(id);
+				if(arrendadorDao.findById(id) == null) {
+					System.out.println("Usuario no encontrado..");
+					System.out.print("Desea volver a intentar..\n1.Si\n2.No\nOpcion:");
+					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
+
+					if(opcion1 == 2) {
+						menuArrendadorDao();
+						loop = false;
+					}
+				}else {
+					arrendadorDao.findById(id);	
+				}
+			}
+
 			break;
 
 		case 2:
@@ -152,17 +165,32 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		}
 	}
 
-	public void menuArrendatario() {
+	public void menuArrendatario() throws SQLException {
 
 		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"+ "\nOpcion: ");
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
 
 		switch(opcion) {
 		case 1:
-			System.out.print("Me puedes indicar cual es tu ID: ");
-			long id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
+			boolean loop = true;
+			while(loop) {
+				System.out.print("Me puedes indicar cual es tu ID: ");
+				long id =  scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
 
-			arrendatarioDao.findById(id);
+				if(arrendatarioDao.findById(id) == null) {
+					System.out.println("Usuario no encontrado..");
+					System.out.print("Desea volver a intentar..\n1.Si\n2.No\nOpcion:");
+					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
+
+					if(opcion1 == 2) {
+						menuArrendatarioDao();
+						loop = false;
+					}
+				}else {
+					arrendatarioDao.findById(id);
+				}
+			}
+
 			break;
 
 		case 2:

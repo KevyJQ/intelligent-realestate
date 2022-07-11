@@ -33,7 +33,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 			pstmt = connection.prepareStatement(instruccionSQL);
 			pstmt.setLong(1, arrendadorId);
 			rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
 				arrendador = new Arrendador();
 				arrendador.setNombre1(rs.getString(1));
@@ -44,6 +44,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 				arrendador.setCorreo(rs.getString(6));
 				arrendador.setCelular(rs.getString(7));
 
+			}else {
+				return null;
 			}
 			System.out.println("ID: "+arrendadorId+"\nNombre: "+rs.getString(1)
 			+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)
@@ -53,7 +55,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return arrendador;
 	}
 
