@@ -3,7 +3,8 @@ package com.intelligent.realestate.services.impl;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.intelligent.realestate.jdbc.ArrendadorDao;
+import com.intelligent.realestate.dao.ArrendadorDao;
+import com.intelligent.realestate.jdbc.ArrendadorDaoImpl;
 import com.intelligent.realestate.jdbc.DbConnnection;
 import com.intelligent.realestate.jdbc.DbInsert;
 import com.intelligent.realestate.model.Arrendador;
@@ -16,9 +17,11 @@ import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
 
 public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEstateMenuService {
 
+	private ArrendadorDao arrendadorDao;
 	private IntelligentRealEstateScannerService scannerService;
 
-	public IntelligentRealEstateMenuServiceImpl(IntelligentRealEstateScannerService scannerService) {
+	public IntelligentRealEstateMenuServiceImpl(ArrendadorDao arrendadorDao, IntelligentRealEstateScannerService scannerService) {
+		this.arrendadorDao = arrendadorDao;
 		this.scannerService = scannerService;
 	}
 
@@ -89,9 +92,9 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			menuSecundario();
 		}else {	
 			System.out.println("Ok..Ingresemos tus datos.");
-			DbInsert insert = new DbInsert(DbConnnection.getConnection());
+	
 			Arrendador arrendador = new Arrendador();
-			insert.insertArrendador(arrendador);
+			arrendadorDao.insertArrendador(arrendador);
 			//			arrendador.setDireccion(new Direccion());
 			//			arrendador.setRealEstate(new RealEstate());
 			//			scannerService.pedirArrendador();
@@ -124,7 +127,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 
 		//System.out.println("==================================================================");
 
-		ArrendadorDao arrendadordao = new ArrendadorDao(DbConnnection.getConnection());
+		ArrendadorDaoImpl arrendadordao = new ArrendadorDaoImpl(DbConnnection.getConnection());
 
 		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido"
 				+ "\nOpcion: ");

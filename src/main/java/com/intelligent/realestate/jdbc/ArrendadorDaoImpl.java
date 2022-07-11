@@ -8,17 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 
 
-public class ArrendadorDao {
+public class ArrendadorDaoImpl implements ArrendadorDao {
 
 	Scanner scanner = new Scanner(System.in);
-	Connection oConnection;
+	Connection connection;
 	String instruccionSQL;
 
-	public ArrendadorDao(Connection conn) {
-		this.oConnection = conn;
+	public ArrendadorDaoImpl(Connection conn) {
+		this.connection = conn;
 	}
 
 	public Arrendador findById(long arrendadorId) {
@@ -28,7 +29,7 @@ public class ArrendadorDao {
 		Arrendador arrendador = null;
 		try {
 			PreparedStatement myStmt;
-			myStmt = oConnection.prepareStatement(instruccionSQL);
+			myStmt = connection.prepareStatement(instruccionSQL);
 			myStmt.setLong(1, arrendadorId);
 			ResultSet myRs = myStmt.executeQuery();
 
@@ -55,8 +56,7 @@ public class ArrendadorDao {
 		return arrendador;
 	}
 
-	public List<Arrendador> findByNameAndLasName(String name, String apelledoMaterno
-			,String apellidoPaterno){
+	public List<Arrendador> findByNameAndLasName(String name, String apelledoMaterno, String apellidoPaterno){
 
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>();
 
@@ -66,7 +66,7 @@ public class ArrendadorDao {
 
 		try {
 			PreparedStatement myStmt;
-			myStmt = oConnection.prepareStatement(instruccionSQL);
+			myStmt = connection.prepareStatement(instruccionSQL);
 			myStmt.setString(1,name);
 			myStmt.setString(2,apellidoPaterno);
 			myStmt.setString(3,apelledoMaterno);
@@ -104,24 +104,36 @@ public class ArrendadorDao {
 		return arrendadores;
 	}
 
-	public void guardarArrendador(Arrendador arrendador){
-		
-		System.out.print("Primer nombre:");
-		arrendador.setNombre1(scanner.nextLine());
-		System.out.print("Segundo nombre:");
-		arrendador.setNombre2(scanner.nextLine());
-		System.out.print("Apellido Paterno:");
-		arrendador.setApellidoPaterno(scanner.nextLine());
-		System.out.print("Apellido Materno:");
-		arrendador.setApellidoMaterno(scanner.nextLine());
-		System.out.print("Edad: :");
-		arrendador.setEdad(Integer.parseInt(scanner.nextLine()));
-		System.out.print("Correo:");
-		arrendador.setCorreo(scanner.nextLine());
-		System.out.print("Celular:");
-		arrendador.setCelular(scanner.nextLine());
-		
-	}
+	public void insertArrendador(Arrendador arrendador) {
 
+		instruccionSQL = "INSERT INTO arrendador(nombre1,nombre2,apellidoPaterno,apellidoMaterno,"
+				+ "edad,correo,celular) VALUE (?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement myStmt;
+			myStmt = connection.prepareStatement(instruccionSQL);
+			myStmt.setString(1, arrendador.getNombre1());
+			myStmt.setString(2, arrendador.getNombre2());
+			myStmt.setString(3, arrendador.getApellidoPaterno());
+			myStmt.setString(4, arrendador.getApellidoMaterno());
+			myStmt.setInt(5, arrendador.getEdad());
+			myStmt.setString(6, arrendador.getCorreo());
+			myStmt.setString(7, arrendador.getCelular());
+			myStmt.execute();
+
+			PreparedStatement rs = connection.prepareStatement("SELECT id_arrendador FROM arrendador WHERE nombre1= ? AND apellidoPaterno = ? AND apellidoMaterno= ?");
+			rs.setString(1, arrendador.getNombre1());
+			rs.setString(2, arrendador.getApellidoPaterno());
+			rs.setString(3, arrendador.getApellidoMaterno());
+			ResultSet rst = rs.executeQuery();
+			long id= 0;
+			while(rst.next()){
+				id = rst.getLong(1);
+			}
+			System.out.println("\n\t\tTu ID sera: "+id);
+			System.out.println("\nInsert exitoso..");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 
 }

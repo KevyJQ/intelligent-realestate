@@ -17,41 +17,6 @@ public class DbInsert {
 		this.oConnection = conn;
 	}
 
-	public void insertArrendador(Arrendador arrendador) throws SQLException {
-
-		instruccionSQL = "INSERT INTO arrendador(nombre1,nombre2,apellidoPaterno,apellidoMaterno,"
-				+ "edad,correo,celular) VALUE (?,?,?,?,?,?,?)";
-
-		ArrendadorDao arrendadordao = new ArrendadorDao(DbConnnection.getConnection());
-		try {
-			PreparedStatement myStmt;
-			myStmt = oConnection.prepareStatement(instruccionSQL);
-			arrendadordao.guardarArrendador(arrendador);
-			myStmt.setString(1, arrendador.getNombre1());
-			myStmt.setString(2, arrendador.getNombre2());
-			myStmt.setString(3, arrendador.getApellidoPaterno());
-			myStmt.setString(4, arrendador.getApellidoMaterno());
-			myStmt.setInt(5, arrendador.getEdad());
-			myStmt.setString(6, arrendador.getCorreo());
-			myStmt.setString(7, arrendador.getCelular());
-			myStmt.execute();
-
-			PreparedStatement rs = oConnection.prepareStatement("SELECT id_arrendador FROM arrendador WHERE nombre1= ? AND apellidoPaterno = ? AND apellidoMaterno= ?");
-			rs.setString(1, arrendador.getNombre1());
-			rs.setString(2, arrendador.getApellidoPaterno());
-			rs.setString(3, arrendador.getApellidoMaterno());
-			ResultSet rst = rs.executeQuery();
-			long id= 0;
-			while(rst.next()){
-				id = rst.getLong(1);
-			}
-			System.out.println("\n\t\tTu ID sera: "+id);
-			System.out.println("\nInsert exitoso..");
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-	}
-
 	public void insertArrendatario(Arrendatario arrendatario) throws SQLException {
 
 		instruccionSQL = "INSERT INTO arrendatario(nombre1,nombre2,apellidoPaterno,apellidoMaterno,"

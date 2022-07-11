@@ -1,8 +1,16 @@
 package com.intelligent.realestate.model;
 
 public class Arrendador extends Persona {
-	// TODO: Add comments and the properties that is renting.
-	
+	private Integer idArrendador;
+
+	public Integer getIdArrendador() {
+		return idArrendador;
+	}
+
+	public void setIdArrendador(Integer idArrendador) {
+		this.idArrendador = idArrendador;
+	}
+
 	public Arrendador() {
 	}
 

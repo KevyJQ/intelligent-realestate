@@ -1,4 +1,4 @@
-package com.mycompany.app.intelligent_RealEstate;
+package com.intelligent.realestate;
 
 import static org.junit.Assert.assertTrue;
 
