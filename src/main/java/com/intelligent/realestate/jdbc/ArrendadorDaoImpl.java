@@ -33,7 +33,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 			pstmt = connection.prepareStatement(instruccionSQL);
 			pstmt.setLong(1, arrendadorId);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
 				arrendador = new Arrendador();
 				arrendador.setNombre1(rs.getString(1));
@@ -55,7 +55,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return arrendador;
 	}
 
@@ -101,12 +101,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 				System.out.print("\nEdad: "+arre.getEdad());
 				System.out.print("\nCorreo: "+arre.getCorreo());
 				System.out.print("\nCelular: "+arre.getCelular());
+				System.out.println();
 			}
 
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-
 		return arrendadores;
 	}
 
@@ -133,6 +133,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 			rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				arrendador.setIdArrendador(rs.getInt(1));
+				System.out.println("\n\tTu id sera: "+arrendador.getIdArrendador()+"\n");
 			} else {
 				// TODO: throw an exception from here
 			}

@@ -1,16 +1,13 @@
 package com.intelligent.realestate.services.impl;
 
-import java.awt.Container;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.ArrendatarioDao;
-
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
-import com.intelligent.realestate.model.Direccion;
-import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.IntelligentRealEstateMenuService;
 import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
@@ -39,7 +36,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		return opcion;
 	}
 
-	private int menuSecundario() {	//Menu Agregar biene raices
+	private int menuSecundario() {
 		boolean Vali = true;
 		do {
 			System.out.println("==================================================================");
@@ -148,19 +145,33 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 					arrendadorDao.findById(id);	
 				}
 			}
-
 			break;
 
 		case 2:
-			Scanner sc = new Scanner(System.in);
-			System.out.print("Cual es tu nombre o primer nombre:");
-			String nombre1 = sc.nextLine();
-			System.out.print("Cual es tu apellido paterno:");
-			String apellidoPaterno = sc.nextLine();
-			System.out.print("Cual es tu apellido materno:");
-			String apellidoMaterno = sc.nextLine();
+			boolean loop2 = true;
+			while(loop2) {
 
-			arrendadorDao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
+				Scanner sc = new Scanner(System.in);
+				System.out.print("Cual es tu nombre o primer nombre:");
+				String nombre1 = sc.nextLine();
+				System.out.print("Cual es tu apellido paterno:");
+				String apellidoPaterno = sc.nextLine();
+				System.out.print("Cual es tu apellido materno:");
+				String apellidoMaterno = sc.nextLine();
+
+				List<Arrendador> arrendadores = arrendadorDao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
+				if( arrendadores.isEmpty()) {
+					System.out.println("Usuario no encontrado..");
+					System.out.print("Desea volver a intentar..\n1.Si\n2.No\nOpcion:");
+					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
+					if(opcion1 == 2) {
+						menuArrendadorDao();
+						loop2 = false;
+					}
+				}else {
+					loop2 = false;	
+				}
+			}
 			break;
 		}
 	}
@@ -190,19 +201,32 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 					arrendatarioDao.findById(id);
 				}
 			}
-
 			break;
 
 		case 2:
-			Scanner sc = new Scanner(System.in);
-			System.out.print("Cual es tu nombre o primer nombre:");
-			String nombre1 = sc.nextLine();
-			System.out.print("Cual es tu apellido paterno:");
-			String apellidoPaterno = sc.nextLine();
-			System.out.print("Cual es tu apellido materno:");
-			String apellidoMaterno = sc.nextLine();
+			boolean loop2 = true;
+			while(loop2) {
+				Scanner sc = new Scanner(System.in);
+				System.out.print("Cual es tu nombre o primer nombre:");
+				String nombre1 = sc.nextLine();
+				System.out.print("Cual es tu apellido paterno:");
+				String apellidoPaterno = sc.nextLine();
+				System.out.print("Cual es tu apellido materno:");
+				String apellidoMaterno = sc.nextLine();
 
-			arrendatarioDao.findByNameAndLasName(nombre1, apellidoPaterno, apellidoMaterno);
+				List<Arrendatario> arrendatarios = arrendatarioDao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
+				if( arrendatarios.isEmpty()) {
+					System.out.println("Arrendatario no encontrado..");
+					System.out.print("Desea volver a intentar..\n1.Si\n2.No\nOpcion:");
+					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
+					if(opcion1 == 2) {
+						menuArrendatarioDao();
+						loop2 = false;
+					}
+				}else {
+					loop2 = false;	
+				}
+			}
 			break;
 		}
 	}

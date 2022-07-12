@@ -135,6 +135,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				arrendatario.setIdArrendatario(rs.getInt(1));
+				System.out.println("\n\tTu id sera: "+arrendatario.getIdArrendatario()+"\n");
 			} else {
 				// TODO: throw an exception from here
 			}
