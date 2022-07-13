@@ -8,6 +8,7 @@ import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
+import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.IntelligentRealEstateMenuService;
 import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
@@ -83,6 +84,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 
 	private void menuArrendadorDao() throws SQLException {
 
+		Arrendador arrendador = new Arrendador();
 		int opcion;
 
 		System.out.print("1.Arrendador existente\n2.Arrendador nuevo\nOpcion: ");
@@ -94,8 +96,9 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			menuSecundario();
 		}else {	
 			System.out.println("Ok..Ingresemos tus datos.");
+			//arrendador.setDireccion(new Direccion());
 			arrendadorDao.insertArrendador(scannerService.pedirArrendador());
-			//			arrendador.setDireccion(new Direccion());
+			
 			//			arrendador.setRealEstate(new RealEstate());
 			menuSecundario();
 		}
@@ -141,9 +144,8 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 						menuArrendadorDao();
 						loop = false;
 					}
-				}else {
-					arrendadorDao.findById(id);	
 				}
+				loop = false;
 			}
 			break;
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.intelligent.realestate.model.Arrendador;
 
+
 public interface ArrendadorDao {
 
 	public Arrendador findById(long arrendadorId);

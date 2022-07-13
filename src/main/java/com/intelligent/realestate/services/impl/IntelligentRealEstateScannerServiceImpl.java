@@ -88,12 +88,12 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		persona.setCelular(celular);
 
 		if (isDireccionMandatory) {
-			pedirDireccion();
+			persona.setDireccion(pedirDireccion());
 		}else  {
 			System.out.print("Cuentas con residencia actual\n1.Si\n2.No\nOpcion: ");
 			int opcion = pedirNumeroEntreRango("", "Numero no valido", 1, 2);
 			if(opcion == 1) {
-				pedirDireccion();
+				persona.setDireccion(pedirDireccion());	
 			}
 		}
 	}
