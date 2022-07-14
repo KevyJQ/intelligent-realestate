@@ -8,7 +8,6 @@ import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
-import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.IntelligentRealEstateMenuService;
 import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
@@ -96,7 +95,6 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			menuSecundario();
 		}else {	
 			System.out.println("Ok..Ingresemos tus datos.");
-			//arrendador.setDireccion(new Direccion());
 			arrendadorDao.insertArrendador(scannerService.pedirArrendador());
 			
 			//			arrendador.setRealEstate(new RealEstate());
@@ -106,17 +104,15 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 
 	public void menuArrendatarioDao() throws SQLException {
 
-		//Arrendatario arrendatario = new Arrendatario();
-
 		System.out.print("1.Arrendatario existente\n2.Arrendatario nuevo\nOpcion: ");
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 2);
 
 		if(opcion == 1) {
+			System.out.println("==================================================================");
 			menuArrendatario();	//Buscar arrendatario
 		}else {
 			System.out.println("Bienvenido..Ingresemos tus datos.");
 			arrendatarioDao.insertArrendatario(scannerService.pedirArrendatario());//Ingresar al nuevo arrendatario
-			//arrendatario.setDireccion(new Direccion());
 			//insert.insertArrendatario(arrendatario);
 			menuRealEstate();
 		}
@@ -199,9 +195,8 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 						menuArrendatarioDao();
 						loop = false;
 					}
-				}else {
-					arrendatarioDao.findById(id);
 				}
+				loop = false;
 			}
 			break;
 
@@ -244,7 +239,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			switch(opcion) {
 			case 1:	//Propietario
 				// Crear clase MenuArrendador que maneje todas las opciones del arrendador.
-				//System.out.println("\n\n\n\n\n\n");
+
 				System.out.println("==================================================================");
 				System.out.println("Menu Arrendador");
 				System.out.println("==================================================================");
@@ -257,7 +252,6 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 
 			case 2:	//Inquilino
 				// Crear clase MenuArrendatario que maneje todas las opciones del arrendatario.
-				//System.out.println("\n\n\n\n\n\n");
 				System.out.println("==================================================================");
 				System.out.println("Menu Arrendatario");
 				System.out.println("==================================================================");
@@ -271,7 +265,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 				//				arrendatario.setDireccion(new Direccion());
 				//
 				//				scannerService.pedirArrendatario();
-				//				menuRealEstate();
+				menuRealEstate();
 				break;
 
 			case 3:

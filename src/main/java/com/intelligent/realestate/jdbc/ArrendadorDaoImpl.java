@@ -144,7 +144,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 
 	public void insertArrendador(Arrendador arrendador) {
 
-		
+		//arrendador.setDireccion(new Direccion());
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -168,7 +168,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 			pstmt.setString(11, arrendador.getDireccion().getCiudad());
 			pstmt.setString(12, arrendador.getDireccion().getEstado());
 			pstmt.setString(13, arrendador.getDireccion().getCodigoPostal());
-
 			
 			pstmt.executeUpdate();
 
