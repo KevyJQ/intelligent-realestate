@@ -10,24 +10,27 @@ import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.TypeRealEstate;
-import com.intelligent.realestate.services.IntelligentRealEstateMenuService;
-import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
+import com.intelligent.realestate.services.MenuService;
+import com.intelligent.realestate.services.ScannerService;
 
-public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEstateMenuService {
+public class MenuPrincipalServiceImpl implements MenuService {
 
 	private ArrendadorDao arrendadorDao;
 	private ArrendatarioDao arrendatarioDao;
-	private IntelligentRealEstateScannerService scannerService;
+	private ScannerService scannerService;
 
-	public IntelligentRealEstateMenuServiceImpl(ArrendadorDao arrendadorDao, ArrendatarioDao arrendatarioDao,
-			IntelligentRealEstateScannerService scannerService) {
+	private enum MenuType {ARRENDADOR, ARRENDATARIO, SALIR};
+	
+	public MenuPrincipalServiceImpl(ArrendadorDao arrendadorDao, ArrendatarioDao arrendatarioDao,
+			ScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
 		this.arrendatarioDao = arrendatarioDao;
 		this.scannerService = scannerService;
 	}
 
-	private int mostrarAndObtenerOpciones() {
+	private MenuType mostrarAndObtenerOpciones() {
 		int opcion;
+
 		System.out.println("================================");
 		System.out.println("1. Menu Arrendador");
 		System.out.println("2. Menu Arrendatario");
@@ -36,7 +39,8 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		opcion = scannerService.pedirNumeroEntreRango("Dame el numero de opcion deseado entre 1-3",
 				"El numero debe ser entre 1-3", 1, 3);
 
-		return opcion;
+		MenuType[] menus = MenuType.values();
+		return menus[opcion - 1];
 	}
 
 	private int menuSecundario() {
@@ -110,7 +114,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			arrendadorDao.insertArrendador(scannerService.pedirArrendador());
 			menuSecundario();
 		} else {
-			mostrarMenuPrincipal();
+			mostrarMenu();
 		}
 		return opcion;
 	}
@@ -130,7 +134,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 			// insert.insertArrendatario(arrendatario);
 			menuRealEstate();
 		} else {
-			mostrarMenuPrincipal();
+			mostrarMenu();
 		}
 	}
 
@@ -153,7 +157,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
 
 					if (opcion1 == 2) {
-						mostrarMenuPrincipal();
+						mostrarMenu();
 						loop = false;
 					}
 				}
@@ -181,7 +185,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
 
 					if (opcion1 == 2) {
-						mostrarMenuPrincipal();
+						mostrarMenu();
 						loop2 = false;
 					}
 				} else {
@@ -247,17 +251,22 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 		}
 	}
 
+	/*
+	 * Muestra el menu principal que consiste en:
+	 *
+	 * - Capturar arrendador - Capturar arrendatario
+	 */
 	@Override
-	public void mostrarMenuPrincipal() throws SQLException {
-		System.out.println("================================");
-		System.out.println("---Bienvenido a mi sistema---");
+	public void mostrarMenu() {
+		System.out.println("==========================================");
+		System.out.println("--- Bienvenido Intelligent Real Estate ---");
 
 		boolean exit = false;
 		do {
-			int opcion = mostrarAndObtenerOpciones(); // Nos regresara la opcion que deseamos
+			MenuType opcion = mostrarAndObtenerOpciones(); // Nos regresara la opcion que deseamos
 
 			switch (opcion) {
-			case 1: // Propietario
+			case ARRENDADOR: // Propietario
 
 				// Arrendador arrendador = new Arrendador(); //--------------Creacion del objeto
 				// Arrendador
@@ -266,11 +275,16 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 				System.out.println("Menu Arrendador");
 				System.out.println("================================");
 
-				menuArrendadorDao();
+				try {
+					menuArrendadorDao();
+				} catch (SQLException e1) {
+	
+					e1.printStackTrace();
+				}
 
 				break;
 
-			case 2: // Inquilino
+			case ARRENDATARIO: // Inquilino
 				// Crear clase MenuArrendatario que maneje todas las opciones del arrendatario.
 				System.out.println("================================");
 				System.out.println("Menu Arrendatario");
@@ -284,7 +298,7 @@ public class IntelligentRealEstateMenuServiceImpl implements IntelligentRealEsta
 				menuRealEstate();
 				break;
 
-			case 3:
+			case SALIR:
 				System.out.println("\n\tHasta luego, tenga un lindo dia.");
 				exit = true;
 				break;

@@ -8,13 +8,13 @@ import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.Persona;
-import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
+import com.intelligent.realestate.services.ScannerService;
 
-public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealEstateScannerService {
+public class ScannerServiceImpl implements ScannerService {
 
 	private Scanner scanner;
 
-	public IntelligentRealEstateScannerServiceImpl() {
+	public ScannerServiceImpl() {
 		scanner = new Scanner(new FilterInputStream(System.in) {
 			public void close() {
 			}

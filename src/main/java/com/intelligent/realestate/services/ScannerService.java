@@ -8,7 +8,7 @@ import com.intelligent.realestate.model.Direccion;
  * Servicio para obtener la information de los arrendatarios, arrendadores,
  * bienes raices, etc.
  */
-public interface IntelligentRealEstateScannerService {
+public interface ScannerService {
 
 	/*
 	 * Pide un numero.
