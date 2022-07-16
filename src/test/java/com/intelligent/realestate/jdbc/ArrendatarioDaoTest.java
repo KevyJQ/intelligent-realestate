@@ -8,10 +8,10 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendatario;
-
+import com.intelligent.realestate.model.Direccion;
+import com.intelligent.realestate.model.util.ModelUtil;
 
 public class ArrendatarioDaoTest {
 	private ArrendatarioDao arrendatarioDao;
@@ -21,31 +21,17 @@ public class ArrendatarioDaoTest {
 		arrendatarioDao = new ArrendatarioDaoImpl(DbConnnection.getConnection());
 	}
 
-	public Arrendatario crearArrendatario() {
-		Arrendatario arrendatario = new Arrendatario();
-		Date date = new Date();
-		arrendatario.setNombre1("Test nombre1 " + date);
-		arrendatario.setNombre1("Test name ");
-		arrendatario.setNombre2("Test nombre2 ");
-		arrendatario.setApellidoPaterno("Test Apellido");
-		arrendatario.setApellidoMaterno("Test materno");
-		arrendatario.setEdad(23);
-		arrendatario.setCorreo("test@gmail.com");
-		arrendatario.setCelular("659 864 9454");
-
-		return arrendatario;
-	}
 
 	@Test
 	public void insertarrendatario() {
 		// Setup
-		Arrendatario arrendatario = crearArrendatario();
+		Arrendatario arrendatario = ModelUtil.crearArrendatario();
 
 		// Ejecutar test case.
-		//--Pueba del metodo insertArrendatario
+		// --Pueba del metodo insertArrendatario
 		arrendatarioDao.insertArrendatario(arrendatario);
-		//--Prueba del metodo findById de Arrendatario
-		//arrendatarioDao.findById(1);
+		// --Prueba del metodo findById de Arrendatario
+		// arrendatarioDao.findById(1);
 
 		System.out.println("Id arrendatario: " + arrendatario.getIdArrendatario());
 

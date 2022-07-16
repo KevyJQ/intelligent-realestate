@@ -10,6 +10,7 @@ import com.intelligent.realestate.jdbc.ArrendatarioDaoImpl;
 import com.intelligent.realestate.jdbc.DbConnnection;
 import com.intelligent.realestate.services.MenuService;
 import com.intelligent.realestate.services.ScannerService;
+import com.intelligent.realestate.services.impl.MenuArrendadorImpl;
 import com.intelligent.realestate.services.impl.MenuPrincipalServiceImpl;
 import com.intelligent.realestate.services.impl.ScannerServiceImpl;
 
@@ -21,8 +22,14 @@ public class Main {
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl(connection);
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		ScannerService scannerService = new ScannerServiceImpl();
-		MenuService menuService = new MenuPrincipalServiceImpl(arrendadorDao,
-				arrendatarioDao, scannerService);
-		menuService.mostrarMenu();
+		MenuService menuArrendMenuService = new MenuArrendadorImpl(
+				arrendadorDao, scannerService);
+		MenuService menuPrincipalService = new MenuPrincipalServiceImpl(
+				arrendadorDao,
+				arrendatarioDao,
+				menuArrendMenuService,
+				scannerService);
+
+		menuPrincipalService.mostrarMenu();
 	}
 }

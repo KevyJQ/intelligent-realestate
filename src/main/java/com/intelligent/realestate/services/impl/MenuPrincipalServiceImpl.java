@@ -17,14 +17,19 @@ public class MenuPrincipalServiceImpl implements MenuService {
 
 	private ArrendadorDao arrendadorDao;
 	private ArrendatarioDao arrendatarioDao;
+	private MenuService menuArrendadorService;
 	private ScannerService scannerService;
 
 	private enum MenuType {ARRENDADOR, ARRENDATARIO, SALIR};
 	
-	public MenuPrincipalServiceImpl(ArrendadorDao arrendadorDao, ArrendatarioDao arrendatarioDao,
+	public MenuPrincipalServiceImpl(
+			ArrendadorDao arrendadorDao,
+			ArrendatarioDao arrendatarioDao,
+			MenuService menuArrendadorService,
 			ScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
 		this.arrendatarioDao = arrendatarioDao;
+		this.menuArrendadorService = menuArrendadorService;
 		this.scannerService = scannerService;
 	}
 
@@ -43,44 +48,6 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		return menus[opcion - 1];
 	}
 
-	private int menuSecundario() {
-
-		boolean Vali = true;
-		do {
-			System.out.println("================================");
-			System.out.print("1.Agregar nueva direccion\n2.Ver propiedades\n3.Atras\nOpcion: ");
-
-			int opcSec = scannerService.pedirNumeroEntreRango("", "Esa opcion no existe", 1, 3);
-			switch (opcSec) {
-
-			case 1:
-				boolean addRealEstate = true;
-				while (addRealEstate) {
-					int typeRE = menuRealEstate();
-					// scannerService.pedirDireccion();
-					arrendadorDao.insertRealEstate(typeRE);
-					System.out.print("Deseas agregar otra propiedad?\n1.Si\n2.No\nOpcion: ");
-					int exitAddRealEstate = scannerService.pedirNumeroEntreRango("", "Numero no valido", 1, 2);
-					if (exitAddRealEstate == 2) {
-						addRealEstate = false;
-					}
-				}
-				break;
-
-			case 2:
-				System.out.println("__Que tipo de bienes raices deseas ver__");
-				menuRealEstate();
-				// Agredar los select
-				break;
-
-			case 3:
-				Vali = false; // No quiere agregar una nueva direccion
-				return 0;
-			}
-		} while (!Vali);
-		return 0;
-	}
-
 	private int menuRealEstate() {
 
 		TypeRealEstate[] type = TypeRealEstate.values(); // Crenado el arreglo que contenga las opciones que tiene el
@@ -95,28 +62,6 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		int tipoRealEstate = scannerService.pedirNumeroEntreRango("", "Esa opcion no fue encontrada", 1, type.length);
 
 		return tipoRealEstate;
-	}
-
-	private int menuArrendadorDao() throws SQLException {
-
-		int opcion;
-
-		System.out.print("1.Arrendador existente\n2.Arrendador nuevo\n3.Atras\nOpcion: ");
-		opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 3);
-
-		if (opcion == 1) {
-			System.out.println("================================");
-			menuArrendador(); // Ya trae los datos guardados de arrendador
-			menuSecundario();
-		} else if (opcion == 2) {
-			System.out.println("================================");
-			System.out.println("Ok..Ingresemos tus datos.");
-			arrendadorDao.insertArrendador(scannerService.pedirArrendador());
-			menuSecundario();
-		} else {
-			mostrarMenu();
-		}
-		return opcion;
 	}
 
 	public void menuArrendatarioDao() throws SQLException {
@@ -135,64 +80,6 @@ public class MenuPrincipalServiceImpl implements MenuService {
 			menuRealEstate();
 		} else {
 			mostrarMenu();
-		}
-	}
-
-	public void menuArrendador() throws SQLException {
-
-		System.out.print("1.Buscar por id\n2.buscar por Nombre y Apellido" + "\nOpcion: ");
-		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
-
-		switch (opcion) {
-		case 1:
-			boolean loop = true;
-			while (loop) {
-				long id;
-				System.out.print("Me puedes indicar cual es tu ID: ");
-				id = scannerService.pedirNumero("", "Numero no valido, ingrese nuevamente..");
-
-				if (arrendadorDao.findById(id) == null) {
-					System.out.println("Usuario no encontrado..");
-					System.out.print("Desea volver a intentar..\n1.Si\n2.No\nOpcion:");
-					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
-
-					if (opcion1 == 2) {
-						mostrarMenu();
-						loop = false;
-					}
-				}
-				loop = false;
-			}
-			break;
-
-		case 2:
-			boolean loop2 = true;
-			while (loop2) {
-
-				Scanner sc = new Scanner(System.in);
-				System.out.print("Cual es tu nombre o primer nombre:");
-				String nombre1 = sc.nextLine();
-				System.out.print("Cual es tu apellido paterno:");
-				String apellidoPaterno = sc.nextLine();
-				System.out.print("Cual es tu apellido materno:");
-				String apellidoMaterno = sc.nextLine();
-
-				List<Arrendador> arrendadores = arrendadorDao.findByNameAndLasName(nombre1, apellidoMaterno,
-						apellidoPaterno);
-				if (arrendadores.isEmpty()) {
-					System.out.println("Usuario no encontrado..");
-					System.out.print("Desea volver a intentar..\n1.Si\n2.No\nOpcion:");
-					int opcion1 = scannerService.pedirNumeroEntreRango("", "Opcion no valida", 1, 2);
-
-					if (opcion1 == 2) {
-						mostrarMenu();
-						loop2 = false;
-					}
-				} else {
-					loop2 = false;
-				}
-			}
-			break;
 		}
 	}
 
@@ -261,29 +148,13 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		System.out.println("==========================================");
 		System.out.println("--- Bienvenido Intelligent Real Estate ---");
 
-		boolean exit = false;
-		do {
+		while(true) {
 			MenuType opcion = mostrarAndObtenerOpciones(); // Nos regresara la opcion que deseamos
 
 			switch (opcion) {
-			case ARRENDADOR: // Propietario
-
-				// Arrendador arrendador = new Arrendador(); //--------------Creacion del objeto
-				// Arrendador
-
-				System.out.println("================================");
-				System.out.println("Menu Arrendador");
-				System.out.println("================================");
-
-				try {
-					menuArrendadorDao();
-				} catch (SQLException e1) {
-	
-					e1.printStackTrace();
-				}
-
+			case ARRENDADOR:
+				menuArrendadorService.mostrarMenu();
 				break;
-
 			case ARRENDATARIO: // Inquilino
 				// Crear clase MenuArrendatario que maneje todas las opciones del arrendatario.
 				System.out.println("================================");
@@ -300,10 +171,8 @@ public class MenuPrincipalServiceImpl implements MenuService {
 
 			case SALIR:
 				System.out.println("\n\tHasta luego, tenga un lindo dia.");
-				exit = true;
-				break;
+				return;
 			}
-		} while (!exit);
-
+		}
 	}
 }
