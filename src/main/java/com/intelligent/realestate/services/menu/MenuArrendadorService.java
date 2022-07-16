@@ -1,4 +1,4 @@
-package com.intelligent.realestate.services;
+package com.intelligent.realestate.services.menu;
 
 public interface MenuArrendadorService {
 

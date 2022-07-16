@@ -28,6 +28,7 @@ public class ScannerServiceImpl implements ScannerService {
 
 		do {
 			try {
+				System.out.println(msg);
 				String value = scanner.nextLine();
 				num = Integer.parseInt(value);
 				valid = true;
@@ -148,5 +149,28 @@ public class ScannerServiceImpl implements ScannerService {
 		boolean isDireccionMandator = false;
 		llenarPersona(arrendatario, isDireccionMandator);
 		return arrendatario;
+	}
+
+	@Override
+	public String pedirString(String msg, String errorMsg) {
+		boolean valid = false;
+		String value = null;
+
+		do {
+			try {
+				System.out.println(msg);
+				value = scanner.nextLine();
+				if (value == null || value.isEmpty()) {
+					System.out.println(errorMsg);
+					valid = false;
+				} else {
+					valid = true;
+				}
+			} catch (NumberFormatException | InputMismatchException e) {
+				System.out.println(errorMsg);
+			}
+		} while (!valid);
+
+		return value;
 	}
 }

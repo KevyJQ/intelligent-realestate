@@ -1,4 +1,4 @@
-package com.intelligent.realestate.services.impl;
+package com.intelligent.realestate.services.menu.impl;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,8 +10,8 @@ import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.TypeRealEstate;
-import com.intelligent.realestate.services.MenuService;
 import com.intelligent.realestate.services.ScannerService;
+import com.intelligent.realestate.services.menu.MenuService;
 
 public class MenuPrincipalServiceImpl implements MenuService {
 
@@ -37,6 +37,9 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		int opcion;
 
 		System.out.println("================================");
+		System.out.println("        Menu Principal");
+		System.out.println("================================");
+
 		System.out.println("1. Menu Arrendador");
 		System.out.println("2. Menu Arrendatario");
 		System.out.println("3. Salir");

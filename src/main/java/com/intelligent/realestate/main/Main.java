@@ -8,11 +8,14 @@ import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.jdbc.ArrendadorDaoImpl;
 import com.intelligent.realestate.jdbc.ArrendatarioDaoImpl;
 import com.intelligent.realestate.jdbc.DbConnnection;
-import com.intelligent.realestate.services.MenuService;
+import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.services.ScannerService;
-import com.intelligent.realestate.services.impl.MenuArrendadorImpl;
-import com.intelligent.realestate.services.impl.MenuPrincipalServiceImpl;
 import com.intelligent.realestate.services.impl.ScannerServiceImpl;
+import com.intelligent.realestate.services.menu.MenuBuscarService;
+import com.intelligent.realestate.services.menu.MenuService;
+import com.intelligent.realestate.services.menu.impl.MenuArrendadorImpl;
+import com.intelligent.realestate.services.menu.impl.MenuBuscarArrendadorServiceImpl;
+import com.intelligent.realestate.services.menu.impl.MenuPrincipalServiceImpl;
 
 public class Main {
 
@@ -22,8 +25,10 @@ public class Main {
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl(connection);
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		ScannerService scannerService = new ScannerServiceImpl();
+		MenuBuscarService<Arrendador> menuBuscarArrendador =
+				new MenuBuscarArrendadorServiceImpl(arrendadorDao, scannerService);
 		MenuService menuArrendMenuService = new MenuArrendadorImpl(
-				arrendadorDao, scannerService);
+				arrendadorDao, menuBuscarArrendador, scannerService);
 		MenuService menuPrincipalService = new MenuPrincipalServiceImpl(
 				arrendadorDao,
 				arrendatarioDao,

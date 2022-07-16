@@ -18,6 +18,8 @@ public interface ScannerService {
 	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo,
 			int limiteSuperiorInclusivo);
 
+	public String pedirString(String msg, String errorMsg);
+	
 	public Direccion pedirDireccion();
 
 	public Arrendador pedirArrendador();

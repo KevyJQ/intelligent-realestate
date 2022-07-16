@@ -36,14 +36,19 @@ $ git branch -va
 ## Para compilarlo y ejecutarlo
 
 ```shell
-# Compilarlo
+# Compilar y correr test
 $ mvn package
 
+# Compilar, correr test y generar jar con dependencias
+$ mvn assembly:assembly -DdescriptorId=jar-with-dependencies
+
+
 # Ver archivos en el jar
-$ jar tf ./target/intelligent_RealEstate-0.0.1-SNAPSHOT.jar
+$ jar tf ./target/intelligent_RealEstate-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 $ cd intelligent-realestate	//ingresamos al directorio
-$ java -cp target/intelligent_RealEstate-0.0.1-SNAPSHOT.jar com.intelligent.realestate.main.IntelligentRealEstateMain
+$ java -cp target/intelligent_RealEstate-0.0.1-SNAPSHOT-jar-with-dependencies.jar \
+       com.intelligent.realestate.main.Main
 ```
 > Nota: com.intelligent.realestate.main  -> es el package donde se encuentra
 >	IntelligentRealEstateMain	-> es el nombre de tu archivo Main
