@@ -1,6 +1,5 @@
 package com.intelligent.realestate.jdbc;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,16 +21,14 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	}
 
 	public Arrendatario findById(long arrendatarioId) {
-		
+
 		Arrendatario arrendatario = null;
 		PreparedStatement pstmt;
 		ResultSet rs;
 
 		final String instruccionSQL = "SELECT nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, "
-				+ "direccion1, direccion2, pais, ciudad, estado, CP "
-				+ "FROM arrendatario "
-				+ "WHERE id_arrendatario = ? ";
+				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "FROM arrendatario " + "WHERE id_arrendatario = ? ";
 
 		try {
 
@@ -40,10 +37,10 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				
+
 				arrendatario = new Arrendatario();
 				arrendatario.setDireccion(new Direccion());
-				
+
 				arrendatario.setNombre1(rs.getString(1));
 				arrendatario.setNombre2(rs.getString(2));
 				arrendatario.setApellidoPaterno(rs.getString(3));
@@ -58,17 +55,16 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 				arrendatario.getDireccion().setEstado(rs.getString(12));
 				arrendatario.getDireccion().setCodigoPostal(rs.getString(13));
 
-			}else {
+			} else {
 				return null;
 			}
-			System.out.println("ID: "+arrendatarioId+"\nNombre: "+rs.getString(1)
-			+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)
-			+"\nEdad: "+rs.getInt(5)+"\nCorreo: "+rs.getString(6)+"\nCelular: "
-			+rs.getString(7)+"\nDireccion1: "+rs.getString(8)+"\nDireccion2: "+rs.getString(9)
-			+"\nPais: "+rs.getString(10)+"\nCiudad: "+rs.getString(11)+"\nEstado: "+rs.getString(12)
-			+"\nCodigo Postal: "+rs.getString(13));
+			System.out.println("ID: " + arrendatarioId + "\nNombre: " + rs.getString(1) + " " + rs.getString(2) + " "
+					+ rs.getString(3) + " " + rs.getString(4) + "\nEdad: " + rs.getInt(5) + "\nCorreo: "
+					+ rs.getString(6) + "\nCelular: " + rs.getString(7) + "\nDireccion1: " + rs.getString(8)
+					+ "\nDireccion2: " + rs.getString(9) + "\nPais: " + rs.getString(10) + "\nCiudad: "
+					+ rs.getString(11) + "\nEstado: " + rs.getString(12) + "\nCodigo Postal: " + rs.getString(13));
 
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -76,7 +72,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	}
 
-	public List<Arrendatario> findByNameAndLasName(String name,String apellidoPaterno,String apellidoMaterno){
+	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno) {
 
 		List<Arrendatario> arrendatarios = new ArrayList<Arrendatario>();
 		Arrendatario arrendatario = new Arrendatario();
@@ -89,14 +85,13 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, CP"
-				+ "FROM arrendatario "
-				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+				+ "FROM arrendatario " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
 		try {
 			pstmt = connection.prepareStatement(instruccionSQL);
-			pstmt.setString(1,name);
-			pstmt.setString(2,apellidoPaterno);
-			pstmt.setString(3,apellidoMaterno);
+			pstmt.setString(1, name);
+			pstmt.setString(2, apellidoPaterno);
+			pstmt.setString(3, apellidoMaterno);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -114,29 +109,29 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 				arrendatario.getDireccion().setCiudad(rs.getString(12));
 				arrendatario.getDireccion().setEstado(rs.getString(13));
 				arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
-				
+
 				arrendatarios.add(arrendatario);
 			}
 
-			for(Arrendatario arre : arrendatarios) {
-				System.out.print("ID: "+ID);
-				System.out.print("\nNombre: "+arre.getNombre1());
-				System.out.print(" "+arre.getNombre2());
-				System.out.print(" "+arre.getApellidoPaterno());
-				System.out.print(" "+arre.getApellidoMaterno());
-				System.out.print("\nEdad: "+arre.getEdad());
-				System.out.print("\nCorreo: "+arre.getCorreo());
-				System.out.print("\nCelular: "+arre.getCelular());
-				System.out.print("\nDireccion: "+arre.getDireccion().getDireccion1());
-				System.out.print(" "+arre.getDireccion().getDireccion2());
-				System.out.print("\nPais: "+arre.getDireccion().getPais());
-				System.out.print("\nCiudad: "+arre.getDireccion().getCiudad());
-				System.out.print("\nEstado: "+arre.getDireccion().getEstado());
-				System.out.print("\nCodigo Postal: "+arre.getDireccion().getCodigoPostal());
+			for (Arrendatario arre : arrendatarios) {
+				System.out.print("ID: " + ID);
+				System.out.print("\nNombre: " + arre.getNombre1());
+				System.out.print(" " + arre.getNombre2());
+				System.out.print(" " + arre.getApellidoPaterno());
+				System.out.print(" " + arre.getApellidoMaterno());
+				System.out.print("\nEdad: " + arre.getEdad());
+				System.out.print("\nCorreo: " + arre.getCorreo());
+				System.out.print("\nCelular: " + arre.getCelular());
+				System.out.print("\nDireccion: " + arre.getDireccion().getDireccion1());
+				System.out.print(" " + arre.getDireccion().getDireccion2());
+				System.out.print("\nPais: " + arre.getDireccion().getPais());
+				System.out.print("\nCiudad: " + arre.getDireccion().getCiudad());
+				System.out.print("\nEstado: " + arre.getDireccion().getEstado());
+				System.out.print("\nCodigo Postal: " + arre.getDireccion().getCodigoPostal());
 				System.out.println();
 			}
 
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -168,20 +163,21 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			pstmt.setString(11, arrendatario.getDireccion().getCiudad());
 			pstmt.setString(12, arrendatario.getDireccion().getEstado());
 			pstmt.setString(13, arrendatario.getDireccion().getCodigoPostal());
-			
+
 			pstmt.executeUpdate();
 
 			rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				arrendatario.setIdArrendatario(rs.getInt(1));
-				System.out.println("\n\tTu id sera: "+arrendatario.getIdArrendatario()+"\n");
+				System.out.println("\n\tTu id sera: " + arrendatario.getIdArrendatario() + "\n");
 			} else {
 				// TODO: throw an exception from here
 			}
 
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
+
 }

@@ -21,7 +21,8 @@ public class IntelligentRealEstateMain {
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl(connection);
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		IntelligentRealEstateScannerService scannerService = new IntelligentRealEstateScannerServiceImpl();
-		IntelligentRealEstateMenuService menuService = new IntelligentRealEstateMenuServiceImpl(arrendadorDao,arrendatarioDao,scannerService);
+		IntelligentRealEstateMenuService menuService = new IntelligentRealEstateMenuServiceImpl(arrendadorDao,
+				arrendatarioDao, scannerService);
 		menuService.mostrarMenuPrincipal();
 	}
 }

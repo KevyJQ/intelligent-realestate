@@ -15,7 +15,8 @@ public interface IntelligentRealEstateScannerService {
 	 */
 	public int pedirNumero(String msg, String errorMsg);
 
-	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo, int limiteSuperiorInclusivo);
+	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo,
+			int limiteSuperiorInclusivo);
 
 	public Direccion pedirDireccion();
 

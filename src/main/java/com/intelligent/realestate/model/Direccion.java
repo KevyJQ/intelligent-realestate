@@ -40,7 +40,6 @@ public class Direccion {
 		return ciudad;
 	}
 
-	
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
@@ -77,7 +76,7 @@ public class Direccion {
 		sb.append("\n");
 		sb.append(codigoPostal);
 		sb.append("}");
-		
+
 		return sb.toString();
 	}
 }

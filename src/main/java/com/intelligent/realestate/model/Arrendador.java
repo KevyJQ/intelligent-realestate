@@ -17,10 +17,10 @@ public class Arrendador extends Persona {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(super.toString());
 		sb.append("Propiedades: ");
-		//Proximamente..
+		// Proximamente..
 
 		return sb.toString();
 	}

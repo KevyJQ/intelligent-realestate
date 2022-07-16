@@ -12,8 +12,8 @@ public class Persona {
 	private String correo;
 	private String celular;
 	private Direccion direccion;
-	private RealEstate realEstate;	
-	
+	private RealEstate realEstate;
+
 	public Persona() {
 	}
 
@@ -110,7 +110,7 @@ public class Persona {
 		sb.append(celular);
 		sb.append("\n");
 		sb.append("}");
-		
+
 		return sb.toString();
 	}
 }

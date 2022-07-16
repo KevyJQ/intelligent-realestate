@@ -1,10 +1,10 @@
 package com.intelligent.realestate.model;
 
 public class RealEstate {
-	// TODO: Add comments and the properties that is renting. Implement toString().
+
 	private Direccion direccion;
 	private TypeRealEstate realEstateType;
-	
+
 	public RealEstate() {
 	}
 
@@ -33,7 +33,7 @@ public class RealEstate {
 		sb.append(realEstateType);
 		sb.append("\n");
 		sb.append("}");
-		
+
 		return sb.toString();
 	}
 }

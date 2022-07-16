@@ -12,7 +12,6 @@ import com.intelligent.realestate.services.IntelligentRealEstateScannerService;
 
 public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealEstateScannerService {
 
-
 	private Scanner scanner;
 
 	public IntelligentRealEstateScannerServiceImpl() {
@@ -41,7 +40,8 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 	}
 
 	@Override
-	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo,int limiteSuperiorInclusivo) {
+	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo,
+			int limiteSuperiorInclusivo) {
 		int num = -1;
 		boolean valid = false;
 
@@ -57,7 +57,7 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		return num;
 	}
 
-	private void llenarPersona(Persona persona, boolean isDireccionMandatory) {	
+	private void llenarPersona(Persona persona, boolean isDireccionMandatory) {
 
 		System.out.print("Dame tu primer nombre: ");
 		String nombre1 = scanner.nextLine();
@@ -89,12 +89,12 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 
 		if (isDireccionMandatory) {
 			persona.setDireccion(pedirDireccion());
-		}else {
+		} else {
 			System.out.print("Cuentas con residencia actual\n1.Si\n2.No\nOpcion: ");
 			int opcion = pedirNumeroEntreRango("", "Numero no valido", 1, 2);
-			if(opcion == 1) {
-				persona.setDireccion(pedirDireccion());	
-			}else {
+			if (opcion == 1) {
+				persona.setDireccion(pedirDireccion());
+			} else {
 				persona.setDireccion(new Direccion());
 			}
 		}
@@ -127,7 +127,6 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 		direccion.setCodigoPostal(codigoPostal);
 	}
 
-
 	@Override
 	public Direccion pedirDireccion() {
 		Direccion direccion = new Direccion();
@@ -147,7 +146,7 @@ public class IntelligentRealEstateScannerServiceImpl implements IntelligentRealE
 	public Arrendatario pedirArrendatario() {
 		Arrendatario arrendatario = new Arrendatario();
 		boolean isDireccionMandator = false;
-		llenarPersona(arrendatario,isDireccionMandator);
+		llenarPersona(arrendatario, isDireccionMandator);
 		return arrendatario;
 	}
 }
