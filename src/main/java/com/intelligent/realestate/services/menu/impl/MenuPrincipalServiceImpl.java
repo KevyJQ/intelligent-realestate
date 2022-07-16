@@ -33,24 +33,6 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		this.scannerService = scannerService;
 	}
 
-	private MenuType mostrarAndObtenerOpciones() {
-		int opcion;
-
-		System.out.println("================================");
-		System.out.println("        Menu Principal");
-		System.out.println("================================");
-
-		System.out.println("1. Menu Arrendador");
-		System.out.println("2. Menu Arrendatario");
-		System.out.println("3. Salir");
-		System.out.print("Opcion: ");
-		opcion = scannerService.pedirNumeroEntreRango("Dame el numero de opcion deseado entre 1-3",
-				"El numero debe ser entre 1-3", 1, 3);
-
-		MenuType[] menus = MenuType.values();
-		return menus[opcion - 1];
-	}
-
 	private int menuRealEstate() {
 
 		TypeRealEstate[] type = TypeRealEstate.values(); // Crenado el arreglo que contenga las opciones que tiene el
@@ -68,7 +50,6 @@ public class MenuPrincipalServiceImpl implements MenuService {
 	}
 
 	public void menuArrendatarioDao() throws SQLException {
-
 		System.out.print("1.Arrendatario existente\n2.Arrendatario nuevo\n3.Atras\nOpcion: ");
 		int opcion = scannerService.pedirNumeroEntreRango("", "Opcion no valida, ingrese nuevamente..", 1, 3);
 
@@ -177,5 +158,23 @@ public class MenuPrincipalServiceImpl implements MenuService {
 				return;
 			}
 		}
+	}
+
+	private MenuType mostrarAndObtenerOpciones() {
+		int opcion;
+
+		System.out.println("================================");
+		System.out.println("        Menu Principal");
+		System.out.println("================================");
+
+		System.out.println("1. Menu Arrendador");
+		System.out.println("2. Menu Arrendatario");
+		System.out.println("3. Salir");
+		System.out.print("Opcion: ");
+		opcion = scannerService.pedirNumeroEntreRango("Dame el numero de opcion deseado entre 1-3",
+				"El numero debe ser entre 1-3", 1, 3);
+
+		MenuType[] menus = MenuType.values();
+		return menus[opcion - 1];
 	}
 }

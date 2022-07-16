@@ -12,5 +12,5 @@ public interface ArrendadorDao {
 
 	public void insertArrendador(Arrendador arrendador);
 
-	public void insertRealEstate(int typeRE);
+	public void insertRealEstate(Arrendador arrendador);
 }

@@ -1,12 +1,11 @@
 package com.intelligent.realestate.services.menu.impl;
 
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
+import com.intelligent.realestate.model.Direccion;
+import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
@@ -18,11 +17,10 @@ public class MenuArrendadorImpl implements MenuService {
 	private ScannerService scannerService;
 
 	private enum MenuType {
-		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, SALIR
+		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
 	};
 
-	public MenuArrendadorImpl(ArrendadorDao arrendadorDao,
-			MenuBuscarService<Arrendador> menuBuscarArrendador,
+	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
 			ScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
 		this.menuBuscarArrendador = menuBuscarArrendador;
@@ -32,18 +30,47 @@ public class MenuArrendadorImpl implements MenuService {
 	@Override
 	public void mostrarMenu() {
 		while (true) {
+			Optional<Arrendador> arrendador;
 			MenuType opcion = mostrarAndOptenerOpcion();
 
 			switch (opcion) {
 			case BUSCAR_ARRENDADOR:
 				System.out.println("================================");
-				Optional<Arrendador> arrendador = menuBuscarArrendador.buscarMenu();
-				// TODO: verificar que no es null.
+				arrendador = menuBuscarArrendador.buscarMenu();
+				if (arrendador.isPresent()) {
+					// TODO create una clase PrintModels que va a tener el metodo printArredador(Arrendador);
+					System.out.println("Arrendador : " + arrendador);
+				}
 				break;
 			case CREAR_ARRENDADOR:
 				System.out.println("================================");
 				System.out.println("Ok..Ingresemos tus datos.");
 				arrendadorDao.insertArrendador(scannerService.pedirArrendador());
+				break;
+			case AGREGAR_REAL_ESTATE:
+				arrendador = menuBuscarArrendador.buscarMenu();
+				if (arrendador.isPresent()) {
+					// TODO crear metodo para llenar real estate
+					Arrendador arr = arrendador.get();
+					RealEstate re = new RealEstate();
+
+					Direccion direccion = new Direccion();
+					direccion.setCiudad("Rentar Ciudad");
+					direccion.setEstado("Rentar Estado");
+					direccion.setDireccion1("Rentar direccion 1");
+					direccion.setDireccion2("Rentar direccion 2");
+					direccion.setCodigoPostal("Rentar cp");
+					direccion.setPais("Rentar Pais");
+					
+					re.setDireccion(direccion);
+					re.setRealEstateType(TypeRealEstate.DEPARTAMENTO);
+					
+					arr.setRealEstate(re);
+					
+					System.out.println("Arrendador : " + arrendador);
+					System.out.println("Insertando real estate..");
+					arrendadorDao.insertRealEstate(arr);
+				}
 				break;
 			case SALIR:
 				return;
@@ -58,10 +85,11 @@ public class MenuArrendadorImpl implements MenuService {
 		System.out.println("        Menu Arrendador");
 		System.out.println("================================");
 
-		System.out.println("1. Arrendador existente");
+		System.out.println("1. Buscar Arrendador");
 		System.out.println("2. Arrendador nuevo");
-		System.out.println("3. Salir de menu arrendador");
-		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 3);
+		System.out.println("3. Agregar real estate a arrendador");
+		System.out.println("4. Salir de menu arrendador");
+		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
 
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
