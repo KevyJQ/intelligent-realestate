@@ -58,11 +58,11 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			} else {
 				return null;
 			}
-			System.out.println("ID: " + arrendatarioId + "\nNombre: " + rs.getString(1) + " " + rs.getString(2) + " "
-					+ rs.getString(3) + " " + rs.getString(4) + "\nEdad: " + rs.getInt(5) + "\nCorreo: "
-					+ rs.getString(6) + "\nCelular: " + rs.getString(7) + "\nDireccion1: " + rs.getString(8)
-					+ "\nDireccion2: " + rs.getString(9) + "\nPais: " + rs.getString(10) + "\nCiudad: "
-					+ rs.getString(11) + "\nEstado: " + rs.getString(12) + "\nCodigo Postal: " + rs.getString(13));
+//			System.out.println("ID: " + arrendatarioId + "\nNombre: " + rs.getString(1) + " " + rs.getString(2) + " "
+//					+ rs.getString(3) + " " + rs.getString(4) + "\nEdad: " + rs.getInt(5) + "\nCorreo: "
+//					+ rs.getString(6) + "\nCelular: " + rs.getString(7) + "\nDireccion1: " + rs.getString(8)
+//					+ "\nDireccion2: " + rs.getString(9) + "\nPais: " + rs.getString(10) + "\nCiudad: "
+//					+ rs.getString(11) + "\nEstado: " + rs.getString(12) + "\nCodigo Postal: " + rs.getString(13));
 
 		} catch (SQLException e) {
 			e.printStackTrace();

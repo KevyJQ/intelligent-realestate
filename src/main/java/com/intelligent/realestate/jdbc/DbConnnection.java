@@ -14,7 +14,7 @@ public class DbConnnection {
 			String cadenaConexion = "jdbc:mariadb://localhost/intelligent_realestate"; // va la direccion de la DB y el
 																						// nombre de ella
 			String usuario = "root"; // Ingresamos el Usuario
-			String contraseña = "Kevy12345.";
+			String contraseña = "";	//Ingresamos la contraseña
 			conn = DriverManager.getConnection(cadenaConexion, usuario, contraseña);
 		}
 		return conn;

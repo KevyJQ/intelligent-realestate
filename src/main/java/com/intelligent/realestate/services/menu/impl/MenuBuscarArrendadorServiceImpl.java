@@ -46,14 +46,15 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 			}
 		}
 	}
-
+	//--Buscara por ID al Arrendador
 	private Optional<Arrendador> buscarPorId() {
 		long id = scannerService.pedirNumero("Me puedes indicar cual es tu ID: ",
 				"Numero no valido, ingrese nuevamente..");
 
 		return Optional.ofNullable(arrendadorDao.findById(id));
 	}
-
+	
+	//Buscara por Su primero nombre y Apellidos
 	private Optional<Arrendador> buscarPorNombreAndApellido() {
 		String nombre1 = scannerService.pedirString("Cual es tu nombre o primer nombre:",
 				"Proporciona el nombre por favor");

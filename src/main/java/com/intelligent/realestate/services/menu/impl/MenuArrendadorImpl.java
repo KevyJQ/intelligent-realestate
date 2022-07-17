@@ -42,11 +42,13 @@ public class MenuArrendadorImpl implements MenuService {
 					System.out.println("Arrendador : " + arrendador);
 				}
 				break;
+				
 			case CREAR_ARRENDADOR:
 				System.out.println("================================");
 				System.out.println("Ok..Ingresemos tus datos.");
 				arrendadorDao.insertArrendador(scannerService.pedirArrendador());
 				break;
+				
 			case AGREGAR_REAL_ESTATE:
 				arrendador = menuBuscarArrendador.buscarMenu();
 				if (arrendador.isPresent()) {
@@ -93,22 +95,6 @@ public class MenuArrendadorImpl implements MenuService {
 
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
-	}
-
-	private int menuRealEstate() {
-
-		TypeRealEstate[] type = TypeRealEstate.values(); // Crenado el arreglo que contenga las opciones que tiene el
-															// enum
-		System.out.println("================================");
-
-		for (int i = 0; i < type.length; i++) {
-			System.out.println((i + 1) + ") " + type[i]);
-		}
-
-		System.out.println("Que tipo de Real Estate deseas: ");
-		int tipoRealEstate = scannerService.pedirNumeroEntreRango("", "Esa opcion no fue encontrada", 1, type.length);
-
-		return tipoRealEstate;
 	}
 
 }
