@@ -25,9 +25,9 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		PreparedStatement pstmt;
 		ResultSet rs;
 
-		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno," + "apellidoMaterno,edad,correo,celular,"
-				+ "direccion1, direccion2, pais, ciudad, estado, CP " + "FROM arrendador "
-				+ "WHERE id_arrendador = ? ;";
+		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno,"
+				+ "apellidoMaterno,edad,correo,celular," + "direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "FROM arrendador " + "WHERE id_arrendador = ? ;";
 
 		try {
 			pstmt = connection.prepareStatement(instruccionSQL);
@@ -174,7 +174,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		try {
 			pstmt = connection.prepareStatement(instruccionSQL);
 			pstmt.setLong(1, arrendador.getIdArrendador());
-			pstmt.setInt(2,  arrendador.getRealEstate().getRealEstateType().getId());
+			pstmt.setInt(2, arrendador.getRealEstate().getRealEstateType().getId());
 			pstmt.setString(3, arrendador.getRealEstate().getDireccion().getDireccion1());
 			pstmt.setString(4, arrendador.getRealEstate().getDireccion().getDireccion2());
 			pstmt.setString(5, arrendador.getRealEstate().getDireccion().getPais());

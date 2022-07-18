@@ -8,6 +8,7 @@ import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.Persona;
+import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.ScannerService;
 
 public class ScannerServiceImpl implements ScannerService {
@@ -127,7 +128,7 @@ public class ScannerServiceImpl implements ScannerService {
 		String codigoPostal = scanner.nextLine();
 		direccion.setCodigoPostal(codigoPostal);
 	}
-
+	
 	@Override
 	public Direccion pedirDireccion() {
 		Direccion direccion = new Direccion();

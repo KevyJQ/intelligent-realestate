@@ -32,9 +32,11 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 			case BUSCAR_POR_ID:
 				arrendador = buscarPorId();
 				break;
+
 			case BUSCAR_POR_NOMBRE_Y_APELLIDO:
 				arrendador = buscarPorNombreAndApellido();
 				break;
+
 			case CANCELAR:
 				return Optional.empty();
 			}
@@ -46,15 +48,16 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 			}
 		}
 	}
-	//--Buscara por ID al Arrendador
+
+	// --Buscara por ID al Arrendador
 	private Optional<Arrendador> buscarPorId() {
 		long id = scannerService.pedirNumero("Me puedes indicar cual es tu ID: ",
 				"Numero no valido, ingrese nuevamente..");
 
 		return Optional.ofNullable(arrendadorDao.findById(id));
 	}
-	
-	//Buscara por Su primero nombre y Apellidos
+
+	// Buscara por Su primero nombre y Apellidos
 	private Optional<Arrendador> buscarPorNombreAndApellido() {
 		String nombre1 = scannerService.pedirString("Cual es tu nombre o primer nombre:",
 				"Proporciona el nombre por favor");
@@ -78,7 +81,7 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 		System.out.println("================================");
 		System.out.println("        Buscar Arrendador");
 		System.out.println("================================");
-		
+
 		System.out.println("1. Buscar por ID");
 		System.out.println("2. Buscar por Nombre y Apellido");
 		System.out.println("3. Cancelar");

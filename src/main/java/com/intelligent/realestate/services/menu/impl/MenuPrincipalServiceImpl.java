@@ -38,7 +38,7 @@ public class MenuPrincipalServiceImpl implements MenuService {
 				menuArrendadorService.mostrarMenu();
 				break;
 
-			case ARRENDATARIO: // Inquilino
+			case ARRENDATARIO:
 				menuArrendatarioService.mostrarMenu();
 				break;
 

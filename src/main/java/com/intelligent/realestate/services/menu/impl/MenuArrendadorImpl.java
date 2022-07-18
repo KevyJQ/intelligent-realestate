@@ -19,6 +19,7 @@ public class MenuArrendadorImpl implements MenuService {
 	private enum MenuType {
 		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
 	};
+	
 
 	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
 			ScannerService scannerService) {
@@ -38,40 +39,32 @@ public class MenuArrendadorImpl implements MenuService {
 				System.out.println("================================");
 				arrendador = menuBuscarArrendador.buscarMenu();
 				if (arrendador.isPresent()) {
-					// TODO create una clase PrintModels que va a tener el metodo printArredador(Arrendador);
+					// TODO create una clase PrintModels que va a tener el metodo
+					// printArredador(Arrendador);
 					System.out.println("Arrendador : " + arrendador);
 				}
 				break;
-				
+
 			case CREAR_ARRENDADOR:
 				System.out.println("================================");
 				System.out.println("Ok..Ingresemos tus datos.");
 				arrendadorDao.insertArrendador(scannerService.pedirArrendador());
 				break;
-				
+
 			case AGREGAR_REAL_ESTATE:
 				arrendador = menuBuscarArrendador.buscarMenu();
 				if (arrendador.isPresent()) {
-					// TODO crear metodo para llenar real estate
-					Arrendador arr = arrendador.get();
-					RealEstate re = new RealEstate();
 
-					Direccion direccion = new Direccion();
-					direccion.setCiudad("Rentar Ciudad");
-					direccion.setEstado("Rentar Estado");
-					direccion.setDireccion1("Rentar direccion 1");
-					direccion.setDireccion2("Rentar direccion 2");
-					direccion.setCodigoPostal("Rentar cp");
-					direccion.setPais("Rentar Pais");
-					
-					re.setDireccion(direccion);
-					re.setRealEstateType(TypeRealEstate.DEPARTAMENTO);
-					
-					arr.setRealEstate(re);
-					
-					System.out.println("Arrendador : " + arrendador);
-					System.out.println("Insertando real estate..");
-					arrendadorDao.insertRealEstate(arr);
+					Arrendador arrendado = arrendador.get(); // Obtenemos el Arrendador
+					RealEstate realestate = new RealEstate();
+
+					realestate.setDireccion(scannerService.pedirDireccion());
+					realestate.setRealEstateType(typeRealEstate());
+
+					arrendado.setRealEstate(realestate);
+					arrendadorDao.insertRealEstate(arrendado);
+
+					//System.out.println("Arrendador : " + arrendador);
 				}
 				break;
 			case SALIR:
@@ -95,6 +88,23 @@ public class MenuArrendadorImpl implements MenuService {
 
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
+	}
+	
+	private TypeRealEstate typeRealEstate() {
+		int opcion;
+		
+		System.out.println("================================");
+		System.out.println("       Tipos de Real Estate     ");
+		System.out.println("================================");
+		
+		System.out.println("1. Casa");
+		System.out.println("2. Departamento");
+		System.out.println("3. Terreno");
+		System.out.println("4. Oficina");
+		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
+		
+		TypeRealEstate[] tyRE = TypeRealEstate.values();
+		return tyRE[opcion -1];
 	}
 
 }
