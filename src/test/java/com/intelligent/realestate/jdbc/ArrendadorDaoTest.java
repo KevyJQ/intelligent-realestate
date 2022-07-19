@@ -17,22 +17,22 @@ import com.intelligent.realestate.model.util.ModelUtil;
  */
 public class ArrendadorDaoTest {
 	private ArrendadorDao arrendadorDao;
-	
+
 	@Before
 	public void setup() throws SQLException {
 		arrendadorDao = new ArrendadorDaoImpl(DbConnnection.getConnection());
 	}
-	
-    @Test
-    public void insertArrendador() {
-    	// Setup
-    	Arrendador arrendador = ModelUtil.crearArrendador();
 
-    	// Ejecutar test case.
-    	arrendadorDao.insertArrendador(arrendador);
-    	System.out.println("Id arrendador: " + arrendador.getIdArrendador());
+	@Test
+	public void insertArrendador() {
+		// Setup
+		Arrendador arrendador = ModelUtil.crearArrendador();
 
-    	// Evaluar assertions.
-    	assertNotNull(arrendador.getIdArrendador());
-    }
+		// Ejecutar test case.
+		arrendadorDao.insertArrendador(arrendador);
+		System.out.println("Id arrendador: " + arrendador.getIdArrendador());
+
+		// Evaluar assertions.
+		assertNotNull(arrendador.getIdArrendador());
+	}
 }

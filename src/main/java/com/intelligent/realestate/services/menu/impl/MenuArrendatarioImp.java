@@ -32,15 +32,12 @@ public class MenuArrendatarioImp implements MenuService {
 
 			switch (opcion) {
 			case BUSCAR_ARRENDATARIO:
-				System.out.println("================================");
 				arrendatario = menuBuscarArrendatarios.buscarMenu();
-				if (arrendatario.isPresent()) {
-					System.out.println("Arrendatario: " + arrendatario);
-				}
 				break;
 			case CREAR_ARRENDATARIO:
-				System.out.println("================================");
-				System.out.println("Ok..Ingresemos tus datos.");
+				System.out.println("==========================");
+				System.out.println("   Ingresemos tus datos.  ");
+				System.out.println("==========================");
 				arrendatarioDao.insertArrendatario(scannerService.pedirArrendatario());
 				break;
 			case SALIR:

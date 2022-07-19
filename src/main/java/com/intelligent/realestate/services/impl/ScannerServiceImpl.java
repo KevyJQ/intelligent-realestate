@@ -128,7 +128,7 @@ public class ScannerServiceImpl implements ScannerService {
 		String codigoPostal = scanner.nextLine();
 		direccion.setCodigoPostal(codigoPostal);
 	}
-	
+
 	@Override
 	public Direccion pedirDireccion() {
 		Direccion direccion = new Direccion();

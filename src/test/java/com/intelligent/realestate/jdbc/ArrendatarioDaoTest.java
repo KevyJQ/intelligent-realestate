@@ -21,7 +21,6 @@ public class ArrendatarioDaoTest {
 		arrendatarioDao = new ArrendatarioDaoImpl(DbConnnection.getConnection());
 	}
 
-
 	@Test
 	public void insertarrendatario() {
 		// Setup

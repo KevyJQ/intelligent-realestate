@@ -3,13 +3,13 @@ package com.intelligent.realestate.model;
 public class Arrendatario extends Persona {
 	// TODO: Add comments and the properties that is renting.
 
-	private Integer idArrendatario;
+	private Long idArrendatario;
 
-	public Integer getIdArrendatario() {
+	public Long getIdArrendatario() {
 		return idArrendatario;
 	}
 
-	public void setIdArrendatario(Integer idArrendatario) {
+	public void setIdArrendatario(Long idArrendatario) {
 		this.idArrendatario = idArrendatario;
 	}
 

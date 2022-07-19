@@ -30,16 +30,16 @@ public class Main {
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl(connection);
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		ScannerService scannerService = new ScannerServiceImpl();
-		ImpresionService impresionArrendador = new ImpresionServiceImpl();
+		ImpresionService impresion = new ImpresionServiceImpl();
 		MenuBuscarService<Arrendador> menuBuscarArrendador = new MenuBuscarArrendadorServiceImpl(arrendadorDao,
-				scannerService,impresionArrendador);
+				scannerService, impresion);
 		MenuBuscarService<Arrendatario> menuBuscarArrendatario = new MenuBuscarArrendatarioServiceImpl(arrendatarioDao,
-				scannerService);
-		MenuService menuArrendMenuService = new MenuArrendadorImpl(arrendadorDao, menuBuscarArrendador, scannerService,impresionArrendador);
+				scannerService, impresion);
+		MenuService menuArrendMenuService = new MenuArrendadorImpl(arrendadorDao, menuBuscarArrendador, scannerService);
 		MenuService menuArrendatarioService = new MenuArrendatarioImp(arrendatarioDao, menuBuscarArrendatario,
 				scannerService);
-		MenuService menuPrincipalService = new MenuPrincipalServiceImpl(arrendadorDao, arrendatarioDao,
-				menuArrendMenuService, menuArrendatarioService, scannerService);
+		MenuService menuPrincipalService = new MenuPrincipalServiceImpl(menuArrendMenuService, menuArrendatarioService,
+				scannerService);
 
 		menuPrincipalService.mostrarMenu();
 	}

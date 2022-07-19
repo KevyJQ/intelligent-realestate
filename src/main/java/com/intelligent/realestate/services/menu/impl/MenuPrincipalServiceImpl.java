@@ -1,13 +1,10 @@
 package com.intelligent.realestate.services.menu.impl;
 
-import com.intelligent.realestate.dao.ArrendadorDao;
-import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuService;
 
 public class MenuPrincipalServiceImpl implements MenuService {
-	private ArrendadorDao arrendadorDao;
-	private ArrendatarioDao arrendatarioDao;
+
 	private MenuService menuArrendadorService;
 	private MenuService menuArrendatarioService;
 	private ScannerService scannerService;
@@ -16,10 +13,8 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		ARRENDADOR, ARRENDATARIO, SALIR
 	};
 
-	public MenuPrincipalServiceImpl(ArrendadorDao arrendadorDao, ArrendatarioDao arrendatarioDao,
-			MenuService menuArrendadorService, MenuService menuArrendatarioService, ScannerService scannerService) {
-		this.arrendadorDao = arrendadorDao;
-		this.arrendatarioDao = arrendatarioDao;
+	public MenuPrincipalServiceImpl(MenuService menuArrendadorService, MenuService menuArrendatarioService,
+			ScannerService scannerService) {
 		this.menuArrendadorService = menuArrendadorService;
 		this.menuArrendatarioService = menuArrendatarioService;
 		this.scannerService = scannerService;

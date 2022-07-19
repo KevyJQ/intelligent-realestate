@@ -19,7 +19,7 @@ public interface ScannerService {
 			int limiteSuperiorInclusivo);
 
 	public String pedirString(String msg, String errorMsg);
-	
+
 	public Direccion pedirDireccion();
 
 	public Arrendador pedirArrendador();

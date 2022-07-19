@@ -33,7 +33,7 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 			MenuType opcion = mostrarAndOptenerOpcion();
 
 			switch (opcion) {
-			case BUSCAR_POR_ID:		
+			case BUSCAR_POR_ID:
 				arrendador = buscarPorId();
 				Arrendador arren = arrendador.get();
 				impresionArrendador.imprimirArrendador(arren);

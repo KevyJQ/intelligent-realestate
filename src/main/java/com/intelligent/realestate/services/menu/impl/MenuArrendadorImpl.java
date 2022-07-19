@@ -16,20 +16,17 @@ public class MenuArrendadorImpl implements MenuService {
 	private ArrendadorDao arrendadorDao;
 	private MenuBuscarService<Arrendador> menuBuscarArrendador;
 	private ScannerService scannerService;
-	private ImpresionService impresion;
 
 	private enum MenuType {
 		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
 	};
 
-
 	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
-			ScannerService scannerService, ImpresionService impresion) {
+			ScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
 		this.menuBuscarArrendador = menuBuscarArrendador;
 		this.scannerService = scannerService;
-		this.impresion = impresion;
-		
+
 	}
 
 	@Override
@@ -47,8 +44,9 @@ public class MenuArrendadorImpl implements MenuService {
 				break;
 
 			case CREAR_ARRENDADOR:
-				System.out.println("================================");
-				System.out.println("Ok..Ingresemos tus datos.");
+				System.out.println("==========================");
+				System.out.println("   Ingresemos tus datos.  ");
+				System.out.println("==========================");
 				arrendadorDao.insertArrendador(scannerService.pedirArrendador());
 				break;
 
@@ -56,17 +54,17 @@ public class MenuArrendadorImpl implements MenuService {
 				arrendador = menuBuscarArrendador.buscarMenu();
 				if (arrendador.isPresent()) {
 
-					Arrendador arrendado = arrendador.get(); 
+					Arrendador arrendado = arrendador.get();
 					RealEstate realestate = new RealEstate();
-					
+
 					realestate.setRealEstateType(typeRealEstate());
 					String estatus = status().name();
 					realestate.setDireccion(scannerService.pedirDireccion());
 
 					arrendado.setRealEstate(realestate);
-					arrendadorDao.insertRealEstate(arrendado,estatus);
+					arrendadorDao.insertRealEstate(arrendado, estatus);
 
-					//System.out.println("Arrendador : " + arrendador);
+					// System.out.println("Arrendador : " + arrendador);
 				}
 				break;
 			case SALIR:
@@ -106,7 +104,7 @@ public class MenuArrendadorImpl implements MenuService {
 		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
 
 		TypeRealEstate[] tyRE = TypeRealEstate.values();
-		return tyRE[opcion -1];
+		return tyRE[opcion - 1];
 	}
 
 	private Estatus status() {
@@ -122,7 +120,7 @@ public class MenuArrendadorImpl implements MenuService {
 		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
 
 		Estatus[] statu = Estatus.values();
-		return statu[opcion -1];
+		return statu[opcion - 1];
 	}
 
 }
