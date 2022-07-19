@@ -97,25 +97,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 
 				arrendadores.add(arrendador);
 			}
-
-			for (Arrendador arre : arrendadores) {
-				System.out.print("ID: " + arre.getIdArrendador());
-				System.out.print("\nNombre: " + arre.getNombre1());
-				System.out.print(" " + arre.getNombre2());
-				System.out.print(" " + arre.getApellidoPaterno());
-				System.out.print(" " + arre.getApellidoMaterno());
-				System.out.print("\nEdad: " + arre.getEdad());
-				System.out.print("\nCorreo: " + arre.getCorreo());
-				System.out.print("\nCelular: " + arre.getCelular());
-				System.out.print("\nDireccion: " + arre.getDireccion().getDireccion1());
-				System.out.print(" " + arre.getDireccion().getDireccion2());
-				System.out.print("\nPais: " + arre.getDireccion().getPais());
-				System.out.print("\nCiudad: " + arre.getDireccion().getCiudad());
-				System.out.print("\nEstado: " + arre.getDireccion().getEstado());
-				System.out.print("\nCodigo Postal: " + arre.getDireccion().getCodigoPostal());
-				System.out.println();
-			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -162,7 +143,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		}
 	}
 
-	public void insertRealEstate(Arrendador arrendador,String estatus) {
+	public void insertRealEstate(Arrendador arrendador, String estatus) {
 		PreparedStatement pstmt;
 
 		final String instruccionSQL = "INSERT INTO real_estate"

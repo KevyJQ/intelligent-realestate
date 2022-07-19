@@ -5,20 +5,24 @@ import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
+import com.intelligent.realestate.services.ImpresionService;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 
 public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrendador> {
 	private ArrendadorDao arrendadorDao;
 	private ScannerService scannerService;
+	private ImpresionService impresionArrendador;
 
 	private enum MenuType {
 		BUSCAR_POR_ID, BUSCAR_POR_NOMBRE_Y_APELLIDO, CANCELAR
 	};
 
-	public MenuBuscarArrendadorServiceImpl(ArrendadorDao arrendadorDao, ScannerService scannerService) {
+	public MenuBuscarArrendadorServiceImpl(ArrendadorDao arrendadorDao, ScannerService scannerService,
+			ImpresionService impresionArrendador) {
 		this.arrendadorDao = arrendadorDao;
 		this.scannerService = scannerService;
+		this.impresionArrendador = impresionArrendador;
 	}
 
 	@Override
@@ -29,12 +33,16 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 			MenuType opcion = mostrarAndOptenerOpcion();
 
 			switch (opcion) {
-			case BUSCAR_POR_ID:
+			case BUSCAR_POR_ID:		
 				arrendador = buscarPorId();
+				Arrendador arren = arrendador.get();
+				impresionArrendador.imprimirArrendador(arren);
 				break;
 
 			case BUSCAR_POR_NOMBRE_Y_APELLIDO:
 				arrendador = buscarPorNombreAndApellido();
+				Arrendador arren1 = arrendador.get();
+				impresionArrendador.imprimirArrendador(arren1);
 				break;
 
 			case CANCELAR:

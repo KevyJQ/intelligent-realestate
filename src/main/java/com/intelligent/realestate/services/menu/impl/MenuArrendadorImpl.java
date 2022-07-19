@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
-import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.Estatus;
 import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
+import com.intelligent.realestate.services.ImpresionService;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 import com.intelligent.realestate.services.menu.MenuService;
@@ -16,6 +16,7 @@ public class MenuArrendadorImpl implements MenuService {
 	private ArrendadorDao arrendadorDao;
 	private MenuBuscarService<Arrendador> menuBuscarArrendador;
 	private ScannerService scannerService;
+	private ImpresionService impresion;
 
 	private enum MenuType {
 		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
@@ -23,10 +24,12 @@ public class MenuArrendadorImpl implements MenuService {
 
 
 	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
-			ScannerService scannerService) {
+			ScannerService scannerService, ImpresionService impresion) {
 		this.arrendadorDao = arrendadorDao;
 		this.menuBuscarArrendador = menuBuscarArrendador;
 		this.scannerService = scannerService;
+		this.impresion = impresion;
+		
 	}
 
 	@Override
@@ -37,13 +40,10 @@ public class MenuArrendadorImpl implements MenuService {
 
 			switch (opcion) {
 			case BUSCAR_ARRENDADOR:
-				System.out.println("================================");
 				arrendador = menuBuscarArrendador.buscarMenu();
-				if (arrendador.isPresent()) {
-					// TODO create una clase PrintModels que va a tener el metodo
-					// printArredador(Arrendador);
-					System.out.println(arrendador);
-				}
+//				if (arrendador.isPresent()) {
+//					// Opcion: si queremos que se imprima 
+//				}
 				break;
 
 			case CREAR_ARRENDADOR:
