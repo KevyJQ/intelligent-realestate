@@ -65,19 +65,4 @@ public class MenuPrincipalServiceImpl implements MenuService {
 		return menus[opcion - 1];
 	}
 
-//	private int menuRealEstate() {
-//
-//		TypeRealEstate[] type = TypeRealEstate.values(); // Crenado el arreglo que contenga las opciones que tiene el
-//															// enum
-//		System.out.println("================================");
-//
-//		for (int i = 0; i < type.length; i++) {
-//			System.out.println((i + 1) + ") " + type[i]);
-//		}
-//
-//		System.out.println("Que tipo de Real Estate deseas: ");
-//		int tipoRealEstate = scannerService.pedirNumeroEntreRango("", "Esa opcion no fue encontrada", 1, type.length);
-//
-//		return tipoRealEstate;
-//	}
 }

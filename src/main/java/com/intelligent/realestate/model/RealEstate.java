@@ -4,6 +4,7 @@ public class RealEstate {
 
 	private Direccion direccion;
 	private TypeRealEstate realEstateType;
+	
 
 	public RealEstate() {
 	}

@@ -61,7 +61,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	}
 
 	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
-
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>();
 		Arrendador arrendador = new Arrendador();
 		arrendador.setDireccion(new Direccion());
@@ -124,7 +123,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	}
 
 	public void insertArrendador(Arrendador arrendador) {
-
 		PreparedStatement pstmt;
 		ResultSet rs;
 
@@ -164,23 +162,24 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		}
 	}
 
-	public void insertRealEstate(Arrendador arrendador) {
+	public void insertRealEstate(Arrendador arrendador,String estatus) {
 		PreparedStatement pstmt;
 
 		final String instruccionSQL = "INSERT INTO real_estate"
-				+ "(id_arrendador, id_type_realestate, direccion1, direccion2, " + "pais, ciudad, estado, CP) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, pais, ciudad, estado, CP) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			pstmt = connection.prepareStatement(instruccionSQL);
 			pstmt.setLong(1, arrendador.getIdArrendador());
 			pstmt.setInt(2, arrendador.getRealEstate().getRealEstateType().getId());
-			pstmt.setString(3, arrendador.getRealEstate().getDireccion().getDireccion1());
-			pstmt.setString(4, arrendador.getRealEstate().getDireccion().getDireccion2());
-			pstmt.setString(5, arrendador.getRealEstate().getDireccion().getPais());
-			pstmt.setString(6, arrendador.getRealEstate().getDireccion().getCiudad());
-			pstmt.setString(7, arrendador.getRealEstate().getDireccion().getEstado());
-			pstmt.setString(8, arrendador.getRealEstate().getDireccion().getCodigoPostal());
+			pstmt.setString(3, estatus);
+			pstmt.setString(4, arrendador.getRealEstate().getDireccion().getDireccion1());
+			pstmt.setString(5, arrendador.getRealEstate().getDireccion().getDireccion2());
+			pstmt.setString(6, arrendador.getRealEstate().getDireccion().getPais());
+			pstmt.setString(7, arrendador.getRealEstate().getDireccion().getCiudad());
+			pstmt.setString(8, arrendador.getRealEstate().getDireccion().getEstado());
+			pstmt.setString(9, arrendador.getRealEstate().getDireccion().getCodigoPostal());
 
 			pstmt.execute();
 

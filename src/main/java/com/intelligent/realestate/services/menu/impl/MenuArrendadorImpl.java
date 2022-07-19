@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Direccion;
+import com.intelligent.realestate.model.Estatus;
 import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.ScannerService;
@@ -19,7 +20,7 @@ public class MenuArrendadorImpl implements MenuService {
 	private enum MenuType {
 		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
 	};
-	
+
 
 	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
 			ScannerService scannerService) {
@@ -41,7 +42,7 @@ public class MenuArrendadorImpl implements MenuService {
 				if (arrendador.isPresent()) {
 					// TODO create una clase PrintModels que va a tener el metodo
 					// printArredador(Arrendador);
-					System.out.println("Arrendador : " + arrendador);
+					System.out.println(arrendador);
 				}
 				break;
 
@@ -55,14 +56,15 @@ public class MenuArrendadorImpl implements MenuService {
 				arrendador = menuBuscarArrendador.buscarMenu();
 				if (arrendador.isPresent()) {
 
-					Arrendador arrendado = arrendador.get(); // Obtenemos el Arrendador
+					Arrendador arrendado = arrendador.get(); 
 					RealEstate realestate = new RealEstate();
-
-					realestate.setDireccion(scannerService.pedirDireccion());
+					
 					realestate.setRealEstateType(typeRealEstate());
+					String estatus = status().name();
+					realestate.setDireccion(scannerService.pedirDireccion());
 
 					arrendado.setRealEstate(realestate);
-					arrendadorDao.insertRealEstate(arrendado);
+					arrendadorDao.insertRealEstate(arrendado,estatus);
 
 					//System.out.println("Arrendador : " + arrendador);
 				}
@@ -89,22 +91,38 @@ public class MenuArrendadorImpl implements MenuService {
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
 	}
-	
+
 	private TypeRealEstate typeRealEstate() {
 		int opcion;
-		
+
 		System.out.println("================================");
 		System.out.println("       Tipos de Real Estate     ");
 		System.out.println("================================");
-		
+
 		System.out.println("1. Casa");
 		System.out.println("2. Departamento");
 		System.out.println("3. Terreno");
 		System.out.println("4. Oficina");
 		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
-		
+
 		TypeRealEstate[] tyRE = TypeRealEstate.values();
 		return tyRE[opcion -1];
+	}
+
+	private Estatus status() {
+		int opcion;
+
+		System.out.println("================================");
+		System.out.println("             Estatus            ");
+		System.out.println("================================");
+
+		System.out.println("1. Disponible");
+		System.out.println("2. En renta");
+		System.out.println("3. No disponible");
+		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
+
+		Estatus[] statu = Estatus.values();
+		return statu[opcion -1];
 	}
 
 }

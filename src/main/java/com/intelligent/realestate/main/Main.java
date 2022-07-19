@@ -23,7 +23,7 @@ import com.intelligent.realestate.services.menu.impl.MenuPrincipalServiceImpl;
 public class Main {
 
 	public static void main(String[] args) throws SQLException {
-		// System.out.println("Testing");
+
 		Connection connection = DbConnnection.getConnection();
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl(connection);
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
