@@ -24,7 +24,6 @@ public class RealEstate {
 	public void setRealEstateType(TypeRealEstate realEstateType) {
 		this.realEstateType = realEstateType;
 	}
-	
 
 	public String getStatus() {
 		return status;

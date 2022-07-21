@@ -1,6 +1,5 @@
 package com.intelligent.realestate.services.menu.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,6 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 	@Override
 	public Optional<Arrendatario> buscarMenu() {
 		Optional<Arrendatario> arrendatario = Optional.empty();
-		//List<Optional<Arrendatario>> a = new ArrayList<>();
 
 		while (true) {
 			MenuType opcion = mostrarAndOptenerOpcion();
@@ -38,12 +36,11 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 			case BUSCAR_POR_ID:
 				arrendatario = buscarPorId();
 				Arrendatario arrendata = arrendatario.get();
-				
 				impresionArrendatario.imprimirArrendatario(arrendata);
 				break;
 				
 			case BUSCAR_POR_NOMBRE_Y_APELLIDOS:
-				arrendatario = buscarPorNombreAndApellido();
+				arrendatario = buscarPorNombreAndApellido();	
 				Arrendatario arrendata1 = arrendatario.get();
 				impresionArrendatario.imprimirArrendatario(arrendata1);
 				break;
@@ -68,9 +65,9 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 
 	private Optional<Arrendatario> buscarPorNombreAndApellido() {
 		String nombre1 = scannerService.pedirString("Cual es tu primer nombre: ", "Proporcional el nombre por favor");
-		String apellidoPaterno = scannerService.pedirString("Cual es tu primer nombre: ",
+		String apellidoPaterno = scannerService.pedirString("Cual es tu apellido Paterno: ",
 				"Proporcional el Apellido Paterno por favor");
-		String apellidoMaterno = scannerService.pedirString("Cual es tu primer nombre: ",
+		String apellidoMaterno = scannerService.pedirString("Cual es tu apellido Materno: ",
 				"Proporcional el Apellido Materno por favor");
 
 		List<Arrendatario> arrendatarios = arrendatarioDao.findByNameAndLasName(nombre1, apellidoMaterno,
@@ -96,21 +93,4 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
 	}
-
-//	private int menuRealEstate() {
-//
-//		TypeRealEstate[] type = TypeRealEstate.values(); // Crenado el arreglo que contenga las opciones que tiene el
-//		// enum
-//		System.out.println("================================");
-//
-//		for (int i = 0; i < type.length; i++) {
-//			System.out.println((i + 1) + ") " + type[i]);
-//		}
-//
-//		System.out.println("Que tipo de Real Estate deseas: ");
-//		int tipoRealEstate = scannerService.pedirNumeroEntreRango("", "Esa opcion no fue encontrada", 1, type.length);
-//
-//		return tipoRealEstate;
-//	}
-
 }

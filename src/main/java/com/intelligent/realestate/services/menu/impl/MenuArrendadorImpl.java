@@ -60,7 +60,7 @@ public class MenuArrendadorImpl implements MenuService {
 					arrendadorDao.insertRealEstate(arrendado);
 				}
 				break;
-				
+
 			case SALIR:
 				return;
 			}

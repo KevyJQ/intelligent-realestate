@@ -77,9 +77,10 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 		PreparedStatement pstmt;
 		ResultSet rs;
 
-		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, CP"
-				+ "FROM arrendatario " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellidoPaterno, "
+				+ "apellidoMaterno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "FROM arrendatario "
+				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
 		try {
 			pstmt = connection.prepareStatement(instruccionSQL);
@@ -88,8 +89,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			pstmt.setString(3, apellidoMaterno);
 			rs = pstmt.executeQuery();
 
-			while (rs.next()) {
-				
+			while(rs.next()) {
 				arrendatario.setIdArrendatario(rs.getLong(1));
 				arrendatario.setNombre1(rs.getString(2));
 				arrendatario.setNombre2(rs.getString(3));
@@ -106,9 +106,9 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 				arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
 
 				arrendatarios.add(arrendatario);
-//				System.out.println("Sise: "+arrendatarios.size());
 			}
 		} catch (SQLException e) {
+			System.out.println("HOla");
 			e.printStackTrace();
 		}
 
@@ -156,7 +156,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 		}
 
 	}
-	
+
 //	public void findRE() {
 //		PreparedStatement pstmt;
 //		

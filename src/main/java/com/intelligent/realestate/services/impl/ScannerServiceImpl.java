@@ -58,7 +58,7 @@ public class ScannerServiceImpl implements ScannerService {
 
 		return num;
 	}
-	
+
 	@Override
 	public String pedirString(String msg, String errorMsg) {
 		boolean valid = false;

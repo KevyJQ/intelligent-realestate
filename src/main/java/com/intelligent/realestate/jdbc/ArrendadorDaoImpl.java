@@ -54,19 +54,22 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			 * un bloque llamado Exception que se ejecutara si el Try falla
 			 * 
 			 */
-			pstmt = connection.prepareStatement(instruccionSQL);	
+			pstmt = connection.prepareStatement(instruccionSQL);
 			/*
-			 * Se realiza la conexion a la base de datos, usamos el prepareStatement para despues mandarle cuales son los paramatros que 
-			 * queremos que filtre y al final le mandamos la instruccionSQL(Query)
-			 * */
-			pstmt.setLong(1, arrendadorId);	
+			 * Se realiza la conexion a la base de datos, usamos el prepareStatement para
+			 * despues mandarle cuales son los paramatros que queremos que filtre y al final
+			 * le mandamos la instruccionSQL(Query)
+			 */
+			pstmt.setLong(1, arrendadorId);
 			/*
-			 * Como podemos ver, aqui es donde le mandamos los parametros del prepareStatement, donde el numero 1 indica que en el primer 
-			 * signo "?" queremos que lo cambie por el numero que trae arrendadorId
-			 * */
-			rs = pstmt.executeQuery();	//Indicamos que el reultado de ejecutar la Query se asigne al ResulSet 
+			 * Como podemos ver, aqui es donde le mandamos los parametros del
+			 * prepareStatement, donde el numero 1 indica que en el primer signo "?"
+			 * queremos que lo cambie por el numero que trae arrendadorId
+			 */
+			rs = pstmt.executeQuery(); // Indicamos que el reultado de ejecutar la Query se asigne al ResulSet
 
-			if (rs.next()) {	//En esta seccion asignamos los valores que regreso despues de haber consultado la base de datos
+			if (rs.next()) { // En esta seccion asignamos los valores que regreso despues de haber consultado
+								// la base de datos
 				arrendador = new Arrendador();
 				arrendador.setDireccion(new Direccion());
 				arrendador.setIdArrendador(rs.getLong(1));
@@ -85,17 +88,19 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 				arrendador.getDireccion().setCodigoPostal(rs.getString(14));
 			}
 
-		} catch (SQLException e) {	//La Exception del Try 
-			e.printStackTrace();	//En dado caso que el Try falle, nos mostrara en pantalla le Exception del error
+		} catch (SQLException e) { // La Exception del Try
+			e.printStackTrace(); // En dado caso que el Try falle, nos mostrara en pantalla le Exception del
+									// error
 		}
 
-		return arrendador;	//Regresamos el objeto arrendador con todos los datos guardados
+		return arrendador; // Regresamos el objeto arrendador con todos los datos guardados
 	}
 
 	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
-		List<Arrendador> arrendadores = new ArrayList<Arrendador>();	//Creamos un arreglo de Arrendador
-		Arrendador arrendador = new Arrendador();	//Creamos un nuevo objeto de tipo Arrendador
-		arrendador.setDireccion(new Direccion());	//Al objeto Arrendador le creamos una nueva Direccion
+		
+		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
+		Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
+		arrendador.setDireccion(new Direccion()); // Al objeto Arrendador le creamos una nueva Direccion
 
 		PreparedStatement pstmt;
 		ResultSet rs;
@@ -110,9 +115,9 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setString(2, apellidoPaterno);
 			pstmt.setString(3, apellidoMaterno);
 			/*
-			 * A diferencia de la pasada, ahora podemos ver que los numero indican la posicio de los signos "?"
-			 * y el dato que queremos que sea asignado
-			 * */
+			 * A diferencia de la pasada, ahora podemos ver que los numero indican la
+			 * posicio de los signos "?" y el dato que queremos que sea asignado
+			 */
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -131,12 +136,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 				arrendador.getDireccion().setEstado(rs.getString(13));
 				arrendador.getDireccion().setCodigoPostal(rs.getString(14));
 
-				arrendadores.add(arrendador);	//Guardamos el objeto arrendador en el arreglo previamente declarado
+				arrendadores.add(arrendador); // Guardamos el objeto arrendador en el arreglo previamente declarado
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return arrendadores;	//regresamos el arreglo lleno
+		return arrendadores; // regresamos el arreglo lleno
 	}
 
 	public void insertArrendador(Arrendador arrendador) {
@@ -151,9 +156,10 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 			pstmt = connection.prepareStatement(instruccionSQL, Statement.RETURN_GENERATED_KEYS);
 			/*
-			 * A diferencia de las pasadas ahora aumentamos la sentencia Statement.RETURN_GENERATED_KEYS que nos permitira
-			 * regresar el ID generado automaticamente por la base de datos
-			 * */
+			 * A diferencia de las pasadas ahora aumentamos la sentencia
+			 * Statement.RETURN_GENERATED_KEYS que nos permitira regresar el ID generado
+			 * automaticamente por la base de datos
+			 */
 			pstmt.setString(1, arrendador.getNombre1());
 			pstmt.setString(2, arrendador.getNombre2());
 			pstmt.setString(3, arrendador.getApellidoPaterno());
@@ -168,11 +174,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setString(12, arrendador.getDireccion().getEstado());
 			pstmt.setString(13, arrendador.getDireccion().getCodigoPostal());
 
-			pstmt.executeUpdate();	//Le decimos que nos devuelva un entero del numero de registro que afecto con la operacion(Query)
-			rs = pstmt.getGeneratedKeys();	//Retorna el valor de la columna modificada
-	
+			pstmt.executeUpdate(); // Le decimos que nos devuelva un entero del numero de registro que afecto con
+									// la operacion(Query)
+			rs = pstmt.getGeneratedKeys(); // Retorna el valor de la columna modificada
+
 			if (rs.next()) {
-				arrendador.setIdArrendador(rs.getLong(1));	//Asignaos el la llave retornada a el atributo IdArrendador
+				arrendador.setIdArrendador(rs.getLong(1)); // Asignaos el la llave retornada a el atributo IdArrendador
 				System.out.println("\n\tTu id sera: " + arrendador.getIdArrendador() + "\n");
 			}
 

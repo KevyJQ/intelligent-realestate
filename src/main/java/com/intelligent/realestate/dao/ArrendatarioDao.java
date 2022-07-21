@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.intelligent.realestate.model.Arrendatario;
 
-public interface ArrendatarioDao {	//Interface ArrendatarioDao que nos permitira usar los siguientes metodos
+public interface ArrendatarioDao { // Interface ArrendatarioDao que nos permitira usar los siguientes metodos
 
 	public Arrendatario findById(long arrendatarioId);
 

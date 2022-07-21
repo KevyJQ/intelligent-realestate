@@ -34,14 +34,14 @@ public class MenuArrendatarioImp implements MenuService {
 			case BUSCAR_ARRENDATARIO:
 				arrendatario = menuBuscarArrendatarios.buscarMenu();
 				break;
-				
+
 			case CREAR_ARRENDATARIO:
 				System.out.println("==========================");
 				System.out.println("   Ingresemos tus datos.  ");
 				System.out.println("==========================");
 				arrendatarioDao.insertArrendatario(scannerService.pedirArrendatario());
 				break;
-				
+
 			case SALIR:
 				return;
 			}
