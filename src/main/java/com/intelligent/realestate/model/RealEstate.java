@@ -4,6 +4,7 @@ public class RealEstate {
 
 	private Direccion direccion;
 	private TypeRealEstate realEstateType;
+	private String status;
 
 	public RealEstate() {
 	}
@@ -23,6 +24,15 @@ public class RealEstate {
 	public void setRealEstateType(TypeRealEstate realEstateType) {
 		this.realEstateType = realEstateType;
 	}
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
@@ -31,6 +41,8 @@ public class RealEstate {
 		sb.append(direccion);
 		sb.append("\n\t");
 		sb.append(realEstateType);
+		sb.append("\n");
+		sb.append(status);
 		sb.append("\n");
 		sb.append("}");
 

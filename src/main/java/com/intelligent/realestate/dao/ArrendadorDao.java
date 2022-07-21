@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.intelligent.realestate.model.Arrendador;
 
-public interface ArrendadorDao {
+public interface ArrendadorDao {	//Interface ArrendadorDao que nos permitira usar los siguientes metodos
 
-	public Arrendador findById(long arrendadorId);
+	public Arrendador findById(long arrendadorId);	
 
 	public List<Arrendador> findByNameAndLasName(String name, String apelledoMaterno, String apellidoPaterno);
 
 	public void insertArrendador(Arrendador arrendador);
 
-	public void insertRealEstate(Arrendador arrendador, String estatus);
+	public void insertRealEstate(Arrendador arrendador);
 }

@@ -1,5 +1,6 @@
 package com.intelligent.realestate.services.menu.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 	@Override
 	public Optional<Arrendatario> buscarMenu() {
 		Optional<Arrendatario> arrendatario = Optional.empty();
+		//List<Optional<Arrendatario>> a = new ArrayList<>();
 
 		while (true) {
 			MenuType opcion = mostrarAndOptenerOpcion();
@@ -36,15 +38,19 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 			case BUSCAR_POR_ID:
 				arrendatario = buscarPorId();
 				Arrendatario arrendata = arrendatario.get();
+				
 				impresionArrendatario.imprimirArrendatario(arrendata);
 				break;
+				
 			case BUSCAR_POR_NOMBRE_Y_APELLIDOS:
 				arrendatario = buscarPorNombreAndApellido();
 				Arrendatario arrendata1 = arrendatario.get();
 				impresionArrendatario.imprimirArrendatario(arrendata1);
 				break;
+				
 			case CANCELAR:
 				return Optional.empty();
+				
 			}
 			if (arrendatario.isPresent()) {
 				return arrendatario;

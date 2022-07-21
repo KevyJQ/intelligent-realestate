@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
@@ -88,6 +89,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				
 				arrendatario.setIdArrendatario(rs.getLong(1));
 				arrendatario.setNombre1(rs.getString(2));
 				arrendatario.setNombre2(rs.getString(3));
@@ -104,6 +106,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 				arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
 
 				arrendatarios.add(arrendatario);
+//				System.out.println("Sise: "+arrendatarios.size());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,5 +156,11 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 		}
 
 	}
+	
+//	public void findRE() {
+//		PreparedStatement pstmt;
+//		
+//		final String intruccionSQL = "";
+//	}
 
 }

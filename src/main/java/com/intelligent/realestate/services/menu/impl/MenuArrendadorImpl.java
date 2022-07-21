@@ -1,13 +1,11 @@
 package com.intelligent.realestate.services.menu.impl;
 
 import java.util.Optional;
-
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Estatus;
 import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
-import com.intelligent.realestate.services.ImpresionService;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 import com.intelligent.realestate.services.menu.MenuService;
@@ -38,9 +36,6 @@ public class MenuArrendadorImpl implements MenuService {
 			switch (opcion) {
 			case BUSCAR_ARRENDADOR:
 				arrendador = menuBuscarArrendador.buscarMenu();
-//				if (arrendador.isPresent()) {
-//					// Opcion: si queremos que se imprima 
-//				}
 				break;
 
 			case CREAR_ARRENDADOR:
@@ -58,15 +53,14 @@ public class MenuArrendadorImpl implements MenuService {
 					RealEstate realestate = new RealEstate();
 
 					realestate.setRealEstateType(typeRealEstate());
-					String estatus = status().name();
+					realestate.setStatus(status().name());
 					realestate.setDireccion(scannerService.pedirDireccion());
 
 					arrendado.setRealEstate(realestate);
-					arrendadorDao.insertRealEstate(arrendado, estatus);
-
-					// System.out.println("Arrendador : " + arrendador);
+					arrendadorDao.insertRealEstate(arrendado);
 				}
 				break;
+				
 			case SALIR:
 				return;
 			}
