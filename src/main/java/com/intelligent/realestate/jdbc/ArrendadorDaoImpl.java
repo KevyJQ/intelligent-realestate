@@ -1,12 +1,12 @@
 package com.intelligent.realestate.jdbc;
 
+import static com.intelligent.realestate.jdbc.util.JdbcUtil.insert;
 import static com.intelligent.realestate.jdbc.util.JdbcUtil.select;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.intelligent.realestate.model.Direccion;
 
 public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDaoImpl que usara la interface
 															// ArrendadorDao
-	Connection connection; // Tiene una variable de tipo Connection que es global
+	private Connection connection; // Tiene una variable de tipo Connection que es global
 
 	public ArrendadorDaoImpl(Connection conn) { // Constructor que inicializa la conexion
 		this.connection = conn;
@@ -98,14 +98,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 		return arrendador; // Regresamos el objeto arrendador con todos los datos guardados
 	}
 
-	public List<Arrendador> findByNameAndLasName(
-			String name, String apellidoMaterno, String apellidoPaterno) {
+	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
 
 		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, CP "
-				+ "FROM arrendador "
-				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+				+ "FROM arrendador " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
 		select(connection, instruccionSQL, (rs) -> {
 			Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
@@ -132,21 +130,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public void insertArrendador(Arrendador arrendador) {
-		PreparedStatement pstmt;
-		ResultSet rs;
-
 		final String instruccionSQL = "INSERT INTO arrendador"
 				+ "(nombre1, nombre2, apellidoPaterno, apellidoMaterno, edad, correo, celular"
 				+ ", direccion1, direccion2, pais, ciudad, estado, CP) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try {
 
-			pstmt = connection.prepareStatement(instruccionSQL, Statement.RETURN_GENERATED_KEYS);
-			/*
-			 * A diferencia de las pasadas ahora aumentamos la sentencia
-			 * Statement.RETURN_GENERATED_KEYS que nos permitira regresar el ID generado
-			 * automaticamente por la base de datos
-			 */
+		insert(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setString(1, arrendador.getNombre1());
 			pstmt.setString(2, arrendador.getNombre2());
 			pstmt.setString(3, arrendador.getApellidoPaterno());
@@ -160,19 +149,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setString(11, arrendador.getDireccion().getCiudad());
 			pstmt.setString(12, arrendador.getDireccion().getEstado());
 			pstmt.setString(13, arrendador.getDireccion().getCodigoPostal());
-
-			pstmt.executeUpdate(); // Le decimos que nos devuelva un entero del numero de registro que afecto con
-									// la operacion(Query)
-			rs = pstmt.getGeneratedKeys(); // Retorna el valor de la columna modificada
-
+		}, (rs) -> {
 			if (rs.next()) {
 				arrendador.setIdArrendador(rs.getLong(1)); // Asignaos el la llave retornada a el atributo IdArrendador
 				System.out.println("\n\tTu id sera: " + arrendador.getIdArrendador() + "\n");
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		});
 	}
 
 	public void insertRealEstate(Arrendador arrendador) {
