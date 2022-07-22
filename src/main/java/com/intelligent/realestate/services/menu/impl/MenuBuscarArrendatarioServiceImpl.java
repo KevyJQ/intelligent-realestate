@@ -5,24 +5,21 @@ import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendatario;
-import com.intelligent.realestate.services.ImpresionService;
+import com.intelligent.realestate.model.util.ModelPrintUtil;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 
 public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arrendatario> {
 	private ArrendatarioDao arrendatarioDao;
 	private ScannerService scannerService;
-	private ImpresionService impresionArrendatario;
 
 	private enum MenuType {
 		BUSCAR_POR_ID, BUSCAR_POR_NOMBRE_Y_APELLIDOS, CANCELAR
 	};
 
-	public MenuBuscarArrendatarioServiceImpl(ArrendatarioDao arrendatarioDao, ScannerService scannerService,
-			ImpresionService impresionArrendatario) {
+	public MenuBuscarArrendatarioServiceImpl(ArrendatarioDao arrendatarioDao, ScannerService scannerService) {
 		this.arrendatarioDao = arrendatarioDao;
 		this.scannerService = scannerService;
-		this.impresionArrendatario = impresionArrendatario;
 	}
 
 	@Override
@@ -36,13 +33,13 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 			case BUSCAR_POR_ID:
 				arrendatario = buscarPorId();
 				Arrendatario arrendata = arrendatario.get();
-				impresionArrendatario.imprimirArrendatario(arrendata);
+				ModelPrintUtil.imprimirArrendatario(arrendata);
 				break;
 
 			case BUSCAR_POR_NOMBRE_Y_APELLIDOS:
 				arrendatario = buscarPorNombreAndApellido();
 				Arrendatario arrendata1 = arrendatario.get();
-				impresionArrendatario.imprimirArrendatario(arrendata1);
+				ModelPrintUtil.imprimirArrendatario(arrendata1);
 				break;
 
 			case CANCELAR:
@@ -110,7 +107,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 
 		for (int i = 0; i < arrendatarios.size(); i++) {
 			System.out.println("---- Arrendatario " + (i + 1) + " ----");
-			impresionArrendatario.printMultiArrendatarios(arrendatarios.get(i));
+			ModelPrintUtil.printMultiArrendatarios(arrendatarios.get(i));
 		}
 		ID = scannerService.pedirNumeroEntreRango("Que arrendatario eres:", "Arrendatario no valido..", 1,
 				arrendatarios.size());

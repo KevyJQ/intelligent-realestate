@@ -1,12 +1,10 @@
-package com.intelligent.realestate.services.impl;
+package com.intelligent.realestate.model.util;
 
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
-import com.intelligent.realestate.services.ImpresionService;
 
-public class ImpresionServiceImpl implements ImpresionService {
-
-	public void imprimirArrendador(Arrendador arrendador) {
+public class ModelPrintUtil {
+	public static void imprimirArrendador(Arrendador arrendador) {
 		System.out.println("================================");
 		System.out.println("      Datos del Arrendador      ");
 		System.out.println("================================");
@@ -26,8 +24,7 @@ public class ImpresionServiceImpl implements ImpresionService {
 
 	}
 
-	@Override
-	public void imprimirArrendatario(Arrendatario arrendatario) {
+	public static void imprimirArrendatario(Arrendatario arrendatario) {
 		System.out.println("================================");
 		System.out.println("      Datos del Arrendatario      ");
 		System.out.println("================================");
@@ -47,7 +44,7 @@ public class ImpresionServiceImpl implements ImpresionService {
 
 	}
 
-	public void printMultiArrendatarios(Arrendatario arrendatario) {
+	public static void printMultiArrendatarios(Arrendatario arrendatario) {
 		System.out.println("ID: " + arrendatario.getIdArrendatario());
 		System.out.println("Nombre: " + arrendatario.getNombre1() + " " + arrendatario.getNombre2());
 		System.out.println("Apellidos: " + arrendatario.getApellidoPaterno() + " " + arrendatario.getApellidoMaterno());
@@ -56,7 +53,7 @@ public class ImpresionServiceImpl implements ImpresionService {
 		System.out.println("Celular: " + arrendatario.getCelular());
 	}
 	
-	public void printMultiArrendadores(Arrendador arrendador) {
+	public static  void printMultiArrendadores(Arrendador arrendador) {
 		System.out.println("ID: " + arrendador.getIdArrendador());
 		System.out.println("Nombre: " + arrendador.getNombre1() + " " + arrendador.getNombre2());
 		System.out.println("Apellidos: " + arrendador.getApellidoPaterno() + " " + arrendador.getApellidoMaterno());
@@ -64,5 +61,4 @@ public class ImpresionServiceImpl implements ImpresionService {
 		System.out.println("Correo: " + arrendador.getCorreo());
 		System.out.println("Celular: " + arrendador.getCelular());
 	}
-
 }
