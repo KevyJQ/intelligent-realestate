@@ -80,6 +80,7 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 
 		if (arrendadores.isEmpty()) {
 			return Optional.empty();
+
 		}else if(arrendadores.size() > 1) {
 			ID = Selectrrendador(arrendadores);
 			Arrendador arrenda = arrendadores.get(ID);
@@ -104,7 +105,7 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
 	}
-	
+
 	private int Selectrrendador(List<Arrendador> arrendador) {
 		int ID = 0;
 
@@ -116,8 +117,10 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 			System.out.println("---- Arrendador " + (i + 1) + " ----");
 			impresionArrendador.printMultiArrendadores(arrendador.get(i));
 		}
+		System.out.println("Si no eres ninguno de los anteriores teclear 0");
 		ID = scannerService.pedirNumeroEntreRango("Que arrendador eres:", "Arrendatario no valido..", 1,
 				arrendador.size());
+
 		return ID - 1;
 
 	}
