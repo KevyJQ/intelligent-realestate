@@ -38,16 +38,16 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 				Arrendatario arrendata = arrendatario.get();
 				impresionArrendatario.imprimirArrendatario(arrendata);
 				break;
-				
+
 			case BUSCAR_POR_NOMBRE_Y_APELLIDOS:
-				arrendatario = buscarPorNombreAndApellido();	
+				arrendatario = buscarPorNombreAndApellido();
 				Arrendatario arrendata1 = arrendatario.get();
 				impresionArrendatario.imprimirArrendatario(arrendata1);
 				break;
-				
+
 			case CANCELAR:
 				return Optional.empty();
-				
+
 			}
 			if (arrendatario.isPresent()) {
 				return arrendatario;
@@ -62,22 +62,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 				"Numero no valido, ingrese nuevamente..");
 		return Optional.ofNullable(arrendatarioDao.findById(id));
 	}
-
-	private Optional<Arrendatario> buscarPorNombreAndApellido() {
-		String nombre1 = scannerService.pedirString("Cual es tu primer nombre: ", "Proporcional el nombre por favor");
-		String apellidoPaterno = scannerService.pedirString("Cual es tu apellido Paterno: ",
-				"Proporcional el Apellido Paterno por favor");
-		String apellidoMaterno = scannerService.pedirString("Cual es tu apellido Materno: ",
-				"Proporcional el Apellido Materno por favor");
-
-		List<Arrendatario> arrendatarios = arrendatarioDao.findByNameAndLasName(nombre1, apellidoMaterno,
-				apellidoPaterno);
-		if (arrendatarios.isEmpty()) {
-			return Optional.empty();
-		}
-		return Optional.of(arrendatarios.get(0));
-	}
-
+	
 	private MenuType mostrarAndOptenerOpcion() {
 		int opcion;
 
@@ -92,5 +77,44 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];
+	}
+
+	private Optional<Arrendatario> buscarPorNombreAndApellido() {
+		int ID;
+
+		String nombre1 = scannerService.pedirString("Cual es tu primer nombre: ", "Proporcional el nombre por favor");
+		String apellidoPaterno = scannerService.pedirString("Cual es tu apellido Paterno: ",
+				"Proporcional el Apellido Paterno por favor");
+		String apellidoMaterno = scannerService.pedirString("Cual es tu apellido Materno: ",
+				"Proporcional el Apellido Materno por favor");
+
+		List<Arrendatario> arrendatarios = arrendatarioDao.findByNameAndLasName(nombre1, apellidoMaterno,
+				apellidoPaterno);
+		if (arrendatarios.isEmpty()) {
+			return Optional.empty();
+
+		} else if (arrendatarios.size() > 1) {
+			ID = HowArrendatario(arrendatarios);
+			Arrendatario arrendata1 = arrendatarios.get(ID);
+			return Optional.of(arrendata1);
+		}
+		return Optional.of(arrendatarios.get(0));
+	}
+
+	private int HowArrendatario(List<Arrendatario> arrendatarios) {
+		int ID = 0;
+
+		System.out.println("================================");
+		System.out.println("      Que Arrendatario eres     ");
+		System.out.println("================================");
+
+		for (int i = 0; i < arrendatarios.size(); i++) {
+			System.out.println("---- Arrendatario " + (i + 1) + " ----");
+			impresionArrendatario.printMultiArrendatarios(arrendatarios.get(i));
+		}
+		ID = scannerService.pedirNumeroEntreRango("Que arrendatario eres:", "Arrendatario no valido..", 1,
+				arrendatarios.size());
+		return ID - 1;
+
 	}
 }

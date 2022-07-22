@@ -71,16 +71,12 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno) {
 
 		List<Arrendatario> arrendatarios = new ArrayList<Arrendatario>();
-		Arrendatario arrendatario = new Arrendatario();
-		arrendatario.setDireccion(new Direccion());
-
 		PreparedStatement pstmt;
 		ResultSet rs;
 
 		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellidoPaterno, "
 				+ "apellidoMaterno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
-				+ "FROM arrendatario "
-				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+				+ "FROM arrendatario " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
 		try {
 			pstmt = connection.prepareStatement(instruccionSQL);
@@ -89,7 +85,10 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			pstmt.setString(3, apellidoMaterno);
 			rs = pstmt.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
+				Arrendatario arrendatario = new Arrendatario();
+				arrendatario.setDireccion(new Direccion());
+
 				arrendatario.setIdArrendatario(rs.getLong(1));
 				arrendatario.setNombre1(rs.getString(2));
 				arrendatario.setNombre2(rs.getString(3));
@@ -108,7 +107,6 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 				arrendatarios.add(arrendatario);
 			}
 		} catch (SQLException e) {
-			System.out.println("HOla");
 			e.printStackTrace();
 		}
 

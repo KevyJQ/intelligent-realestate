@@ -97,7 +97,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
-		
+
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
 		Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
 		arrendador.setDireccion(new Direccion()); // Al objeto Arrendador le creamos una nueva Direccion

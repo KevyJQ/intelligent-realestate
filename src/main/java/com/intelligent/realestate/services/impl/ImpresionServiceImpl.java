@@ -49,4 +49,14 @@ public class ImpresionServiceImpl implements ImpresionService {
 
 	}
 
+	public void printMultiArrendatarios(Arrendatario arrendatario) {
+
+		System.out.println("ID: " + arrendatario.getIdArrendatario());
+		System.out.println("Nombre: " + arrendatario.getNombre1() + " " + arrendatario.getNombre2());
+		System.out.println("Apellidos: " + arrendatario.getApellidoPaterno() + " " + arrendatario.getApellidoMaterno());
+		System.out.println("Edad: " + arrendatario.getEdad());
+		System.out.println("Correo: " + arrendatario.getCorreo());
+		System.out.println("Celular: " + arrendatario.getCelular());
+	}
+
 }
