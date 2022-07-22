@@ -1,5 +1,7 @@
 package com.intelligent.realestate.jdbc;
 
+import static com.intelligent.realestate.jdbc.util.JdbcUtil.select;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +13,6 @@ import java.util.List;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Direccion;
-import com.intelligent.realestate.model.RealEstate;
 
 public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDaoImpl que usara la interface
 															// ArrendadorDao
@@ -19,6 +20,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 	public ArrendadorDaoImpl(Connection conn) { // Constructor que inicializa la conexion
 		this.connection = conn;
+
 	}
 
 	public Arrendador findById(long arrendadorId) { // Metodo buscar por ID que recibe un ID
@@ -96,51 +98,36 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 		return arrendador; // Regresamos el objeto arrendador con todos los datos guardados
 	}
 
-	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
-
+	public List<Arrendador> findByNameAndLasName(
+			String name, String apellidoMaterno, String apellidoPaterno) {
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
 
-		PreparedStatement pstmt;
-		ResultSet rs;
-
 		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, CP "
-				+ "FROM arrendador " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "FROM arrendador "
+				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
-		try {
-			pstmt = connection.prepareStatement(instruccionSQL);
-			pstmt.setString(1, name);
-			pstmt.setString(2, apellidoPaterno);
-			pstmt.setString(3, apellidoMaterno);
-			/*
-			 * A diferencia de la pasada, ahora podemos ver que los numero indican la
-			 * posicio de los signos "?" y el dato que queremos que sea asignado
-			 */
-			rs = pstmt.executeQuery();
+		select(connection, instruccionSQL, (rs) -> {
+			Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
+			arrendador.setDireccion(new Direccion()); // Al objeto Arrendador le creamos una nueva Direccion
+			arrendador.setIdArrendador(rs.getLong(1));
+			arrendador.setNombre1(rs.getString(2));
+			arrendador.setNombre2(rs.getString(3));
+			arrendador.setApellidoPaterno(rs.getString(4));
+			arrendador.setApellidoMaterno(rs.getString(5));
+			arrendador.setEdad(rs.getInt(6));
+			arrendador.setCorreo(rs.getString(7));
+			arrendador.setCelular(rs.getString(8));
+			arrendador.getDireccion().setDireccion1(rs.getString(9));
+			arrendador.getDireccion().setDireccion2(rs.getString(10));
+			arrendador.getDireccion().setPais(rs.getNString(11));
+			arrendador.getDireccion().setCiudad(rs.getString(12));
+			arrendador.getDireccion().setEstado(rs.getString(13));
+			arrendador.getDireccion().setCodigoPostal(rs.getString(14));
 
-			while (rs.next()) {
-				Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
-				arrendador.setDireccion(new Direccion()); // Al objeto Arrendador le creamos una nueva Direccion
-				arrendador.setIdArrendador(rs.getLong(1));
-				arrendador.setNombre1(rs.getString(2));
-				arrendador.setNombre2(rs.getString(3));
-				arrendador.setApellidoPaterno(rs.getString(4));
-				arrendador.setApellidoMaterno(rs.getString(5));
-				arrendador.setEdad(rs.getInt(6));
-				arrendador.setCorreo(rs.getString(7));
-				arrendador.setCelular(rs.getString(8));
-				arrendador.getDireccion().setDireccion1(rs.getString(9));
-				arrendador.getDireccion().setDireccion2(rs.getString(10));
-				arrendador.getDireccion().setPais(rs.getNString(11));
-				arrendador.getDireccion().setCiudad(rs.getString(12));
-				arrendador.getDireccion().setEstado(rs.getString(13));
-				arrendador.getDireccion().setCodigoPostal(rs.getString(14));
+			arrendadores.add(arrendador); // Guardamos el objeto arrendador en el arreglo previamente declarado
+		}, name, apellidoPaterno, apellidoMaterno);
 
-				arrendadores.add(arrendador); // Guardamos el objeto arrendador en el arreglo previamente declarado
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		return arrendadores; // regresamos el arreglo lleno
 	}
 
