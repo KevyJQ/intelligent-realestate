@@ -94,14 +94,14 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 			return Optional.empty();
 
 		} else if (arrendatarios.size() > 1) {
-			ID = HowArrendatario(arrendatarios);
+			ID = Selectrrendatario(arrendatarios);
 			Arrendatario arrendata1 = arrendatarios.get(ID);
 			return Optional.of(arrendata1);
 		}
 		return Optional.of(arrendatarios.get(0));
 	}
 
-	private int HowArrendatario(List<Arrendatario> arrendatarios) {
+	private int Selectrrendatario(List<Arrendatario> arrendatarios) {
 		int ID = 0;
 
 		System.out.println("================================");

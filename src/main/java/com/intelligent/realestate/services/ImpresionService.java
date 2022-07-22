@@ -10,4 +10,6 @@ public interface ImpresionService {
 	public void imprimirArrendatario(Arrendatario arrendatario);
 
 	public void printMultiArrendatarios(Arrendatario arrendatario);
+	
+	public void printMultiArrendadores(Arrendador arrendador);
 }

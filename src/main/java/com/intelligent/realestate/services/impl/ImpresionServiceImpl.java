@@ -7,7 +7,6 @@ import com.intelligent.realestate.services.ImpresionService;
 public class ImpresionServiceImpl implements ImpresionService {
 
 	public void imprimirArrendador(Arrendador arrendador) {
-
 		System.out.println("================================");
 		System.out.println("      Datos del Arrendador      ");
 		System.out.println("================================");
@@ -29,7 +28,6 @@ public class ImpresionServiceImpl implements ImpresionService {
 
 	@Override
 	public void imprimirArrendatario(Arrendatario arrendatario) {
-
 		System.out.println("================================");
 		System.out.println("      Datos del Arrendatario      ");
 		System.out.println("================================");
@@ -50,13 +48,21 @@ public class ImpresionServiceImpl implements ImpresionService {
 	}
 
 	public void printMultiArrendatarios(Arrendatario arrendatario) {
-
 		System.out.println("ID: " + arrendatario.getIdArrendatario());
 		System.out.println("Nombre: " + arrendatario.getNombre1() + " " + arrendatario.getNombre2());
 		System.out.println("Apellidos: " + arrendatario.getApellidoPaterno() + " " + arrendatario.getApellidoMaterno());
 		System.out.println("Edad: " + arrendatario.getEdad());
 		System.out.println("Correo: " + arrendatario.getCorreo());
 		System.out.println("Celular: " + arrendatario.getCelular());
+	}
+	
+	public void printMultiArrendadores(Arrendador arrendador) {
+		System.out.println("ID: " + arrendador.getIdArrendador());
+		System.out.println("Nombre: " + arrendador.getNombre1() + " " + arrendador.getNombre2());
+		System.out.println("Apellidos: " + arrendador.getApellidoPaterno() + " " + arrendador.getApellidoMaterno());
+		System.out.println("Edad: " + arrendador.getEdad());
+		System.out.println("Correo: " + arrendador.getCorreo());
+		System.out.println("Celular: " + arrendador.getCelular());
 	}
 
 }
