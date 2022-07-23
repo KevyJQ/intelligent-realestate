@@ -4,8 +4,6 @@ import static com.intelligent.realestate.jdbc.util.JdbcUtil.insert;
 import static com.intelligent.realestate.jdbc.util.JdbcUtil.select;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 	public ArrendadorDaoImpl(Connection conn) { // Constructor que inicializa la conexion
 		this.connection = conn;
-
 	}
 
 	public Arrendador findById(long arrendadorId) {
