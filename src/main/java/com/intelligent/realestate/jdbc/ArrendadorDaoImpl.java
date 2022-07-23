@@ -14,7 +14,7 @@ import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Direccion;
 
 public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDaoImpl que usara la interface
-															// ArrendadorDao
+	// ArrendadorDao
 	private Connection connection; // Tiene una variable de tipo Connection que es global
 
 	public ArrendadorDaoImpl(Connection conn) { // Constructor que inicializa la conexion
@@ -23,7 +23,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public Arrendador findById(long arrendadorId) {
-
 		Arrendador arrendador = new Arrendador();
 
 		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno,"
@@ -52,7 +51,6 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
-
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
 
 		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
@@ -112,14 +110,12 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public void insertRealEstate(Arrendador arrendador) {
-		PreparedStatement pstmt;
 
 		final String instruccionSQL = "INSERT INTO real_estate"
 				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, pais, ciudad, estado, CP) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try {
-			pstmt = connection.prepareStatement(instruccionSQL);
+		insert(connection, instruccionSQL, (pstmt)->{
 			pstmt.setLong(1, arrendador.getIdArrendador());
 			pstmt.setInt(2, arrendador.getRealEstate().getRealEstateType().getId());
 			pstmt.setString(3, arrendador.getRealEstate().getStatus());
@@ -129,11 +125,9 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setString(7, arrendador.getRealEstate().getDireccion().getCiudad());
 			pstmt.setString(8, arrendador.getRealEstate().getDireccion().getEstado());
 			pstmt.setString(9, arrendador.getRealEstate().getDireccion().getCodigoPostal());
+		}, (rs)->{
+			//Si tuviera un ResultSet aqui se colocaria
+		});
 
-			pstmt.execute();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 }
