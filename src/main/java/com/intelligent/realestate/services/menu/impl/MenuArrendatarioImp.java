@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendatario;
+import com.intelligent.realestate.model.Estatus;
+import com.intelligent.realestate.model.RealEstate;
+import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 import com.intelligent.realestate.services.menu.MenuService;
@@ -11,16 +14,18 @@ import com.intelligent.realestate.services.menu.MenuService;
 public class MenuArrendatarioImp implements MenuService {
 	private ArrendatarioDao arrendatarioDao;
 	private MenuBuscarService<Arrendatario> menuBuscarArrendatarios;
+	private MenuBuscarService<RealEstate> menuBuscarRealEstate;
 	private ScannerService scannerService;
 
 	private enum MenuType {
-		BUSCAR_ARRENDATARIO, CREAR_ARRENDATARIO, SALIR
+		BUSCAR_ARRENDATARIO, CREAR_ARRENDATARIO, CREAR_CONTRATO, SALIR
 	};
 
 	public MenuArrendatarioImp(ArrendatarioDao arrendatarioDao, MenuBuscarService<Arrendatario> menuBuscarArrendatario,
-			ScannerService scannerService) {
+			MenuBuscarService<RealEstate> meBuscarRealEstate, ScannerService scannerService) {
 		this.arrendatarioDao = arrendatarioDao;
 		this.menuBuscarArrendatarios = menuBuscarArrendatario;
+		this.menuBuscarRealEstate = meBuscarRealEstate;
 		this.scannerService = scannerService;
 	}
 
@@ -28,6 +33,7 @@ public class MenuArrendatarioImp implements MenuService {
 	public void mostrarMenu() {
 		while (true) {
 			Optional<Arrendatario> arrendatario;
+			Optional<RealEstate> realestate;
 			MenuType opcion = mostrarAndOptenerOpcion();
 
 			switch (opcion) {
@@ -40,6 +46,20 @@ public class MenuArrendatarioImp implements MenuService {
 				System.out.println("   Ingresemos tus datos.  ");
 				System.out.println("==========================");
 				arrendatarioDao.insertArrendatario(scannerService.pedirArrendatario());
+				break;
+
+			case CREAR_CONTRATO:
+				realestate = menuBuscarRealEstate.buscarMenu();
+				
+				
+//				//Ingresamos al arrendatario
+//				arrendatario = menuBuscarArrendatarios.buscarMenu();
+//				if(arrendatario.isPresent()) {
+//					//Ingresamos la real estate que queire rentar
+//					realestate = menuBuscarRealEstate.buscarMenu();
+//					//Hacemos el insert de la informacion
+//				}
+
 				break;
 
 			case SALIR:
@@ -57,8 +77,9 @@ public class MenuArrendatarioImp implements MenuService {
 
 		System.out.println("1.Arrendatario existente");
 		System.out.println("2.Arrendatario nuevo");
-		System.out.println("3.Atras");
-		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 3);
+		System.out.println("3.Crear contrato");
+		System.out.println("4.Atras");
+		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
 
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];

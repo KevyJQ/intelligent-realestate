@@ -14,7 +14,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 	private ScannerService scannerService;
 
 	private enum MenuType {
-		BUSCAR_POR_ID, BUSCAR_POR_NOMBRE_Y_APELLIDOS, CANCELAR
+		BUSCAR_POR_ID, BUSCAR_POR_NOMBRE_Y_APELLIDOS,CANCELAR
 	};
 
 	public MenuBuscarArrendatarioServiceImpl(ArrendatarioDao arrendatarioDao, ScannerService scannerService) {

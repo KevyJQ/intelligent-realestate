@@ -1,10 +1,6 @@
 package com.intelligent.realestate.jdbc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +81,6 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	}
 
 	public void insertArrendatario(Arrendatario arrendatario) {
-
 		final String instruccionSQL = "INSERT INTO arrendatario"
 				+ "(nombre1, nombre2, apellidoPaterno, apellidoMaterno, edad, correo, celular, "
 				+ "direccion1, direccion2, pais, ciudad, estado, CP) "

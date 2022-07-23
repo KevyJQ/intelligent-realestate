@@ -1,57 +1,54 @@
 package com.intelligent.realestate.jdbc;
 
+import static com.intelligent.realestate.jdbc.util.JdbcUtil.select;
+
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.intelligent.realestate.dao.RealEstateDao;
+import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.RealEstate;
 
 public class RealEstateDaoImpl implements RealEstateDao{
-	Connection connection;
+	private Connection connection;
 
 	public RealEstateDaoImpl(Connection conn) {
 		this.connection = conn;
 	}
 
 	@Override
-	public List<RealEstate> realEstate() {
+	public List<RealEstate> selectRealEstate(String pais, String ciudad, String status) {
 		
-		List<RealEstate> realestate = new ArrayList<>();
+		List<RealEstate> realestate = new ArrayList<RealEstate>();
 		
-		PreparedStatement pstmt;
-		ResultSet rs;
+		final String instruccionSQL = "SELECT id_realestate, estatus, "
+				+ "direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "FROM real_estate "
+				+ "WHERE pais= ? AND ciudad= ? AND estatus= ?";
+
+		select(connection, instruccionSQL, (rs)->{
+			
+			RealEstate realestat = new RealEstate();
+			realestat.setDireccion(new Direccion());
+			
+			realestat.setIdRealEstate(rs.getLong(1));
+			realestat.setStatus(rs.getString(2));
+			realestat.getDireccion().setDireccion1(rs.getString(3));
+			realestat.getDireccion().setDireccion2(rs.getString(4));
+			realestat.getDireccion().setPais(rs.getString(5));
+			realestat.getDireccion().setCiudad(rs.getString(6));
+			realestat.getDireccion().setEstado(rs.getString(7));
+			realestat.getDireccion().setCodigoPostal(rs.getString(8));
+
+			realestate.add(realestat);
+			
+		}, pais,ciudad,status);
 		
-		//Por modificar para Real Estate
-		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, CP "
-				+ "FROM arrendatario " + "WHERE id_arrendatario = ? ";
-
-		try {
-
-			pstmt = connection.prepareStatement(instruccionSQL);
-			//pstmt.setLong(1, arrendatarioId);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				RealEstate realest = new RealEstate();
-				realest.setDireccion(new Direccion());
-
-
-			} else {
-				return null;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 		return realestate;
 	}
+
 	
 
 }

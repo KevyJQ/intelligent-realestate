@@ -5,6 +5,15 @@ public class RealEstate {
 	private Direccion direccion;
 	private TypeRealEstate realEstateType;
 	private String status;
+	long idRealEstate;
+
+	public long getIdRealEstate() {
+		return idRealEstate;
+	}
+
+	public void setIdRealEstate(long idRealEstate) {
+		this.idRealEstate = idRealEstate;
+	}
 
 	public RealEstate() {
 	}

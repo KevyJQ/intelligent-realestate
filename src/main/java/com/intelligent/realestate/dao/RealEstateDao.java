@@ -6,5 +6,5 @@ import com.intelligent.realestate.model.RealEstate;
 
 public interface RealEstateDao {
 
-	List<RealEstate> realEstate();
+	List<RealEstate> selectRealEstate(String pais, String ciudad, String status);
 }

@@ -2,6 +2,7 @@ package com.intelligent.realestate.model.util;
 
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
+import com.intelligent.realestate.model.RealEstate;
 
 public class ModelPrintUtil {
 	public static void imprimirArrendador(Arrendador arrendador) {
@@ -60,5 +61,17 @@ public class ModelPrintUtil {
 		System.out.println("Edad: " + arrendador.getEdad());
 		System.out.println("Correo: " + arrendador.getCorreo());
 		System.out.println("Celular: " + arrendador.getCelular());
+	}
+	
+	public static  void printMultiRealEstates(RealEstate realestate) {
+		System.out.println("ID: " + realestate.getIdRealEstate());
+		System.out.println("Estatus: " + realestate.getStatus());
+		System.out.println("Direccion1: " + realestate.getDireccion().getDireccion1());
+		System.out.println("Direccion2: " + realestate.getDireccion().getDireccion2());
+		System.out.println("Pais: " + realestate.getDireccion().getPais());
+		System.out.println("Ciudad: " + realestate.getDireccion().getCiudad());
+		System.out.println("Estado: " + realestate.getDireccion().getEstado());
+		System.out.println("CP: " + realestate.getDireccion().getCodigoPostal());
+
 	}
 }
