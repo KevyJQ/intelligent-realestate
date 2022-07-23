@@ -29,8 +29,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, CP "
 				+ "FROM arrendatario " + "WHERE id_arrendatario = ? ";
-		
-		select(connection, instruccionSQL, (rs)->{
+
+		select(connection, instruccionSQL, (rs) -> {
 			arrendatario.setDireccion(new Direccion());
 			arrendatario.setIdArrendatario(rs.getLong(1));
 			arrendatario.setNombre1(rs.getString(2));
@@ -47,7 +47,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			arrendatario.getDireccion().setEstado(rs.getString(13));
 			arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
 		}, arrendatarioId);
-		
+
 		return arrendatario;
 	}
 
@@ -58,8 +58,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 				+ "apellidoMaterno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
 				+ "FROM arrendatario " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
-		select(connection, instruccionSQL, (rs)->{
-			
+		select(connection, instruccionSQL, (rs) -> {
+
 			Arrendatario arrendatario = new Arrendatario();
 			arrendatario.setDireccion(new Direccion());
 
@@ -79,23 +79,19 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
 
 			arrendatarios.add(arrendatario);
-		}, name,apellidoPaterno, apellidoMaterno);
+		}, name, apellidoPaterno, apellidoMaterno);
 
 		return arrendatarios;
 	}
 
 	public void insertArrendatario(Arrendatario arrendatario) {
 
-		PreparedStatement pstmt;
-		ResultSet rs;
-
 		final String instruccionSQL = "INSERT INTO arrendatario"
 				+ "(nombre1, nombre2, apellidoPaterno, apellidoMaterno, edad, correo, celular, "
 				+ "direccion1, direccion2, pais, ciudad, estado, CP) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		try {
 
-			pstmt = connection.prepareStatement(instruccionSQL, Statement.RETURN_GENERATED_KEYS);
+		insert(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setString(1, arrendatario.getNombre1());
 			pstmt.setString(2, arrendatario.getNombre2());
 			pstmt.setString(3, arrendatario.getApellidoPaterno());
@@ -109,27 +105,12 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			pstmt.setString(11, arrendatario.getDireccion().getCiudad());
 			pstmt.setString(12, arrendatario.getDireccion().getEstado());
 			pstmt.setString(13, arrendatario.getDireccion().getCodigoPostal());
-
-			pstmt.executeUpdate();
-
-			rs = pstmt.getGeneratedKeys();
+		}, (rs) -> {
 			if (rs.next()) {
 				arrendatario.setIdArrendatario(rs.getLong(1));
 				System.out.println("\n\tTu id sera: " + arrendatario.getIdArrendatario() + "\n");
-			} else {
-				// TODO: throw an exception from here
 			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
+		});
 	}
-
-//	public void findRE() {
-//		PreparedStatement pstmt;
-//		
-//		final String intruccionSQL = "";
-//	}
 
 }
