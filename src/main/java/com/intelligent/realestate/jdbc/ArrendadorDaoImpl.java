@@ -5,7 +5,6 @@ import static com.intelligent.realestate.jdbc.util.JdbcUtil.select;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,82 +22,37 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 	}
 
-	public Arrendador findById(long arrendadorId) { // Metodo buscar por ID que recibe un ID
-		Arrendador arrendador = null; // Inicializamos la Arrendador con null
-		PreparedStatement pstmt;
-		/*
-		 * La interfas PreparedStatement representa una delcaracion de SQL pre-copilada
-		 * lo que nos permitira es mandar una instruccion parametrizada que le podemos
-		 * pasar 0 o mas parametros
-		 * 
-		 */
+	public Arrendador findById(long arrendadorId) {
 
-		ResultSet rs;
-		/*
-		 * Es el ResulSet es un objeto que que representa un conjunto de resultados de
-		 * la base de datos que generalmente se genera al ejecutar una declaracion de
-		 * consulta a la base de datos
-		 * 
-		 */
+		Arrendador arrendador = new Arrendador();
 
 		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular," + "direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, CP "
 				+ "FROM arrendador " + "WHERE id_arrendador = ? ;";
-		/*
-		 * Mandamos la instrucionSQL que queremos que se ejecute en nustra base de
-		 * datos, en este caso es una busqueda usando un SELECT
-		 * 
-		 */
 
-		try {
-			/*
-			 * La funcion Try ejecutara una sentencia de bloque que si ocurre un error tiene
-			 * un bloque llamado Exception que se ejecutara si el Try falla
-			 * 
-			 */
-			pstmt = connection.prepareStatement(instruccionSQL);
-			/*
-			 * Se realiza la conexion a la base de datos, usamos el prepareStatement para
-			 * despues mandarle cuales son los paramatros que queremos que filtre y al final
-			 * le mandamos la instruccionSQL(Query)
-			 */
-			pstmt.setLong(1, arrendadorId);
-			/*
-			 * Como podemos ver, aqui es donde le mandamos los parametros del
-			 * prepareStatement, donde el numero 1 indica que en el primer signo "?"
-			 * queremos que lo cambie por el numero que trae arrendadorId
-			 */
-			rs = pstmt.executeQuery(); // Indicamos que el reultado de ejecutar la Query se asigne al ResulSet
+		select(connection, instruccionSQL, (rs) -> {
+			arrendador.setDireccion(new Direccion());
+			arrendador.setIdArrendador(rs.getLong(1));
+			arrendador.setNombre1(rs.getString(2));
+			arrendador.setNombre2(rs.getString(3));
+			arrendador.setApellidoPaterno(rs.getString(4));
+			arrendador.setApellidoMaterno(rs.getString(5));
+			arrendador.setEdad(rs.getInt(6));
+			arrendador.setCorreo(rs.getString(7));
+			arrendador.setCelular(rs.getString(8));
+			arrendador.getDireccion().setDireccion1(rs.getString(9));
+			arrendador.getDireccion().setDireccion2(rs.getString(10));
+			arrendador.getDireccion().setPais(rs.getString(11));
+			arrendador.getDireccion().setCiudad(rs.getString(12));
+			arrendador.getDireccion().setEstado(rs.getString(13));
+			arrendador.getDireccion().setCodigoPostal(rs.getString(14));
+		}, arrendadorId);
 
-			if (rs.next()) { // En esta seccion asignamos los valores que regreso despues de haber consultado
-								// la base de datos
-				arrendador = new Arrendador();
-				arrendador.setDireccion(new Direccion());
-				arrendador.setIdArrendador(rs.getLong(1));
-				arrendador.setNombre1(rs.getString(2));
-				arrendador.setNombre2(rs.getString(3));
-				arrendador.setApellidoPaterno(rs.getString(4));
-				arrendador.setApellidoMaterno(rs.getString(5));
-				arrendador.setEdad(rs.getInt(6));
-				arrendador.setCorreo(rs.getString(7));
-				arrendador.setCelular(rs.getString(8));
-				arrendador.getDireccion().setDireccion1(rs.getString(9));
-				arrendador.getDireccion().setDireccion2(rs.getString(10));
-				arrendador.getDireccion().setPais(rs.getString(11));
-				arrendador.getDireccion().setCiudad(rs.getString(12));
-				arrendador.getDireccion().setEstado(rs.getString(13));
-				arrendador.getDireccion().setCodigoPostal(rs.getString(14));
-			}
-
-		} catch (SQLException e) { // La Exception del Try
-			e.printStackTrace(); // En dado caso que el Try falle, nos mostrara en pantalla le Exception del
-									// error
-		}
-
-		return arrendador; // Regresamos el objeto arrendador con todos los datos guardados
+		return arrendador;
 	}
 
 	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
+
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
 
 		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
@@ -123,7 +77,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			arrendador.getDireccion().setEstado(rs.getString(13));
 			arrendador.getDireccion().setCodigoPostal(rs.getString(14));
 
-			arrendadores.add(arrendador); // Guardamos el objeto arrendador en el arreglo previamente declarado
+			arrendadores.add(arrendador);
 		}, name, apellidoPaterno, apellidoMaterno);
 
 		return arrendadores; // regresamos el arreglo lleno
