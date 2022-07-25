@@ -1,9 +1,9 @@
 package com.intelligent.realestate.model;
 
 public class Arrendatario extends Persona {
-	// TODO: Add comments and the properties that is renting.
 
 	private Long idArrendatario;
+	private long idContrato;
 
 	public Long getIdArrendatario() {
 		return idArrendatario;
@@ -14,6 +14,15 @@ public class Arrendatario extends Persona {
 	}
 
 	public Arrendatario() { // Constructor
+	}
+	
+
+	public long getIdContrato() {
+		return idContrato;
+	}
+
+	public void setIdContrato(long idContrato) {
+		this.idContrato = idContrato;
 	}
 
 	@Override

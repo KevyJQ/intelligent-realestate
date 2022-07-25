@@ -6,6 +6,10 @@ public class RealEstate {
 	private TypeRealEstate realEstateType;
 	private String status;
 	long idRealEstate;
+	long arrendadadorId;
+	int id_typeRE;
+	long costo;
+	
 
 	public long getIdRealEstate() {
 		return idRealEstate;
@@ -40,6 +44,33 @@ public class RealEstate {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	
+	public int getId_typeRE() {
+		return id_typeRE;
+	}
+
+	public void setId_typeRE(int id_typeRE) {
+		this.id_typeRE = id_typeRE;
+	}
+	
+
+	public long getArrendadadorId() {
+		return arrendadadorId;
+	}
+
+	public void setArrendadadorId(long arrendadadorId) {
+		this.arrendadadorId = arrendadadorId;
+	}
+	
+
+	public long getCosto() {
+		return costo;
+	}
+
+	public void setCosto(long costo) {
+		this.costo = costo;
 	}
 
 	@Override

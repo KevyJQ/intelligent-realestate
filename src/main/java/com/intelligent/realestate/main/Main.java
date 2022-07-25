@@ -33,16 +33,19 @@ public class Main {
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		ScannerService scannerService = new ScannerServiceImpl();
 		RealEstateDao realEstate = new RealEstateDaoImpl(connection);
-		
+
 		MenuBuscarService<Arrendador> menuBuscarArrendador = new MenuBuscarArrendadorServiceImpl(arrendadorDao,
 				scannerService);
 		MenuBuscarService<Arrendatario> menuBuscarArrendatario = new MenuBuscarArrendatarioServiceImpl(arrendatarioDao,
 				scannerService);
-		MenuBuscarService<RealEstate> menuBuscarRealEstate = new MenuBuscarRealEstateServiceImpl(realEstate, scannerService);
-		
-		MenuService menuArrendMenuService = new MenuArrendadorImpl(arrendadorDao, menuBuscarArrendador, scannerService);
-		MenuService menuArrendatarioService = new MenuArrendatarioImp(arrendatarioDao, menuBuscarArrendatario, menuBuscarRealEstate,
+		MenuBuscarService<RealEstate> menuBuscarRealEstate = new MenuBuscarRealEstateServiceImpl(realEstate,
 				scannerService);
+
+		MenuService menuArrendMenuService = new MenuArrendadorImpl(arrendadorDao, menuBuscarArrendador, scannerService);
+
+		MenuService menuArrendatarioService = new MenuArrendatarioImp(arrendatarioDao, menuBuscarArrendatario,
+				menuBuscarRealEstate, realEstate, scannerService);
+
 		MenuService menuPrincipalService = new MenuPrincipalServiceImpl(menuArrendMenuService, menuArrendatarioService,
 				scannerService);
 

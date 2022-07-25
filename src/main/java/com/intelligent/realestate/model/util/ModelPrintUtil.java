@@ -53,8 +53,8 @@ public class ModelPrintUtil {
 		System.out.println("Correo: " + arrendatario.getCorreo());
 		System.out.println("Celular: " + arrendatario.getCelular());
 	}
-	
-	public static  void printMultiArrendadores(Arrendador arrendador) {
+
+	public static void printMultiArrendadores(Arrendador arrendador) {
 		System.out.println("ID: " + arrendador.getIdArrendador());
 		System.out.println("Nombre: " + arrendador.getNombre1() + " " + arrendador.getNombre2());
 		System.out.println("Apellidos: " + arrendador.getApellidoPaterno() + " " + arrendador.getApellidoMaterno());
@@ -62,9 +62,11 @@ public class ModelPrintUtil {
 		System.out.println("Correo: " + arrendador.getCorreo());
 		System.out.println("Celular: " + arrendador.getCelular());
 	}
-	
-	public static  void printMultiRealEstates(RealEstate realestate) {
+
+	public static void printMultiRealEstates(RealEstate realestate) {
 		System.out.println("ID: " + realestate.getIdRealEstate());
+		// System.out.println("ID Ar: " + realestate.getArrendadadorId());
+		// System.out.println("ID Ty: " + realestate.getId_typeRE());
 		System.out.println("Estatus: " + realestate.getStatus());
 		System.out.println("Direccion1: " + realestate.getDireccion().getDireccion1());
 		System.out.println("Direccion2: " + realestate.getDireccion().getDireccion2());

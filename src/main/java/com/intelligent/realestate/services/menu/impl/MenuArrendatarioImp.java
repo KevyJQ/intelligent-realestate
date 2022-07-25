@@ -3,16 +3,19 @@ package com.intelligent.realestate.services.menu.impl;
 import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
+import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Estatus;
 import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
+import com.intelligent.realestate.model.util.ModelPrintUtil;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 import com.intelligent.realestate.services.menu.MenuService;
 
 public class MenuArrendatarioImp implements MenuService {
 	private ArrendatarioDao arrendatarioDao;
+	private RealEstateDao realEstateDao;
 	private MenuBuscarService<Arrendatario> menuBuscarArrendatarios;
 	private MenuBuscarService<RealEstate> menuBuscarRealEstate;
 	private ScannerService scannerService;
@@ -22,10 +25,11 @@ public class MenuArrendatarioImp implements MenuService {
 	};
 
 	public MenuArrendatarioImp(ArrendatarioDao arrendatarioDao, MenuBuscarService<Arrendatario> menuBuscarArrendatario,
-			MenuBuscarService<RealEstate> meBuscarRealEstate, ScannerService scannerService) {
+			MenuBuscarService<RealEstate> meBuscarRealEstate, RealEstateDao realEstateDao, ScannerService scannerService) {
 		this.arrendatarioDao = arrendatarioDao;
 		this.menuBuscarArrendatarios = menuBuscarArrendatario;
 		this.menuBuscarRealEstate = meBuscarRealEstate;
+		this.realEstateDao = realEstateDao;
 		this.scannerService = scannerService;
 	}
 
@@ -50,15 +54,12 @@ public class MenuArrendatarioImp implements MenuService {
 
 			case CREAR_CONTRATO:
 				realestate = menuBuscarRealEstate.buscarMenu();
-				
-				
-//				//Ingresamos al arrendatario
-//				arrendatario = menuBuscarArrendatarios.buscarMenu();
-//				if(arrendatario.isPresent()) {
-//					//Ingresamos la real estate que queire rentar
-//					realestate = menuBuscarRealEstate.buscarMenu();
-//					//Hacemos el insert de la informacion
-//				}
+				RealEstate realest = realestate.get();	//Objeto Real Estate
+
+				arrendatario = menuBuscarArrendatarios.buscarMenu();
+				Arrendatario arrendata = arrendatario.get();	//Objeto arrendatario
+
+				realEstateDao.insertContrato(realest, arrendata);
 
 				break;
 
