@@ -8,7 +8,8 @@ public class RealEstate {
 	long idRealEstate;
 	long arrendadadorId;
 	int id_typeRE;
-	long costo;
+	long costoMin;
+	long costoMax;
 	
 
 	public long getIdRealEstate() {
@@ -63,14 +64,21 @@ public class RealEstate {
 	public void setArrendadadorId(long arrendadadorId) {
 		this.arrendadadorId = arrendadadorId;
 	}
-	
 
-	public long getCosto() {
-		return costo;
+	public long getCostoMin() {
+		return costoMin;
 	}
 
-	public void setCosto(long costo) {
-		this.costo = costo;
+	public void setCostoMin(long costoMin) {
+		this.costoMin = costoMin;
+	}
+
+	public long getCostoMax() {
+		return costoMax;
+	}
+
+	public void setCostoMax(long costoMax) {
+		this.costoMax = costoMax;
 	}
 
 	@Override

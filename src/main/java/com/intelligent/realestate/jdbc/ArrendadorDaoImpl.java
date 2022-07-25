@@ -109,8 +109,9 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	public void insertRealEstate(Arrendador arrendador) {
 
 		final String instruccionSQL = "INSERT INTO real_estate"
-				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, pais, ciudad, estado, CP) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, "
+				+ "pais, ciudad, estado, CP, costoMin, costoMax) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		insert(connection, instruccionSQL, (pstmt)->{
 			pstmt.setLong(1, arrendador.getIdArrendador());
@@ -122,6 +123,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setString(7, arrendador.getRealEstate().getDireccion().getCiudad());
 			pstmt.setString(8, arrendador.getRealEstate().getDireccion().getEstado());
 			pstmt.setString(9, arrendador.getRealEstate().getDireccion().getCodigoPostal());
+			pstmt.setLong(10, arrendador.getRealEstate().getCostoMin());
+			pstmt.setLong(11, arrendador.getRealEstate().getCostoMax());
 		}, (rs)->{
 			//Si tuviera un ResultSet aqui se colocaria
 		});

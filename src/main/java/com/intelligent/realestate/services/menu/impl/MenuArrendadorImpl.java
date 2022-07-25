@@ -49,6 +49,7 @@ public class MenuArrendadorImpl implements MenuService {
 				arrendador = menuBuscarArrendador.buscarMenu();
 				if (arrendador.isPresent()) {
 
+
 					Arrendador arrendado = arrendador.get();
 					RealEstate realestate = new RealEstate();
 
@@ -56,6 +57,9 @@ public class MenuArrendadorImpl implements MenuService {
 					realestate.setStatus(status().name());
 					realestate.setDireccion(scannerService.pedirDireccion());
 
+					realestate.setCostoMin(scannerService.pedirNumero("Precio Minimo:", "Necesito un numero.."));
+					realestate.setCostoMax(scannerService.pedirNumero("Precio Maximo:", "Necesito un numero.."));
+					
 					arrendado.setRealEstate(realestate);
 					arrendadorDao.insertRealEstate(arrendado);
 				}
@@ -116,5 +120,6 @@ public class MenuArrendadorImpl implements MenuService {
 		Estatus[] statu = Estatus.values();
 		return statu[opcion - 1];
 	}
+	
 
 }
