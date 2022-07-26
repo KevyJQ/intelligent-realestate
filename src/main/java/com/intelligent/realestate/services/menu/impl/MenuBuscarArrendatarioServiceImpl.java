@@ -32,14 +32,18 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 			switch (opcion) {
 			case BUSCAR_POR_ID:
 				arrendatario = buscarPorId();
-				Arrendatario arrendata = arrendatario.get();
-				ModelPrintUtil.imprimirArrendatario(arrendata);
+				if(arrendatario.isPresent()) {
+					Arrendatario arrendata = arrendatario.get();
+					ModelPrintUtil.imprimirArrendatario(arrendata);
+				}
 				break;
 
 			case BUSCAR_POR_NOMBRE_Y_APELLIDOS:
 				arrendatario = buscarPorNombreAndApellido();
-				Arrendatario arrendata1 = arrendatario.get();
-				ModelPrintUtil.imprimirArrendatario(arrendata1);
+				if(arrendatario.isPresent()) {
+					Arrendatario arrendata1 = arrendatario.get();
+					ModelPrintUtil.imprimirArrendatario(arrendata1);
+				}
 				break;
 
 			case CANCELAR:
@@ -59,7 +63,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 				"Numero no valido, ingrese nuevamente..");
 		return Optional.ofNullable(arrendatarioDao.findById(id));
 	}
-	
+
 	private MenuType mostrarAndOptenerOpcion() {
 		int opcion;
 

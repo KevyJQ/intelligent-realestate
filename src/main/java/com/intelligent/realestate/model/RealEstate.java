@@ -10,7 +10,7 @@ public class RealEstate {
 	int id_typeRE;
 	long costoMin;
 	long costoMax;
-	
+	long costoOfertado;
 
 	public long getIdRealEstate() {
 		return idRealEstate;
@@ -47,7 +47,6 @@ public class RealEstate {
 		this.status = status;
 	}
 
-	
 	public int getId_typeRE() {
 		return id_typeRE;
 	}
@@ -55,7 +54,6 @@ public class RealEstate {
 	public void setId_typeRE(int id_typeRE) {
 		this.id_typeRE = id_typeRE;
 	}
-	
 
 	public long getArrendadadorId() {
 		return arrendadadorId;
@@ -79,6 +77,14 @@ public class RealEstate {
 
 	public void setCostoMax(long costoMax) {
 		this.costoMax = costoMax;
+	}
+
+	public long getCostoOfertado() {
+		return costoOfertado;
+	}
+
+	public void setCostoOfertado(long costoOfertado) {
+		this.costoOfertado = costoOfertado;
 	}
 
 	@Override

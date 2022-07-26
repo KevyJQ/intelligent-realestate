@@ -97,8 +97,8 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 		System.out.println("================================");
 
 		System.out.println("1.Buscar por Pais y Ciudad");
-		System.out.println("3.Cancelar");
-		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no encontrada, ingrese nuevamente..", 1, 3);
+		System.out.println("2.Cancelar");
+		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no encontrada, ingrese nuevamente..", 1, 2);
 
 		MenuType[] menus = MenuType.values();
 		return menus[opcion - 1];

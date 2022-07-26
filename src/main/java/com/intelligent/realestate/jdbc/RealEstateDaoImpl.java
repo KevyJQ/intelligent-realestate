@@ -53,12 +53,13 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 	public void insertContrato(RealEstate realestate, Arrendatario arrendatario) {
 
-		final String instruccionSQL = "INSERT INTO contrato " + "(id_arrendador, id_arrendatario, id_realestate)"
-				+ "VALUES (?,?,?)";
+		final String instruccionSQL = "INSERT INTO contrato " + "(id_arrendador, id_arrendatario, id_realestate, costo)"
+				+ "VALUES ( ?, ?, ?, ?)";
 		insert(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setLong(1, realestate.getArrendadadorId());
 			pstmt.setLong(2, arrendatario.getIdArrendatario());
 			pstmt.setLong(3, realestate.getIdRealEstate());
+			pstmt.setLong(4, realestate.getCostoOfertado());
 		}, (rs) -> {
 			if (rs.next()) {
 				arrendatario.setIdContrato(rs.getLong(1));
