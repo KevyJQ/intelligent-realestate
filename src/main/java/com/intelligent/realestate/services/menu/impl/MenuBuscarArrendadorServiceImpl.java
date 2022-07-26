@@ -77,7 +77,7 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 		if (arrendadores.isEmpty()) {
 			return Optional.empty();
 
-		}else if(arrendadores.size() > 1) {
+		} else if (arrendadores.size() > 1) {
 			ID = Selectrrendador(arrendadores);
 			Arrendador arrenda = arrendadores.get(ID);
 			return Optional.of(arrenda);

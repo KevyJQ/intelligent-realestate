@@ -174,7 +174,5 @@ public class ScannerServiceImpl implements ScannerService {
 		llenarPersona(arrendatario, isDireccionMandator);
 		return arrendatario;
 	}
-	
-	
 
 }

@@ -9,5 +9,5 @@ public interface ResultSetProcessor {
 	/**
 	 * Procesa {@code ResultSet} objects.
 	 */
-    public void process(ResultSet rs) throws SQLException;
+	public void process(ResultSet rs) throws SQLException;
 }

@@ -8,6 +8,6 @@ import com.intelligent.realestate.model.RealEstate;
 public interface RealEstateDao {
 
 	List<RealEstate> selectRealEstate(String pais, String ciudad, String status);
-	
-	public void insertContrato(RealEstate realestate,Arrendatario arrendatario);
+
+	public void insertContrato(RealEstate realestate, Arrendatario arrendatario);
 }

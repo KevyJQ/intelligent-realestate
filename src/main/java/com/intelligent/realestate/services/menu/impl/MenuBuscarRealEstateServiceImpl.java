@@ -41,14 +41,13 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 			case CANCELAR:
 				return Optional.empty();
 			}
-			
-			if(realestate.isPresent()){
+
+			if (realestate.isPresent()) {
 				return realestate;
-			}else {
+			} else {
 				System.out.println("Real Estatae no encontrado..");
 			}
 		}
-		
 
 	}
 
@@ -64,7 +63,7 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 
 		if (realest.isEmpty()) {
 			return Optional.empty();
-			
+
 		} else if (realest.size() > 1) {
 			ID = SelectRealEstatee(realest);
 			RealEstate realE = realest.get(ID);

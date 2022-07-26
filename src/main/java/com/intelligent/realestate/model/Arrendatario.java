@@ -15,7 +15,6 @@ public class Arrendatario extends Persona {
 
 	public Arrendatario() { // Constructor
 	}
-	
 
 	public long getIdContrato() {
 		return idContrato;

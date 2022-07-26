@@ -14,7 +14,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 	private ScannerService scannerService;
 
 	private enum MenuType {
-		BUSCAR_POR_ID, BUSCAR_POR_NOMBRE_Y_APELLIDOS,CANCELAR
+		BUSCAR_POR_ID, BUSCAR_POR_NOMBRE_Y_APELLIDOS, CANCELAR
 	};
 
 	public MenuBuscarArrendatarioServiceImpl(ArrendatarioDao arrendatarioDao, ScannerService scannerService) {
@@ -32,7 +32,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 			switch (opcion) {
 			case BUSCAR_POR_ID:
 				arrendatario = buscarPorId();
-				if(arrendatario.isPresent()) {
+				if (arrendatario.isPresent()) {
 					Arrendatario arrendata = arrendatario.get();
 					ModelPrintUtil.imprimirArrendatario(arrendata);
 				}
@@ -40,7 +40,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 
 			case BUSCAR_POR_NOMBRE_Y_APELLIDOS:
 				arrendatario = buscarPorNombreAndApellido();
-				if(arrendatario.isPresent()) {
+				if (arrendatario.isPresent()) {
 					Arrendatario arrendata1 = arrendatario.get();
 					ModelPrintUtil.imprimirArrendatario(arrendata1);
 				}

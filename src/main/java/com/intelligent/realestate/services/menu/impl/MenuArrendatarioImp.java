@@ -52,6 +52,7 @@ public class MenuArrendatarioImp implements MenuService {
 
 			case CREAR_CONTRATO:
 				realestate = menuBuscarRealEstate.buscarMenu();
+				System.out.println("Real Estate encontrada con exito..");
 				if (realestate.isPresent()) {
 					arrendatario = menuBuscarArrendatarios.buscarMenu();
 					if (arrendatario.isPresent()) {
@@ -94,25 +95,22 @@ public class MenuArrendatarioImp implements MenuService {
 	}
 
 	private boolean decision(RealEstate real) {
-		boolean loop = false;
-		int oferta = 0;
 
-		while (loop == false) {
+		while (true) {
+			System.out.println("==========================");
 			real.setCostoOfertado(scannerService.pedirNumero("Cual es tu oferta:", "Necesito un numero.."));
-
+			System.out.println("CostoMin: " + real.getCostoMin());
 			if (real.getCostoOfertado() >= real.getCostoMin()) {
-				loop = true;
+				return true;
 			} else {
-				oferta = scannerService.pedirNumeroEntreRango("Deseas subir mas la oferta?\n1.Si\n2.No",
+
+				int oferta = scannerService.pedirNumeroEntreRango("Deseas subir mas la oferta?\n1.Si o 2.No",
 						"Necesito un numero", 1, 2);
 				if (oferta == 2) {
-					loop = true;
-
+					return false;
 				}
 			}
-			
 		}
-		return loop;
 	}
 
 }
