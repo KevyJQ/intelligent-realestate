@@ -3,7 +3,6 @@ package com.intelligent.realestate.jdbc;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;

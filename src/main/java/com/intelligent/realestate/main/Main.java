@@ -10,6 +10,7 @@ import com.intelligent.realestate.jdbc.ArrendadorDaoImpl;
 import com.intelligent.realestate.jdbc.ArrendatarioDaoImpl;
 import com.intelligent.realestate.jdbc.DbConnnection;
 import com.intelligent.realestate.jdbc.RealEstateDaoImpl;
+import com.intelligent.realestate.jdbc.util.JdbcUtil;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.RealEstate;
@@ -50,5 +51,7 @@ public class Main {
 				scannerService);
 
 		menuPrincipalService.mostrarMenu();
+
+		JdbcUtil.close(connection);
 	}
 }

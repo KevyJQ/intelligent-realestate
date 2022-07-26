@@ -8,9 +8,13 @@ public class DbConnnection {
 
 	private static Connection conn;
 
+	/*
+	 * @return Una Connection. Si el Connection ya existe, regresa el que ya existe,
+	 * de otra manera, crea uno. Implementa el patro Singleton.
+	 */
 	public static Connection getConnection() throws SQLException {
 		if (conn == null) {
-			String cadenaConexion = "jdbc:mariadb://localhost/intelligent_realestate";
+			String cadenaConexion = "jdbc:mariadb://localhost:3306/intelligent_realestate";
 			/*
 			 * va la direccion de la DB y el nombre de ella
 			 */

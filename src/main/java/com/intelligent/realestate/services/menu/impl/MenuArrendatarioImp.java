@@ -52,7 +52,6 @@ public class MenuArrendatarioImp implements MenuService {
 
 			case CREAR_CONTRATO:
 				realestate = menuBuscarRealEstate.buscarMenu();
-				System.out.println("Real Estate encontrada con exito..");
 				if (realestate.isPresent()) {
 					arrendatario = menuBuscarArrendatarios.buscarMenu();
 					if (arrendatario.isPresent()) {

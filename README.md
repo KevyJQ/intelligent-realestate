@@ -68,3 +68,12 @@ $ mysql --version
 $ mysql -u root -p
 ```
 
+## Stop and Start MariaDb
+
+```shell
+# Start server y mandarlo a segundo plano.
+$ mysqld &
+
+# Stop server
+$ mysqladmin -u root -p shutdown
+```

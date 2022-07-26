@@ -60,4 +60,11 @@ public class JdbcUtil {
 		return numInserts;
 	}
 
+	public static void close(Connection conn) {
+		try {
+			conn.close();
+		} catch (SQLException ex) {
+			throw new DbException(ex);
+		}
+	}
 }
