@@ -1,4 +1,4 @@
-package com.intelligent.realestate.jdbc.util;
+package com.intelligent.realestate.dao.jdbc.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

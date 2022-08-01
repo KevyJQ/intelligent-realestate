@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
+import com.intelligent.realestate.dao.jdbc.ArrendadorDaoImpl;
+import com.intelligent.realestate.dao.jdbc.DbConnnection;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.util.ModelUtil;
 

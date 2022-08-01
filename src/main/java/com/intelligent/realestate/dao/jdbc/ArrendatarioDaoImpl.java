@@ -1,11 +1,11 @@
-package com.intelligent.realestate.jdbc;
+package com.intelligent.realestate.dao.jdbc;
+
+import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.insert;
+import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.select;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.intelligent.realestate.jdbc.util.JdbcUtil.insert;
-import static com.intelligent.realestate.jdbc.util.JdbcUtil.select;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.model.Arrendatario;
