@@ -1,4 +1,4 @@
-package com.intelligent.realestate.jdbc;
+package com.intelligent.realestate.dao.jdbc;
 
 import static org.junit.Assert.assertNotNull;
 
