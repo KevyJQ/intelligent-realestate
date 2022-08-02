@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.intelligent.realestate.model">
+	
+	<!-- Nombre de la clase y el nombre de la tabla en la DB -->
+	<class name="Arrendador" table="arrendador">
+		<!-- idArrendador de la clase Arrendador y el nombre de la referencia en la DB -->
+		<id name="idArrendador" column="id_arrendador">
+			<!-- Le indicamos que es de auto_increment con el identity -->
+			<generator class="identity"></generator>
+		</id>
+		<!-- Ponemos los demas atributos de Arrendador 
+			 Recoredemos que primero es el nombre de como esta en tu clase
+			 y luego de como esta en la DB -->
+		<property name="nombre1" column="nombre1"></property>
+		<property name="nombre2" column="nombre2"></property>
+		<property name="apellidoMaterno" column="apellidoMaterno"></property>
+		<property name="apellidoPaterno" column="apellidoPaterno"></property>
+		<property name="edad" column="edad"></property>
+		<property name="correo" column="correo"></property>
+		<property name="celular" column="celular"></property>
+		
+		
+		
+	</class>
+
+</hibernate-mapping>
