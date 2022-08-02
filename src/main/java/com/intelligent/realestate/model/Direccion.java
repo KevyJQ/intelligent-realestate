@@ -1,7 +1,7 @@
 package com.intelligent.realestate.model;
 
 public class Direccion {
-	// TODO: Add comments
+
 	private String direccion1;
 	private String direccion2;
 	private String pais;
