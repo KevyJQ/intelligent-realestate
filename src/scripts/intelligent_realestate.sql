@@ -32,6 +32,12 @@ apellidoMaterno VARCHAR(30),
 edad INTEGER,
 correo VARCHAR(50),
 celular VARCHAR(20),
+direccion1 VARCHAR(100),
+direccion2 VARCHAR(100),
+pais VARCHAR(100),
+ciudad VARCHAR(100),
+estado VARCHAR(100),
+cp VARCHAR(100),
 PRIMARY KEY (id_arrendatario)
 );
 
