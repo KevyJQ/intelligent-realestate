@@ -1,64 +1,33 @@
 package com.intelligent.realestate.dao.hibernate;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Direccion;
+import com.intelligent.realestate.model.util.ModelUtil;
 
 public class ArrendadorDaoTest {
 
-	private SessionFactory sessionFactory;
-	private StandardServiceRegistry registry;
-	
+	private ArrendadorDao arrendadorDao;
+
+	@Before
+	public void setup() {
+		arrendadorDao = new ArrendadorDaoImpl();
+	}
+
 	@Test
-	public void test() {
-		
-		init();
-		Arrendador arrendador = new Arrendador();
-		arrendador.setDireccion(new Direccion());
-		
-		arrendador.setNombre1("Test  nombre111 ");
-		arrendador.setNombre2("Test nombre222 ");
-		arrendador.setApellidoPaterno("Test Apellido");
-		arrendador.setApellidoMaterno("Test materno");
-		arrendador.setEdad(90);
-		arrendador.setCorreo("test@gmail.com");
-		arrendador.setCelular("659 864 9454");
-		arrendador.getDireccion().setDireccion1("Test Direccion1 Hiber");
-		arrendador.getDireccion().setDireccion2("Test Direccion2 Hiber");
-		arrendador.getDireccion().setPais("Test Pais hiber");
-		arrendador.getDireccion().setCiudad("Test Ciudad Hiber");
-		arrendador.getDireccion().setEstado("Test Estado hiber");
-		arrendador.getDireccion().setCodigoPostal("96283");
+	public void insert() {
+		Arrendador arrendador = ModelUtil.crearArrendador();
 
-		Session session = geFactory().openSession();
-		session.beginTransaction();
-		session.save(arrendador);
-		session.getTransaction().commit();
-	}
-	
-	public SessionFactory geFactory() {
-		return this.sessionFactory;
-	}
-	
-	public void init() {		
+		assertNull(arrendador.getIdArrendador());
 
-		registry = new StandardServiceRegistryBuilder()
-				.configure("hibernate.cfg.xml") // se carga la configuracion hibernate
-				.build();
-		try {
-			// se crea una fabrica de sessiones hibernate
-			sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			StandardServiceRegistryBuilder.destroy( registry );
-		}
-	}
+		arrendadorDao.insertArrendador(arrendador);
 
+		assertNotNull(arrendador.getIdArrendador());
+	}
 }
