@@ -23,7 +23,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 		Arrendador arrendador = new Arrendador();
 
 		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, cp "
 				+ "FROM arrendador " + "WHERE id_arrendador = ? ;";
 
 		select(connection, instruccionSQL, (rs) -> {
