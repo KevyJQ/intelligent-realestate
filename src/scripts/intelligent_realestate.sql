@@ -1,7 +1,7 @@
 # SQL script para generar la base de datos intelligen_realestate.
 
 DROP DATABASE intelligent_realestate;
-CREATE DATABASE Intelligent_realEstate;
+CREATE DATABASE intelligent_realestate;
 
 USE intelligent_realestate;
 
@@ -13,7 +13,13 @@ apellidoPaterno VARCHAR(100),
 apellidoMaterno VARCHAR(100),
 edad INTEGER,
 correo VARCHAR(50),
-celular VARCHAR(20),
+celular VARCHAR(50),
+direccion1 VARCHAR(100),
+direccion2 VARCHAR(100),
+pais VARCHAR(100),
+ciudad VARCHAR(100),
+estado VARCHAR(100),
+cp VARCHAR(100),
 PRIMARY KEY (id_arrendador)
 );
 
@@ -50,7 +56,7 @@ direccion2 VARCHAR (100),
 pais VARCHAR(50),
 ciudad VARCHAR(50),
 estado VARCHAR(50),
-CP INTEGER,
+cp INTEGER,
 PRIMARY KEY (id_realestate,id_arrendador),
 FOREIGN KEY (id_arrendador) REFERENCES arrendador(id_arrendador),
 FOREIGN KEY (id_type_realestate) REFERENCES type_realestate(id_type_real_estate)
