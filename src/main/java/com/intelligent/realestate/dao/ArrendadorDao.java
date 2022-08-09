@@ -3,6 +3,7 @@ package com.intelligent.realestate.dao;
 import java.util.List;
 
 import com.intelligent.realestate.model.Arrendador;
+import com.intelligent.realestate.model.RealEstate;
 
 public interface ArrendadorDao { // Interface ArrendadorDao que nos permitira usar los siguientes metodos
 
@@ -12,5 +13,5 @@ public interface ArrendadorDao { // Interface ArrendadorDao que nos permitira us
 
 	public void insertArrendador(Arrendador arrendador);
 
-	public void insertRealEstate(Arrendador arrendador);
+	public void insertRealEstate(RealEstate realEstate);
 }

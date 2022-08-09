@@ -10,6 +10,7 @@ import java.util.List;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Direccion;
+import com.intelligent.realestate.model.RealEstate;
 
 public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDaoImpl que usara la interface
 	// ArrendadorDao
@@ -106,27 +107,29 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 		});
 	}
 
-	public void insertRealEstate(Arrendador arrendador) {
+	public void insertRealEstate(RealEstate realEstate) {
 
 		final String instruccionSQL = "INSERT INTO real_estate"
 				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, "
 				+ "pais, ciudad, estado, CP, costoMin, costoMax) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		insert(connection, instruccionSQL, (pstmt) -> {
-			pstmt.setLong(1, arrendador.getIdArrendador());
-			pstmt.setInt(2, arrendador.getRealEstate().getRealEstateType().getId());
-			pstmt.setString(3, arrendador.getRealEstate().getStatus());
-			pstmt.setString(4, arrendador.getRealEstate().getDireccion().getDireccion1());
-			pstmt.setString(5, arrendador.getRealEstate().getDireccion().getDireccion2());
-			pstmt.setString(6, arrendador.getRealEstate().getDireccion().getPais());
-			pstmt.setString(7, arrendador.getRealEstate().getDireccion().getCiudad());
-			pstmt.setString(8, arrendador.getRealEstate().getDireccion().getEstado());
-			pstmt.setString(9, arrendador.getRealEstate().getDireccion().getCodigoPostal());
-			pstmt.setLong(10, arrendador.getRealEstate().getCostoMin());
-			pstmt.setLong(11, arrendador.getRealEstate().getCostoMax());
+			pstmt.setLong(1, realEstate.getArrendadadorId());
+			pstmt.setInt(2, realEstate.getRealEstateType().getId());
+			pstmt.setString(3, realEstate.getStatus());
+			pstmt.setString(4, realEstate.getDireccion().getDireccion1());
+			pstmt.setString(5, realEstate.getDireccion().getDireccion2());
+			pstmt.setString(6, realEstate.getDireccion().getPais());
+			pstmt.setString(7, realEstate.getDireccion().getCiudad());
+			pstmt.setString(8, realEstate.getDireccion().getEstado());
+			pstmt.setString(9, realEstate.getDireccion().getCodigoPostal());
+			pstmt.setLong(10, realEstate.getCostoMin());
+			pstmt.setLong(11, realEstate.getCostoMax());
 		}, (rs) -> {
-			// Si tuviera un ResultSet aqui se colocaria
+			if (rs.next()) {
+				// Asignar la llave generad a el atributo IdRealEstate.
+				realEstate.setIdRealEstate(rs.getLong(1));
+			}
 		});
-
 	}
 }

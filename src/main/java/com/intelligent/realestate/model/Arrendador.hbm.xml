@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping
-	package="com.intelligent.realestate.model">
+<hibernate-mapping package="com.intelligent.realestate.model">
 
 	<!-- Nombre de la clase y el nombre de la tabla en la DB -->
 	<class name="Arrendador" table="arrendador">
@@ -32,6 +29,11 @@
 			<property name="estado" column="estado"></property>
 			<property name="codigoPostal" column="CP"></property>
 		</component>
+
+		<set name="realEstates" table="real_estate" lazy="false">
+			<key column="id_arrendador"/>
+			<one-to-many class="com.intelligent.realestate.model.RealEstate" />
+		</set>
 
 	</class>
 

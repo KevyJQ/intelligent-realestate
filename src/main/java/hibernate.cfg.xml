@@ -24,6 +24,7 @@
         <property name="hbm2ddl.auto">none</property>
         
         <mapping resource="com/intelligent/realestate/model/Arrendador.hbm.xml"/>
+        <mapping resource="com/intelligent/realestate/model/RealEstate.hbm.xml"/>
         
     </session-factory>
 </hibernate-configuration>

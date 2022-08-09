@@ -1,7 +1,14 @@
 package com.intelligent.realestate.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Arrendador extends Persona {
 	private Long idArrendador;
+	private Set<RealEstate> realEstates = new HashSet<>();
+
+	public Arrendador() {
+	}
 
 	public Long getIdArrendador() {
 		return idArrendador;
@@ -11,7 +18,12 @@ public class Arrendador extends Persona {
 		this.idArrendador = idArrendador;
 	}
 
-	public Arrendador() {
+	public Set<RealEstate> getRealEstates() {
+		return realEstates;
+	}
+
+	public void setRealEstates(Set<RealEstate> realEstates) {
+		this.realEstates = realEstates;
 	}
 
 	@Override

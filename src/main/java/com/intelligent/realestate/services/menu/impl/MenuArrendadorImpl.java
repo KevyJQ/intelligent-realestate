@@ -52,6 +52,7 @@ public class MenuArrendadorImpl implements MenuService {
 					Arrendador arrendado = arrendador.get();
 					RealEstate realestate = new RealEstate();
 
+					realestate.setArrendadadorId(arrendado.getIdArrendador());
 					realestate.setRealEstateType(typeRealEstate());
 					realestate.setStatus(status().name());
 					realestate.setDireccion(scannerService.pedirDireccion());
@@ -60,7 +61,7 @@ public class MenuArrendadorImpl implements MenuService {
 					realestate.setCostoMax(scannerService.pedirNumero("Precio Maximo:", "Necesito un numero.."));
 
 					arrendado.setRealEstate(realestate);
-					arrendadorDao.insertRealEstate(arrendado);
+					arrendadorDao.insertRealEstate(realestate);
 				}
 				break;
 

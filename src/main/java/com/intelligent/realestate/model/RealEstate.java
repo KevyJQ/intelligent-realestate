@@ -1,22 +1,21 @@
 package com.intelligent.realestate.model;
 
 public class RealEstate {
-
-	private Direccion direccion;
-	private TypeRealEstate realEstateType;
-	private String status;
-	long idRealEstate;
-	long arrendadadorId;
+	Long idRealEstate;
+	Long arrendadadorId;
 	int id_typeRE;
 	long costoMin;
 	long costoMax;
 	long costoOfertado;
+	private Direccion direccion;
+	private TypeRealEstate realEstateType;
+	private String status;
 
-	public long getIdRealEstate() {
+	public Long getIdRealEstate() {
 		return idRealEstate;
 	}
 
-	public void setIdRealEstate(long idRealEstate) {
+	public void setIdRealEstate(Long idRealEstate) {
 		this.idRealEstate = idRealEstate;
 	}
 
@@ -55,11 +54,11 @@ public class RealEstate {
 		this.id_typeRE = id_typeRE;
 	}
 
-	public long getArrendadadorId() {
+	public Long getArrendadadorId() {
 		return arrendadadorId;
 	}
 
-	public void setArrendadadorId(long arrendadadorId) {
+	public void setArrendadadorId(Long arrendadadorId) {
 		this.arrendadadorId = arrendadadorId;
 	}
 
