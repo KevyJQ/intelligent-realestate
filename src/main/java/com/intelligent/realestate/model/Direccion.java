@@ -79,4 +79,30 @@ public class Direccion {
 
 		return sb.toString();
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Direccion) {
+			Direccion dir = (Direccion) obj;
+			if ((direccion1 != null && direccion1.equals(dir.getDireccion1()))
+					&& (direccion2 != null && direccion2.equals(dir.getDireccion2()))
+					&& (pais != null && pais.equals(dir.getPais()))
+					&& (ciudad != null && ciudad.equals(dir.getCiudad()))
+					&& (estado != null && estado.equals(dir.getEstado()))
+					&& (codigoPostal != null && codigoPostal.equals(dir.getCodigoPostal())))
+
+				return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		if (direccion1 != null && direccion2 != null) {
+			return direccion1.hashCode() + direccion2.hashCode();
+		}
+
+		return 123;
+	}
 }
