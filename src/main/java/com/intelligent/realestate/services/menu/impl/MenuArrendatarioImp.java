@@ -1,10 +1,14 @@
 package com.intelligent.realestate.services.menu.impl;
 
+import java.sql.Date;
 import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
+import com.intelligent.realestate.dao.ContratoDao;
 import com.intelligent.realestate.dao.RealEstateDao;
+import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
+import com.intelligent.realestate.model.Contrato;
 import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
@@ -15,6 +19,7 @@ public class MenuArrendatarioImp implements MenuService {
 	private RealEstateDao realEstateDao;
 	private MenuBuscarService<Arrendatario> menuBuscarArrendatarios;
 	private MenuBuscarService<RealEstate> menuBuscarRealEstate;
+	private ContratoDao contratoDao;
 	private ScannerService scannerService;
 
 	private enum MenuType {
@@ -22,13 +27,14 @@ public class MenuArrendatarioImp implements MenuService {
 	};
 
 	public MenuArrendatarioImp(ArrendatarioDao arrendatarioDao, MenuBuscarService<Arrendatario> menuBuscarArrendatario,
-			MenuBuscarService<RealEstate> meBuscarRealEstate, RealEstateDao realEstateDao,
+			MenuBuscarService<RealEstate> meBuscarRealEstate, RealEstateDao realEstateDao, ContratoDao contratoDao,
 			ScannerService scannerService) {
 		this.arrendatarioDao = arrendatarioDao;
 		this.menuBuscarArrendatarios = menuBuscarArrendatario;
 		this.menuBuscarRealEstate = meBuscarRealEstate;
 		this.realEstateDao = realEstateDao;
 		this.scannerService = scannerService;
+		this.contratoDao = contratoDao;
 	}
 
 	@Override
@@ -55,13 +61,23 @@ public class MenuArrendatarioImp implements MenuService {
 				if (realestate.isPresent()) {
 					arrendatario = menuBuscarArrendatarios.buscarMenu();
 					if (arrendatario.isPresent()) {
-
+						System.out.println("64");
 						RealEstate realest = realestate.get(); // Objeto Real Estate
 						Arrendatario arrendata = arrendatario.get(); // Objeto arrendatario
+						Arrendador arrendador = new Arrendador();
+						arrendador.setIdArrendador(realest.getArrendadadorId());
+						Contrato contrato = new Contrato();
+						contrato.setArrendador(arrendador);
+						contrato.setArrendatario(arrendata);
+						contrato.setRealEstate(realest);
+						contrato.setFechaInicio(new Date(2022,8,10));
+						contrato.setFechaFinal(new Date(2030, 10, 9));
+						
 
 						if (decision(realest) == true) {
-							realEstateDao.insertContrato(realest, arrendata);
+							contratoDao.guardarContrato(contrato);
 							System.out.println("..Contrato generado Exitosamente..");
+							System.out.println("\n\tID del Contrato: " + contrato.getIdContrato() + "\n");
 						} else {
 							System.out.println("Lo siento, no le es posible rentar esta propiedad");
 						}

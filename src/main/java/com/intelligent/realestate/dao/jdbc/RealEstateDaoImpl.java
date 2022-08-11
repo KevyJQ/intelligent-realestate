@@ -1,6 +1,5 @@
 package com.intelligent.realestate.dao.jdbc;
 
-import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.insert;
 import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.select;
 
 import java.sql.Connection;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.intelligent.realestate.dao.RealEstateDao;
-import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.RealEstate;
 
@@ -25,7 +23,7 @@ public class RealEstateDaoImpl implements RealEstateDao {
 		List<RealEstate> realestate = new ArrayList<RealEstate>();
 
 		final String instruccionSQL = "SELECT id_realestate, id_arrendador, id_type_realestate, "
-				+ "estatus, direccion1, direccion2, pais, ciudad, estado, CP, costoMin, costoMax " + "FROM real_estate "
+				+ "estatus, direccion1, direccion2, pais, ciudad, estado, cp , costo_min, costo_max " + "FROM real_estate "
 				+ "WHERE pais= ? AND ciudad= ? AND estatus= ?";
 
 		select(connection, instruccionSQL, (rs) -> {
@@ -43,8 +41,9 @@ public class RealEstateDaoImpl implements RealEstateDao {
 			realestat.getDireccion().setCiudad(rs.getString(8));
 			realestat.getDireccion().setEstado(rs.getString(9));
 			realestat.getDireccion().setCodigoPostal(rs.getString(10));
-			realestat.setCostoMin(rs.getLong(11));
-			realestat.setCostoMax(rs.getLong(12));
+			realestat.setCostoMin(rs.getDouble(11));
+			realestat.setCostoMax(rs.getDouble(12));
+
 
 			realestate.add(realestat);
 
@@ -53,21 +52,5 @@ public class RealEstateDaoImpl implements RealEstateDao {
 		return realestate;
 	}
 
-	public void insertContrato(RealEstate realestate, Arrendatario arrendatario) {
-
-		final String instruccionSQL = "INSERT INTO contrato " + "(id_arrendador, id_arrendatario, id_realestate, costo)"
-				+ "VALUES ( ?, ?, ?, ?)";
-		insert(connection, instruccionSQL, (pstmt) -> {
-			pstmt.setLong(1, realestate.getArrendadadorId());
-			pstmt.setLong(2, arrendatario.getIdArrendatario());
-			pstmt.setLong(3, realestate.getIdRealEstate());
-			pstmt.setLong(4, realestate.getCostoOfertado());
-		}, (rs) -> {
-			if (rs.next()) {
-				arrendatario.setIdContrato(rs.getLong(1));
-				System.out.println("\n\tID del Contrato: " + arrendatario.getIdContrato() + "\n");
-			}
-		});
-	}
 
 }

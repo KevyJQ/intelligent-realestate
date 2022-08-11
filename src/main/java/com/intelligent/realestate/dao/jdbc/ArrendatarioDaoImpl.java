@@ -21,12 +21,15 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	public Arrendatario findById(long arrendatarioId) {
 		Arrendatario arrendatario = new Arrendatario();
-
+		
+		
 		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, CP "
-				+ "FROM arrendatario " + "WHERE id_arrendatario = ? ";
+				+ "apellidoMaterno,edad,correo,celular, " 
+				+ "direccion1, direccion2, pais, ciudad, estado, cp "
+				+ "FROM arrendatario "
+				+ "WHERE id_arrendatario = ? ";
 
-		select(connection, instruccionSQL, (rs) -> {
+		int resultados = select(connection, instruccionSQL, (rs) -> {
 			arrendatario.setDireccion(new Direccion());
 			arrendatario.setIdArrendatario(rs.getLong(1));
 			arrendatario.setNombre1(rs.getString(2));
@@ -44,7 +47,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 			arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
 		}, arrendatarioId);
 
-		return arrendatario;
+		return resultados > 0 ? arrendatario : null;
 	}
 
 	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno) {

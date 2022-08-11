@@ -10,7 +10,7 @@ import com.intelligent.realestate.exceptions.Exceptions.DbException;
 
 public class JdbcUtil {
 
-	public static void select(Connection conn, String sql, ResultSetProcessor processor, Object... params) {
+	public static int select(Connection conn, String sql, ResultSetProcessor processor, Object... params) {
 		try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
 			int cnt = 1;
@@ -22,9 +22,12 @@ public class JdbcUtil {
 
 			// Procesa los resultdos en el ResultSet.
 			try (ResultSet rs = ps.executeQuery()) {
+				int resultados = 0;
 				while (rs.next()) {
 					processor.process(rs);
+					resultados++;
 				}
+				return resultados;
 			} catch (SQLException ex) {
 				throw new DbException(ex);
 			}

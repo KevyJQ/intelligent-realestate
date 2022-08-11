@@ -5,9 +5,11 @@ import java.sql.SQLException;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.ArrendatarioDao;
+import com.intelligent.realestate.dao.ContratoDao;
 import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.dao.hibernate.ArrendadorDaoImpl;
 import com.intelligent.realestate.dao.jdbc.ArrendatarioDaoImpl;
+import com.intelligent.realestate.dao.jdbc.ContratoDaoImpl;
 import com.intelligent.realestate.dao.jdbc.DbConnnection;
 import com.intelligent.realestate.dao.jdbc.RealEstateDaoImpl;
 import com.intelligent.realestate.dao.jdbc.util.JdbcUtil;
@@ -30,11 +32,12 @@ public class Main {
 	public static void main(String[] args) throws SQLException {
 
 		Connection connection = DbConnnection.getConnection();
-		
+
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl();
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		ScannerService scannerService = new ScannerServiceImpl();
 		RealEstateDao realEstate = new RealEstateDaoImpl(connection);
+		ContratoDao contratoDao = new ContratoDaoImpl(connection);
 
 		MenuBuscarService<Arrendador> menuBuscarArrendador = new MenuBuscarArrendadorServiceImpl(arrendadorDao,
 				scannerService);
@@ -46,7 +49,7 @@ public class Main {
 		MenuService menuArrendMenuService = new MenuArrendadorImpl(arrendadorDao, menuBuscarArrendador, scannerService);
 
 		MenuService menuArrendatarioService = new MenuArrendatarioImp(arrendatarioDao, menuBuscarArrendatario,
-				menuBuscarRealEstate, realEstate, scannerService);
+				menuBuscarRealEstate, realEstate,contratoDao ,scannerService);
 
 		MenuService menuPrincipalService = new MenuPrincipalServiceImpl(menuArrendMenuService, menuArrendatarioService,
 				scannerService);

@@ -21,13 +21,13 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public Arrendador findById(long arrendadorId) {
-		Arrendador arrendador = new Arrendador();
+		Arrendador arrendador = new Arrendador();;
 
 		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, cp "
 				+ "FROM arrendador " + "WHERE id_arrendador = ? ;";
 
-		select(connection, instruccionSQL, (rs) -> {
+		int resultados = select(connection, instruccionSQL, (rs) -> {
 			arrendador.setDireccion(new Direccion());
 			arrendador.setIdArrendador(rs.getLong(1));
 			arrendador.setNombre1(rs.getString(2));
@@ -45,7 +45,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			arrendador.getDireccion().setCodigoPostal(rs.getString(14));
 		}, arrendadorId);
 
-		return arrendador;
+		return resultados > 0 ? arrendador : null;
 	}
 
 	public List<Arrendador> findByNameAndLasName(String name, String apellidoMaterno, String apellidoPaterno) {
@@ -111,7 +111,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 		final String instruccionSQL = "INSERT INTO real_estate"
 				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, "
-				+ "pais, ciudad, estado, cp, costoMin, costoMax) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "pais, ciudad, estado, cp, costo_min, costo_max) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		insert(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setLong(1, realEstate.getArrendadadorId());
@@ -123,8 +123,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setString(7, realEstate.getDireccion().getCiudad());
 			pstmt.setString(8, realEstate.getDireccion().getEstado());
 			pstmt.setString(9, realEstate.getDireccion().getCodigoPostal());
-			pstmt.setLong(10, realEstate.getCostoMin());
-			pstmt.setLong(11, realEstate.getCostoMax());
+			pstmt.setDouble(10, realEstate.getCostoMin());
+			pstmt.setDouble(11, realEstate.getCostoMax());
 		}, (rs) -> {
 			if (rs.next()) {
 				// Asignar la llave generad a el atributo IdRealEstate.

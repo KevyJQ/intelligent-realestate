@@ -4,9 +4,9 @@ public class RealEstate {
 	Long idRealEstate;
 	Long arrendadadorId;
 	int id_typeRE;
-	long costoMin;
-	long costoMax;
-	long costoOfertado;
+	double costoMin;
+	double costoMax;
+	double costoOfertado;
 	private Direccion direccion;
 	private TypeRealEstate realEstateType;
 	private String status;
@@ -45,47 +45,46 @@ public class RealEstate {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
 	public int getId_typeRE() {
 		return id_typeRE;
 	}
-
+	
 	public void setId_typeRE(int id_typeRE) {
 		this.id_typeRE = id_typeRE;
 	}
-
+	
 	public Long getArrendadadorId() {
 		return arrendadadorId;
 	}
-
+	
 	public void setArrendadadorId(Long arrendadadorId) {
 		this.arrendadadorId = arrendadadorId;
 	}
-
-	public long getCostoMin() {
+	
+	public double getCostoMin() {
 		return costoMin;
 	}
-
-	public void setCostoMin(long costoMin) {
+	
+	public void setCostoMin(double costoMin) {
 		this.costoMin = costoMin;
 	}
-
-	public long getCostoMax() {
+	
+	public double getCostoMax() {
 		return costoMax;
 	}
-
-	public void setCostoMax(long costoMax) {
+	
+	public void setCostoMax(double costoMax) {
 		this.costoMax = costoMax;
 	}
-
-	public long getCostoOfertado() {
+	
+	public double getCostoOfertado() {
 		return costoOfertado;
 	}
-
-	public void setCostoOfertado(long costoOfertado) {
+	
+	public void setCostoOfertado(double costoOfertado) {
 		this.costoOfertado = costoOfertado;
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
