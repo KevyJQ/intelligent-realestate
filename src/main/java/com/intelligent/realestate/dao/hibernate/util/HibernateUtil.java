@@ -21,8 +21,8 @@ public final class HibernateUtil {
 			return sessionFactory;
 		}
 
-		registry = new StandardServiceRegistryBuilder()
-				.configure("hibernate.cfg.xml") // se carga la configuracion de Hibernate.
+		registry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml") // se carga la configuracion de
+																						// Hibernate.
 				.build();
 		try {
 			// se crea una fabrica de sessiones hibernate

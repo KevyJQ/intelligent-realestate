@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.dao.RealEstateDao;
-import com.intelligent.realestate.dao.jdbc.ArrendadorDaoImpl;
+import com.intelligent.realestate.dao.hibernate.ArrendadorDaoImpl;
 import com.intelligent.realestate.dao.jdbc.ArrendatarioDaoImpl;
 import com.intelligent.realestate.dao.jdbc.DbConnnection;
 import com.intelligent.realestate.dao.jdbc.RealEstateDaoImpl;
@@ -30,7 +30,8 @@ public class Main {
 	public static void main(String[] args) throws SQLException {
 
 		Connection connection = DbConnnection.getConnection();
-		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl(connection);
+		
+		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl();
 		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
 		ScannerService scannerService = new ScannerServiceImpl();
 		RealEstateDao realEstate = new RealEstateDaoImpl(connection);

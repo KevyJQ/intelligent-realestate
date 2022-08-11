@@ -26,12 +26,12 @@ public class ModelUtil {
 		return direccion;
 	}
 
-	public static Arrendador crearArrendador() {
+	public static Arrendador crearArrendador(String nombre) {
 		Arrendador arrendador = new Arrendador();
 		Date date = new Date();
-		arrendador.setNombre1("Test nombre1 " + date);
+		arrendador.setNombre1(nombre);
 		arrendador.setNombre2("Test nombre2 " + date);
-		arrendador.setApellidoPaterno("Test Apellido");
+		arrendador.setApellidoPaterno("Test Apellido" + date.getTime());
 		arrendador.setApellidoMaterno("Test materno");
 		arrendador.setEdad(23);
 		arrendador.setCorreo("test@gmail.com");
@@ -39,6 +39,11 @@ public class ModelUtil {
 		arrendador.setDireccion(crearDireccion());
 
 		return arrendador;
+
+	}
+
+	public static Arrendador crearArrendador() {
+		return crearArrendador("Kevy");
 	}
 
 	public static RealEstate crearRealEstate(long arrendadorId) {

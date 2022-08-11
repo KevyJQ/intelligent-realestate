@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.intelligent.realestate.model">
+<hibernate-mapping
+	package="com.intelligent.realestate.model">
 
 	<!-- Nombre de la clase y el nombre de la tabla en la DB -->
 	<class name="RealEstate" table="real_estate">
@@ -13,11 +14,10 @@
 		<property name="arrendadadorId" column="id_arrendador"></property>
 		<property name="status" column="estatus"></property>
 
-		<!--
-		   TODO Mapear el resto de las propiedades, costo min, costo max. 
-		-->
+		<!-- TODO Mapear el resto de las propiedades, costo min, costo max. -->
 
-		<component name="direccion" class="com.intelligent.realestate.model.Direccion">
+		<component name="direccion"
+			class="com.intelligent.realestate.model.Direccion">
 			<property name="direccion1" column="direccion1" />
 			<property name="direccion2" column="direccion2" />
 			<property name="pais" column="pais" />

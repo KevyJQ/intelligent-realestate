@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +47,30 @@ public class ArrendadorDaoTest {
 	}
 
 	@Test
+	public void findByNameAndLasName() {
+		Arrendador arrendador1 = ModelUtil.crearArrendador("Dani");
+		Arrendador arrendador2 = ModelUtil.crearArrendador("Jannine");
+
+		arrendadorDao.insertArrendador(arrendador1);
+		arrendadorDao.insertArrendador(arrendador2);
+
+		List<Arrendador> arrendadores;
+		arrendadores = arrendadorDao.findByNameAndLasName(arrendador2.getNombre1(), arrendador2.getApellidoMaterno(),
+				arrendador2.getApellidoPaterno());
+
+		assertEquals(arrendadores.size(), 1);
+	}
+
+	@Test
+	public void findByNameAndLasName_empty() {
+		List<Arrendador> arrendadores;
+
+		arrendadores = arrendadorDao.findByNameAndLasName("HOla", "Como", "estas");
+
+		assertEquals(arrendadores.size(), 0);
+	}
+
+	@Test
 	public void insert_realestate() {
 		Arrendador arrendador = ModelUtil.crearArrendador();
 		arrendadorDao.insertArrendador(arrendador);
@@ -66,5 +92,6 @@ public class ArrendadorDaoTest {
 		for (RealEstate expected : result.getRealEstates()) {
 			assertEquals(expected.getIdRealEstate(), re.getIdRealEstate());
 		}
+
 	}
 }

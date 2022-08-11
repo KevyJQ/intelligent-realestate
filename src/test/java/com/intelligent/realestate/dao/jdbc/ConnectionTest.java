@@ -38,7 +38,7 @@ public class ConnectionTest {
 
 		// int numConnections = 150;
 		int numConnections = 10;
-		
+
 		int i = 0;
 
 		for (i = 0; i < numConnections; i++) {

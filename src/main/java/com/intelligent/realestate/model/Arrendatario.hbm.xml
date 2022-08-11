@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping
+	package="com.intelligent.realestate.model">
+
+	<class name="Arrendatario" table="arrendatario">
+
+		<id name="idArrendatario" column="id_arrendatario">
+			<generator class="identity"></generator>
+		</id>
+		<!-- TODO: checar los de idContrato -->
+
+		<property name="nombre1" column="nombre1"></property>
+		<property name="nombre2" column="nombre2"></property>
+		<property name="apellidoMaterno" column="apellidoMaterno"></property>
+		<property name="apellidoPaterno" column="apellidoPaterno"></property>
+		<property name="edad" column="edad"></property>
+		<property name="correo" column="correo"></property>
+		<property name="celular" column="celular"></property>
+		
+		<component name="direccion" class="com.intelligent.realestate.model.Direccion">
+			<property name="direccion1" column="direccion1"></property>
+			<property name="direccion2" column="direccion2"></property>
+			<property name="pais" column="pais"></property>
+			<property name="ciudad" column="ciudad"></property>
+			<property name="estado" column="estado"></property>
+			<property name="codigoPostal" column="cp"></property>
+		</component>
+		
+		
+	</class>
+
+</hibernate-mapping>
