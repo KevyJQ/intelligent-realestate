@@ -54,7 +54,7 @@ INSERT INTO type_realestate VALUE (4,'Oficina');
 
 CREATE TABLE real_estate(
 id_realestate INTEGER NOT NULL AUTO_INCREMENT,
-id_arrendador INTEGER,
+id_arrendador INTEGER NOT NULL,
 id_type_realestate INTEGER,
 estatus VARCHAR(20),
 direccion1 VARCHAR(100),
@@ -63,8 +63,8 @@ pais VARCHAR(100),
 ciudad VARCHAR(100),
 estado VARCHAR(100),
 cp VARCHAR(100),
-costo_min DOUBLE,
-costo_max DOUBLE,
+costo_min DOUBLE NOT NULL,
+costo_max DOUBLE NOT NULL,
 PRIMARY KEY (id_realestate),
 FOREIGN KEY (id_arrendador) REFERENCES arrendador(id_arrendador),
 FOREIGN KEY (id_type_realestate) REFERENCES type_realestate(id_type_real_estate)

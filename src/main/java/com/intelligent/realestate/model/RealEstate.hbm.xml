@@ -14,7 +14,8 @@
 		<property name="arrendadadorId" column="id_arrendador"></property>
 		<property name="status" column="estatus"></property>
 
-		<!-- TODO Mapear el resto de las propiedades, costo min, costo max. -->
+		<property name="costoMin" column="costo_min"></property>
+		<property name="costoMax" column="costo_max"></property>
 
 		<component name="direccion"
 			class="com.intelligent.realestate.model.Direccion">

@@ -111,7 +111,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 		final String instruccionSQL = "INSERT INTO real_estate"
 				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, "
-				+ "pais, ciudad, estado, cp, costo_min, costo_max) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "pais, ciudad, estado, cp, costo_min, costo_max) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		insert(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setLong(1, realEstate.getArrendadadorId());
