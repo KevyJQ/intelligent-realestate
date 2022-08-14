@@ -1,7 +1,7 @@
 package com.intelligent.realestate.model;
 
 public enum TypeRealEstate {
-	CASA(1), DEPARTAMENTO(2), TERRENO(3), OFICINA(4);
+	CASA(0), DEPARTAMENTO(1), TERRENO(2), OFICINA(3);
 
 	private int id;
 

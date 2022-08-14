@@ -44,6 +44,7 @@ public class RealEstateDaoTest {
 		assertEquals(result.getRealEstates().size(), 1);
 		for (RealEstate expected : result.getRealEstates()) {
 			assertEquals(expected.getIdRealEstate(), re.getIdRealEstate());
+			assertEquals(expected.getRealEstateType(), re.getRealEstateType());
 		}
 	}
 }

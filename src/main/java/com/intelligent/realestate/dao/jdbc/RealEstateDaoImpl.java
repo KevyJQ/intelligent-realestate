@@ -10,6 +10,7 @@ import java.util.List;
 import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.RealEstate;
+import com.intelligent.realestate.model.TypeRealEstate;
 
 public class RealEstateDaoImpl implements RealEstateDao {
 	private Connection connection;
@@ -34,7 +35,8 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 			realestat.setIdRealEstate(rs.getLong(1));
 			realestat.setArrendadadorId(rs.getLong(2));
-			realestat.setId_typeRE(rs.getInt(3));
+			TypeRealEstate typeRealEstate[] = TypeRealEstate.values(); 
+			realestat.setRealEstateType(typeRealEstate[rs.getInt(3)]);
 			realestat.setStatus(rs.getString(4));
 			realestat.getDireccion().setDireccion1(rs.getString(5));
 			realestat.getDireccion().setDireccion2(rs.getString(6));

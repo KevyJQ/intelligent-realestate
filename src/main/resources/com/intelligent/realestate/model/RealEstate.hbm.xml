@@ -12,6 +12,11 @@
 		</id>
 
 		<property name="arrendadadorId" column="id_arrendador"></property>
+		<property name="realEstateType" column="id_type_realestate">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">com.intelligent.realestate.model.TypeRealEstate</param>
+			</type>
+		</property>
 		<property name="status" column="estatus"></property>
 
 		<property name="costoMin" column="costo_min"></property>

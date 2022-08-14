@@ -3,7 +3,6 @@ package com.intelligent.realestate.model;
 public class RealEstate {
 	Long idRealEstate;
 	Long arrendadadorId;
-	int id_typeRE;
 	double costoMin;
 	double costoMax;
 	double costoOfertado;
@@ -45,15 +44,7 @@ public class RealEstate {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	public int getId_typeRE() {
-		return id_typeRE;
-	}
-	
-	public void setId_typeRE(int id_typeRE) {
-		this.id_typeRE = id_typeRE;
-	}
-	
+
 	public Long getArrendadadorId() {
 		return arrendadadorId;
 	}

@@ -49,7 +49,7 @@ public class ModelUtil {
 	public static RealEstate crearRealEstate(long arrendadorId) {
 		RealEstate re = new RealEstate();
 		re.setArrendadadorId(arrendadorId);
-		re.setId_typeRE(TypeRealEstate.CASA.getId());
+		re.setRealEstateType(TypeRealEstate.DEPARTAMENTO);
 		re.setCostoMin(8000);
 		re.setCostoMax(10000);
 		re.setCostoOfertado(8500);

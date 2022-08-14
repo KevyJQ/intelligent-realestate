@@ -47,10 +47,10 @@ TYPE VARCHAR(50),
 PRIMARY KEY (id_type_real_estate)
 );
 
-INSERT INTO type_realestate VALUE (1,'Casa');
-INSERT INTO type_realestate VALUE (2,'Departamento');
-INSERT INTO type_realestate VALUE (3,'Terreno');
-INSERT INTO type_realestate VALUE (4,'Oficina');
+INSERT INTO type_realestate VALUE (0,'Casa');
+INSERT INTO type_realestate VALUE (1,'Departamento');
+INSERT INTO type_realestate VALUE (2,'Terreno');
+INSERT INTO type_realestate VALUE (3,'Oficina');
 
 CREATE TABLE real_estate(
 id_realestate INTEGER NOT NULL AUTO_INCREMENT,
