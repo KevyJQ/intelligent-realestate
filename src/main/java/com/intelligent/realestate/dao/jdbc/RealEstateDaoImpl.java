@@ -58,7 +58,7 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 	public void insertRealEstate(RealEstate realEstate) {
 
-		final String instruccionSQL = "INSERT INTO real_estate"
+		final String instruccionSQL = "INSERT INTO real_estate "
 				+ "(id_arrendador, id_type_realestate, estatus, direccion1, direccion2, "
 				+ "pais, ciudad, estado, cp, costo_min, costo_max) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 

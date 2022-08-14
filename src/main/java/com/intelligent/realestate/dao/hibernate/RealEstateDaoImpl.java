@@ -23,7 +23,21 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 	@Override
 	public List<RealEstate> selectRealEstate(String pais, String ciudad, String status) {
-		// TODO Auto-generated method stub
-		return null;
+		List<RealEstate> realEstate;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		
+		realEstate = session
+				.createQuery("select re from Real_Estate re where re.pais =:pais "
+						+ "and re.ciudad = :ciudad "
+						+ "and re.status = :status",
+						RealEstate.class)
+				.setParameter("pais", pais)
+				.setParameter("ciudad", ciudad)
+				.setParameter("status", status).list();
+		session.getTransaction().commit();
+		session.close();
+
+		return realEstate;
 	}
 }
