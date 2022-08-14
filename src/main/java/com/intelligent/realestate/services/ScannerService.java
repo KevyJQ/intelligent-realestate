@@ -11,9 +11,11 @@ import com.intelligent.realestate.model.Direccion;
 public interface ScannerService {
 
 	/*
-	 * Pide un numero.
+	 * Pide un numero {@code int}
 	 */
-	public int pedirNumero(String msg, String errorMsg);
+	public int pedirInt(String msg, String errorMsg);
+
+	public double pedirDouble(String msg, String errorMsg);
 
 	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo,
 			int limiteSuperiorInclusivo);

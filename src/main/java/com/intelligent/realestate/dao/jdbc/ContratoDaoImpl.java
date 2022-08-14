@@ -1,10 +1,10 @@
 package com.intelligent.realestate.dao.jdbc;
 
-import java.sql.Connection;
-import java.util.List;
-
 import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.insert;
-import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.select;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.util.List;
 
 import com.intelligent.realestate.dao.ContratoDao;
 import com.intelligent.realestate.model.Arrendador;
@@ -26,8 +26,8 @@ public class ContratoDaoImpl implements ContratoDao{
 			pstmt.setLong(1, contrato.getArrendador().getIdArrendador());
 			pstmt.setLong(2, contrato.getArrendatario().getIdArrendatario());
 			pstmt.setLong(3, contrato.getRealEstate().getIdRealEstate());
-			pstmt.setDate(4, contrato.getFechaInicio());
-			pstmt.setDate(5, contrato.getFechaFinal());
+			pstmt.setDate(4, new Date(contrato.getFechaInicio().getTime()));
+			pstmt.setDate(5, new Date(contrato.getFechaFinal().getTime()));
 			pstmt.setDouble(6, contrato.getRealEstate().getCostoOfertado());
 		}, (rs) -> {
 			if (rs.next()) {

@@ -59,7 +59,7 @@ public class MenuBuscarArrendatarioServiceImpl implements MenuBuscarService<Arre
 	}
 
 	private Optional<Arrendatario> buscarPorId() {
-		long id = scannerService.pedirNumero("Me puedes indicar cual es tu ID: ",
+		long id = scannerService.pedirInt("Me puedes indicar cual es tu ID: ",
 				"Numero no valido, ingrese nuevamente..");
 		return Optional.ofNullable(arrendatarioDao.findById(id));
 	}

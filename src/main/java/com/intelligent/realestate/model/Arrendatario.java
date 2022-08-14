@@ -1,7 +1,6 @@
 package com.intelligent.realestate.model;
 
 public class Arrendatario extends Persona {
-
 	private Long idArrendatario;
 	private long idContrato;
 

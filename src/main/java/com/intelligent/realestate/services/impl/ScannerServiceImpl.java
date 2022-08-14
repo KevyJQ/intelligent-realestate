@@ -8,7 +8,6 @@ import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.Persona;
-import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.ScannerService;
 
 public class ScannerServiceImpl implements ScannerService {
@@ -23,7 +22,7 @@ public class ScannerServiceImpl implements ScannerService {
 	}
 
 	@Override
-	public int pedirNumero(String msg, String errorMsg) {
+	public int pedirInt(String msg, String errorMsg) {
 		int num = -1;
 		boolean valid = false;
 
@@ -42,13 +41,32 @@ public class ScannerServiceImpl implements ScannerService {
 	}
 
 	@Override
+	public double pedirDouble(String msg, String errorMsg) {
+		double num = -1;
+		boolean valid = false;
+
+		do {
+			try {
+				System.out.println(msg);
+				String value = scanner.nextLine();
+				num = Double.parseDouble(value);
+				valid = true;
+			} catch (NumberFormatException | InputMismatchException e) {
+				System.out.println(errorMsg);
+			}
+		} while (!valid);
+
+		return num;
+	}
+
+	@Override
 	public int pedirNumeroEntreRango(String msg, String errorMsg, int limiteInferiorInclusivo,
 			int limiteSuperiorInclusivo) {
 		int num = -1;
 		boolean valid = false;
 
 		do {
-			num = pedirNumero(msg, errorMsg);
+			num = pedirInt(msg, errorMsg);
 			if (num >= limiteInferiorInclusivo && num <= limiteSuperiorInclusivo) {
 				valid = true;
 			} else {
@@ -174,5 +192,4 @@ public class ScannerServiceImpl implements ScannerService {
 		llenarPersona(arrendatario, isDireccionMandator);
 		return arrendatario;
 	}
-
 }

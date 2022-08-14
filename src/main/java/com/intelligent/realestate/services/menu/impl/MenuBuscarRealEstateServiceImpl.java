@@ -45,17 +45,17 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 			if (realestate.isPresent()) {
 				return realestate;
 			} else {
-				System.out.println("Real Estatae no encontrado..");
+				System.out.println("\nNo se encontraron real estates con el criterio seleccionado.\n");
 			}
 		}
 
 	}
 
 	private Optional<RealEstate> buscarPorPaisAndCiudad() {
-		int ID;
+		int id;
 		String pais = scannerService.pedirString("Dame el Pais: ", "Error, ingrese nuevamente..");
 		String ciudad = scannerService.pedirString("Dame la ciudad: ", "Error ingrese nuevamente..");
-		String status = status().name();
+		String status = selecionarEstatus().name();
 //		TypeRealEstate typeRE = typeRealEstate();
 //		System.out.println("typeRE: " + typeRE);
 
@@ -63,17 +63,18 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 
 		if (realest.isEmpty()) {
 			return Optional.empty();
-
 		} else if (realest.size() > 1) {
-			ID = SelectRealEstatee(realest);
-			RealEstate realE = realest.get(ID);
+			id = selectRealEstate(realest);
+			RealEstate realE = realest.get(id);
+
 			return Optional.of(realE);
 		}
+
 		return Optional.of(realest.get(0));
 	}
 
-	private int SelectRealEstatee(List<RealEstate> realestate) {
-		int ID = 0;
+	private int selectRealEstate(List<RealEstate> realestate) {
+		int id = 0;
 
 		System.out.println("================================");
 		System.out.println("      Lista de Real estates     ");
@@ -83,9 +84,9 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 			System.out.println("---- Real Estate " + (i + 1) + " ----");
 			ModelPrintUtil.printMultiRealEstates(realestate.get(i));
 		}
-		ID = scannerService.pedirNumeroEntreRango("Que Real Estate deseas rentar:", "Real Estate no valido..", 1,
+		id = scannerService.pedirNumeroEntreRango("Que Real Estate deseas rentar:", "Real Estate no valido..", 1,
 				realestate.size());
-		return ID - 1;
+		return id - 1;
 	}
 
 	private MenuType mostrarAndOptenerOpcion() {
@@ -120,7 +121,7 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 //		return tyRE[opcion - 1];
 //	}
 
-	private Estatus status() {
+	private Estatus selecionarEstatus() {
 		int opcion;
 
 		System.out.println("================================");

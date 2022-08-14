@@ -2,6 +2,7 @@ package com.intelligent.realestate.services.menu.impl;
 
 import java.util.Optional;
 import com.intelligent.realestate.dao.ArrendadorDao;
+import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Estatus;
 import com.intelligent.realestate.model.RealEstate;
@@ -14,17 +15,18 @@ public class MenuArrendadorImpl implements MenuService {
 	private ArrendadorDao arrendadorDao;
 	private MenuBuscarService<Arrendador> menuBuscarArrendador;
 	private ScannerService scannerService;
+	private RealEstateDao realEstateDao;
 
 	private enum MenuType {
 		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
 	};
 
-	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
+	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, RealEstateDao realEstateDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
 			ScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
+		this.realEstateDao = realEstateDao;
 		this.menuBuscarArrendador = menuBuscarArrendador;
 		this.scannerService = scannerService;
-
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class MenuArrendadorImpl implements MenuService {
 				System.out.println("==========================");
 				System.out.println("   Ingresemos tus datos.  ");
 				System.out.println("==========================");
-				arrendadorDao.insertArrendador(scannerService.pedirArrendador());
+				arrendadorDao.guardarArrendador(scannerService.pedirArrendador());
 				break;
 
 			case AGREGAR_REAL_ESTATE:
@@ -54,14 +56,14 @@ public class MenuArrendadorImpl implements MenuService {
 
 					realestate.setArrendadadorId(arrendado.getIdArrendador());
 					realestate.setRealEstateType(typeRealEstate());
-					realestate.setStatus(status().name());
+					realestate.setStatus(seleccionaEstatus().name());
 					realestate.setDireccion(scannerService.pedirDireccion());
 
-					realestate.setCostoMin(scannerService.pedirNumero("Precio Minimo:", "Necesito un numero.."));
-					realestate.setCostoMax(scannerService.pedirNumero("Precio Maximo:", "Necesito un numero.."));
+					realestate.setCostoMin(scannerService.pedirDouble("Precio Minimo:", "Necesito un numero.."));
+					realestate.setCostoMax(scannerService.pedirDouble("Precio Maximo:", "Necesito un numero.."));
 
 					arrendado.setRealEstate(realestate);
-					arrendadorDao.insertRealEstate(realestate);
+					realEstateDao.insertRealEstate(realestate);
 				}
 				break;
 
@@ -105,7 +107,7 @@ public class MenuArrendadorImpl implements MenuService {
 		return tyRE[opcion - 1];
 	}
 
-	private Estatus status() {
+	private Estatus seleccionaEstatus() {
 		int opcion;
 
 		System.out.println("================================");

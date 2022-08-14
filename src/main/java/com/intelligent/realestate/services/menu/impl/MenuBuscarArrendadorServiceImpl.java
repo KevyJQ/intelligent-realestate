@@ -56,10 +56,10 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 
 	// --Buscara por ID al Arrendador
 	private Optional<Arrendador> buscarPorId() {
-		long id = scannerService.pedirNumero("Me puedes indicar cual es tu ID: ",
+		long id = scannerService.pedirInt("Me puedes indicar cual es tu ID: ",
 				"Numero no valido, ingrese nuevamente..");
 
-		return Optional.ofNullable(arrendadorDao.findById(id));
+		return Optional.ofNullable(arrendadorDao.buscarPorId(id));
 	}
 
 	// Buscara por Su primero nombre y Apellidos
@@ -72,7 +72,7 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 		String apellidoMaterno = scannerService.pedirString("Cual es tu apellido materno:",
 				"Proporciona apellido materno por favor");
 
-		List<Arrendador> arrendadores = arrendadorDao.findByNameAndLasName(nombre1, apellidoMaterno, apellidoPaterno);
+		List<Arrendador> arrendadores = arrendadorDao.buscarPorNombreApellidoMaternoApellidoPaterno(nombre1, apellidoMaterno, apellidoPaterno);
 
 		if (arrendadores.isEmpty()) {
 			return Optional.empty();

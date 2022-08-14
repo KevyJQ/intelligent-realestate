@@ -1,22 +1,21 @@
 package com.intelligent.realestate.services.menu.impl;
 
-import java.sql.Date;
+import java.util.GregorianCalendar;
 import java.util.Optional;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.dao.ContratoDao;
-import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Contrato;
 import com.intelligent.realestate.model.RealEstate;
+import com.intelligent.realestate.model.util.ModelPrintUtil;
 import com.intelligent.realestate.services.ScannerService;
 import com.intelligent.realestate.services.menu.MenuBuscarService;
 import com.intelligent.realestate.services.menu.MenuService;
 
 public class MenuArrendatarioImp implements MenuService {
 	private ArrendatarioDao arrendatarioDao;
-	private RealEstateDao realEstateDao;
 	private MenuBuscarService<Arrendatario> menuBuscarArrendatarios;
 	private MenuBuscarService<RealEstate> menuBuscarRealEstate;
 	private ContratoDao contratoDao;
@@ -27,12 +26,11 @@ public class MenuArrendatarioImp implements MenuService {
 	};
 
 	public MenuArrendatarioImp(ArrendatarioDao arrendatarioDao, MenuBuscarService<Arrendatario> menuBuscarArrendatario,
-			MenuBuscarService<RealEstate> meBuscarRealEstate, RealEstateDao realEstateDao, ContratoDao contratoDao,
+			MenuBuscarService<RealEstate> meBuscarRealEstate, ContratoDao contratoDao,
 			ScannerService scannerService) {
 		this.arrendatarioDao = arrendatarioDao;
 		this.menuBuscarArrendatarios = menuBuscarArrendatario;
 		this.menuBuscarRealEstate = meBuscarRealEstate;
-		this.realEstateDao = realEstateDao;
 		this.scannerService = scannerService;
 		this.contratoDao = contratoDao;
 	}
@@ -59,9 +57,10 @@ public class MenuArrendatarioImp implements MenuService {
 			case CREAR_CONTRATO:
 				realestate = menuBuscarRealEstate.buscarMenu();
 				if (realestate.isPresent()) {
+					System.out.println("Real estate seleccionado: ");
+					ModelPrintUtil.printMultiRealEstates(realestate.get());
 					arrendatario = menuBuscarArrendatarios.buscarMenu();
 					if (arrendatario.isPresent()) {
-						System.out.println("64");
 						RealEstate realest = realestate.get(); // Objeto Real Estate
 						Arrendatario arrendata = arrendatario.get(); // Objeto arrendatario
 						Arrendador arrendador = new Arrendador();
@@ -70,9 +69,11 @@ public class MenuArrendatarioImp implements MenuService {
 						contrato.setArrendador(arrendador);
 						contrato.setArrendatario(arrendata);
 						contrato.setRealEstate(realest);
-						contrato.setFechaInicio(new Date(2022,8,10));
-						contrato.setFechaFinal(new Date(2030, 10, 9));
-						
+						// TODO: Pedir las fechas al usuario.
+						GregorianCalendar fechaInicio = new GregorianCalendar(2022, 8, 10);
+						contrato.setFechaInicio(fechaInicio.getTime());
+						GregorianCalendar fechaFinal = new GregorianCalendar(2023, 8, 10);
+						contrato.setFechaFinal(fechaFinal.getTime());
 
 						if (decision(realest) == true) {
 							contratoDao.guardarContrato(contrato);
@@ -113,7 +114,7 @@ public class MenuArrendatarioImp implements MenuService {
 
 		while (true) {
 			System.out.println("==========================");
-			real.setCostoOfertado(scannerService.pedirNumero("Cual es tu oferta:", "Necesito un numero.."));
+			real.setCostoOfertado(scannerService.pedirInt("Cual es tu oferta:", "Necesito un numero.."));
 			System.out.println("CostoMin: " + real.getCostoMin());
 			if (real.getCostoOfertado() >= real.getCostoMin()) {
 				return true;
