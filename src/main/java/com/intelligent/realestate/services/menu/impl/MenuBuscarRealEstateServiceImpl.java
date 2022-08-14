@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.intelligent.realestate.dao.RealEstateDao;
-import com.intelligent.realestate.model.Estatus;
+import com.intelligent.realestate.model.RealEstateEstatus;
 import com.intelligent.realestate.model.RealEstate;
 //import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.model.util.ModelPrintUtil;
@@ -121,7 +121,7 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 //		return tyRE[opcion - 1];
 //	}
 
-	private Estatus selecionarEstatus() {
+	private RealEstateEstatus selecionarEstatus() {
 		int opcion;
 
 		System.out.println("================================");
@@ -133,7 +133,7 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 		System.out.println("3. No disponible");
 		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
 
-		Estatus[] statu = Estatus.values();
+		RealEstateEstatus[] statu = RealEstateEstatus.values();
 		return statu[opcion - 1];
 	}
 }

@@ -65,9 +65,7 @@ public class ModelPrintUtil {
 
 	public static void printMultiRealEstates(RealEstate realestate) {
 		System.out.println("ID: " + realestate.getIdRealEstate());
-		// System.out.println("ID Ar: " + realestate.getArrendadadorId());
-		// System.out.println("ID Ty: " + realestate.getId_typeRE());
-		System.out.println("Estatus: " + realestate.getStatus());
+		System.out.println("Estatus: " + realestate.getEstatus().getName());
 		System.out.println("Direccion1: " + realestate.getDireccion().getDireccion1());
 		System.out.println("Direccion2: " + realestate.getDireccion().getDireccion2());
 		System.out.println("Pais: " + realestate.getDireccion().getPais());

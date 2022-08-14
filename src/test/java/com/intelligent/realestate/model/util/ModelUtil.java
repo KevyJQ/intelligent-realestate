@@ -6,6 +6,7 @@ import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Direccion;
 import com.intelligent.realestate.model.RealEstate;
+import com.intelligent.realestate.model.RealEstateEstatus;
 import com.intelligent.realestate.model.TypeRealEstate;
 
 /*
@@ -54,7 +55,7 @@ public class ModelUtil {
 		re.setCostoMax(10000);
 		re.setCostoOfertado(8500);
 		re.setDireccion(crearDireccion());
-		re.setStatus("Rentada");
+		re.setEstatus(RealEstateEstatus.RENTADA);
 
 		return re;
 	}

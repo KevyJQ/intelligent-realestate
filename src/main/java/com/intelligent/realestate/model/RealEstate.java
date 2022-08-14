@@ -8,7 +8,7 @@ public class RealEstate {
 	double costoOfertado;
 	private Direccion direccion;
 	private TypeRealEstate realEstateType;
-	private String status;
+	private RealEstateEstatus estatus;
 
 	public Long getIdRealEstate() {
 		return idRealEstate;
@@ -37,45 +37,46 @@ public class RealEstate {
 		this.realEstateType = realEstateType;
 	}
 
-	public String getStatus() {
-		return status;
+	public RealEstateEstatus getEstatus() {
+		return estatus;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setEstatus(RealEstateEstatus estatus) {
+		this.estatus = estatus;
 	}
 
 	public Long getArrendadadorId() {
 		return arrendadadorId;
 	}
-	
+
 	public void setArrendadadorId(Long arrendadadorId) {
 		this.arrendadadorId = arrendadadorId;
 	}
-	
+
 	public double getCostoMin() {
 		return costoMin;
 	}
-	
+
 	public void setCostoMin(double costoMin) {
 		this.costoMin = costoMin;
 	}
-	
+
 	public double getCostoMax() {
 		return costoMax;
 	}
-	
+
 	public void setCostoMax(double costoMax) {
 		this.costoMax = costoMax;
 	}
-	
+
 	public double getCostoOfertado() {
 		return costoOfertado;
 	}
-	
+
 	public void setCostoOfertado(double costoOfertado) {
 		this.costoOfertado = costoOfertado;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -84,7 +85,7 @@ public class RealEstate {
 		sb.append("\n\t");
 		sb.append(realEstateType);
 		sb.append("\n");
-		sb.append(status);
+		sb.append(estatus);
 		sb.append("\n");
 		sb.append("}");
 

@@ -4,7 +4,7 @@ import java.util.Optional;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Arrendador;
-import com.intelligent.realestate.model.Estatus;
+import com.intelligent.realestate.model.RealEstateEstatus;
 import com.intelligent.realestate.model.RealEstate;
 import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.services.ScannerService;
@@ -56,7 +56,7 @@ public class MenuArrendadorImpl implements MenuService {
 
 					realestate.setArrendadadorId(arrendado.getIdArrendador());
 					realestate.setRealEstateType(typeRealEstate());
-					realestate.setStatus(seleccionaEstatus().name());
+					realestate.setEstatus(seleccionaEstatus());
 					realestate.setDireccion(scannerService.pedirDireccion());
 
 					realestate.setCostoMin(scannerService.pedirDouble("Precio Minimo:", "Necesito un numero.."));
@@ -107,7 +107,7 @@ public class MenuArrendadorImpl implements MenuService {
 		return tyRE[opcion - 1];
 	}
 
-	private Estatus seleccionaEstatus() {
+	private RealEstateEstatus seleccionaEstatus() {
 		int opcion;
 
 		System.out.println("================================");
@@ -119,7 +119,7 @@ public class MenuArrendadorImpl implements MenuService {
 		System.out.println("3. No disponible");
 		opcion = scannerService.pedirNumeroEntreRango("Opcion: ", "Opcion no valida, ingrese nuevamente..", 1, 4);
 
-		Estatus[] statu = Estatus.values();
+		RealEstateEstatus[] statu = RealEstateEstatus.values();
 		return statu[opcion - 1];
 	}
 
