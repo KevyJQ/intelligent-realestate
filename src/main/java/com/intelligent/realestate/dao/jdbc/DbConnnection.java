@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.intelligent.realestate.exceptions.Exceptions.DbException;
+
 public class DbConnnection {
 
 	private static Connection conn;
@@ -12,7 +14,7 @@ public class DbConnnection {
 	 * @return Una Connection. Si el Connection ya existe, regresa el que ya existe,
 	 * de otra manera, crea uno. Implementa el patro Singleton.
 	 */
-	public static Connection getConnection() throws SQLException {
+	public static Connection getConnection() {
 		if (conn == null) {
 			String cadenaConexion = "jdbc:mariadb://localhost:3306/intelligent_realestate";
 			/*
@@ -20,12 +22,13 @@ public class DbConnnection {
 			 */
 			String usuario = "root"; // Ingresamos el Usuario
 			String contraseña = "Kevy12345."; // Ingresamos la contraseña
-			conn = DriverManager.getConnection(cadenaConexion, usuario, contraseña);
-			/*
-			 * Realizamos la conexion a la base de datos el cual le mandamos la direccion de
-			 * la DB, el usuario y la contraseña
-			 */
+			try {
+				conn = DriverManager.getConnection(cadenaConexion, usuario, contraseña);
+			} catch (SQLException ex) {
+				throw new DbException(ex);
+			}
 		}
+
 		return conn;
 	}
 }

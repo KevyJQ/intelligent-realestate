@@ -10,7 +10,6 @@ import java.util.List;
 import com.intelligent.realestate.dao.ArrendadorDao;
 import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Direccion;
-import com.intelligent.realestate.model.RealEstate;
 
 public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDaoImpl que usara la interface
 	// ArrendadorDao

@@ -1,37 +1,16 @@
 package com.intelligent.realestate.dao.jdbc;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.sql.SQLException;
-
 import org.junit.Before;
-import org.junit.Test;
 
-import com.intelligent.realestate.dao.ArrendadorDao;
-import com.intelligent.realestate.model.Arrendador;
-import com.intelligent.realestate.model.util.ModelUtil;
+import com.intelligent.realestate.dao.ArrendadorDaoBase;
 
 /**
  * Unit test for ArrendadorDao.
  */
-public class ArrendadorDaoTest {
-	private ArrendadorDao arrendadorDao;
+public class ArrendadorDaoTest extends ArrendadorDaoBase {
 
 	@Before
-	public void setup() throws SQLException {
+	public void setup() {
 		arrendadorDao = new ArrendadorDaoImpl(DbConnnection.getConnection());
-	}
-
-	@Test
-	public void insertArrendador() {
-		// Setup
-		Arrendador arrendador = ModelUtil.crearArrendador();
-
-		// Ejecutar test case.
-		arrendadorDao.guardarArrendador(arrendador);
-		System.out.println("Id arrendador: " + arrendador.getIdArrendador());
-
-		// Evaluar assertions.
-		assertNotNull(arrendador.getIdArrendador());
 	}
 }
