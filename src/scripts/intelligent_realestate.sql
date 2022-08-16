@@ -55,7 +55,7 @@ INSERT INTO type_realestate VALUE (3,'Oficina');
 CREATE TABLE real_estate(
 id_realestate INTEGER NOT NULL AUTO_INCREMENT,
 id_arrendador INTEGER NOT NULL,
-id_type_realestate INTEGER,
+id_type_realestate INTEGER NOT NULL,
 estatus VARCHAR(20),
 direccion1 VARCHAR(100),
 direccion2 VARCHAR(100),

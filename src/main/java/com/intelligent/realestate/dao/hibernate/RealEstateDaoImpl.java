@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.dao.hibernate.util.HibernateUtil;
 import com.intelligent.realestate.model.RealEstate;
+import com.intelligent.realestate.model.RealEstateEstatus;
 
 public class RealEstateDaoImpl implements RealEstateDao {
 
@@ -22,19 +23,19 @@ public class RealEstateDaoImpl implements RealEstateDao {
 	}
 
 	@Override
-	public List<RealEstate> selectRealEstate(String pais, String ciudad, String status) {
+	public List<RealEstate> selectRealEstate(String pais, String ciudad, RealEstateEstatus status) {
 		List<RealEstate> realEstate;
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		
 		realEstate = session
-				.createQuery("select re from Real_Estate re where re.pais =:pais "
-						+ "and re.ciudad = :ciudad "
-						+ "and re.status = :status",
+				.createQuery("select re from RealEstate re where re.direccion.pais =:pais "
+						+ "and re.direccion.ciudad = :ciudad "
+						+ "and re.estatus = :estatus",
 						RealEstate.class)
 				.setParameter("pais", pais)
 				.setParameter("ciudad", ciudad)
-				.setParameter("status", status).list();
+				.setParameter("estatus", status).list();
 		session.getTransaction().commit();
 		session.close();
 

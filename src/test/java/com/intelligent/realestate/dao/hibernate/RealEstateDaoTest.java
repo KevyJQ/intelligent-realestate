@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,5 +49,24 @@ public class RealEstateDaoTest {
 			assertEquals(expected.getRealEstateType(), re.getRealEstateType());
 			assertEquals(expected.getEstatus(), re.getEstatus());
 		}
+	}
+
+	@Test
+	public void selectRealEstate() {
+		Arrendador arrendador = ModelUtil.crearArrendador();
+		arrendadorDao.guardarArrendador(arrendador);
+
+		RealEstate realEstate = ModelUtil.crearRealEstate(arrendador.getIdArrendador());
+		assertNull(realEstate.getIdRealEstate());
+
+		realEstateDao.insertRealEstate(realEstate);
+
+		assertNotNull(realEstate.getIdRealEstate());
+
+		List<RealEstate> re = realEstateDao.selectRealEstate(
+				realEstate.getDireccion().getPais(), realEstate.getDireccion().getCiudad(),
+				realEstate.getEstatus());
+		assertEquals(re.size(), 1);
+
 	}
 }

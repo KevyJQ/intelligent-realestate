@@ -17,8 +17,9 @@ public class ModelUtil {
 
 	public static Direccion crearDireccion() {
 		Direccion direccion = new Direccion();
-		direccion.setCiudad("Test Ciudad");
-		direccion.setEstado("Test Estado");
+		Date date = new Date();
+		direccion.setCiudad("Test Ciudad " + date);
+		direccion.setEstado("Test Estado " + date.getTime());
 		direccion.setDireccion1("Test direccion 1");
 		direccion.setDireccion2("Test direccion 2");
 		direccion.setCodigoPostal("Test cp");
@@ -32,7 +33,7 @@ public class ModelUtil {
 		Date date = new Date();
 		arrendador.setNombre1(nombre);
 		arrendador.setNombre2("Test nombre2 " + date);
-		arrendador.setApellidoPaterno("Test Apellido" + date.getTime());
+		arrendador.setApellidoPaterno("Test Apellido " + date.getTime());
 		arrendador.setApellidoMaterno("Test materno");
 		arrendador.setEdad(23);
 		arrendador.setCorreo("test@gmail.com");

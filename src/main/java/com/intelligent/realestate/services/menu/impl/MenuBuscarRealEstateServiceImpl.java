@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.intelligent.realestate.dao.RealEstateDao;
-import com.intelligent.realestate.model.RealEstateEstatus;
 import com.intelligent.realestate.model.RealEstate;
+import com.intelligent.realestate.model.RealEstateEstatus;
 //import com.intelligent.realestate.model.TypeRealEstate;
 import com.intelligent.realestate.model.util.ModelPrintUtil;
 import com.intelligent.realestate.services.ScannerService;
@@ -55,9 +55,7 @@ public class MenuBuscarRealEstateServiceImpl implements MenuBuscarService<RealEs
 		int id;
 		String pais = scannerService.pedirString("Dame el Pais: ", "Error, ingrese nuevamente..");
 		String ciudad = scannerService.pedirString("Dame la ciudad: ", "Error ingrese nuevamente..");
-		String status = selecionarEstatus().name();
-//		TypeRealEstate typeRE = typeRealEstate();
-//		System.out.println("typeRE: " + typeRE);
+		RealEstateEstatus status = selecionarEstatus();
 
 		List<RealEstate> realest = realEstateDao.selectRealEstate(pais, ciudad, status);
 

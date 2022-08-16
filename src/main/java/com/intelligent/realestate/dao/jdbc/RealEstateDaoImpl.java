@@ -21,7 +21,7 @@ public class RealEstateDaoImpl implements RealEstateDao {
 	}
 
 	@Override
-	public List<RealEstate> selectRealEstate(String pais, String ciudad, String status) {
+	public List<RealEstate> selectRealEstate(String pais, String ciudad, RealEstateEstatus status) {
 
 		List<RealEstate> realestate = new ArrayList<RealEstate>();
 
@@ -51,7 +51,7 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 			realestate.add(realestat);
 
-		}, pais, ciudad, status);
+		}, pais, ciudad, status.toString());
 
 		return realestate;
 	}
