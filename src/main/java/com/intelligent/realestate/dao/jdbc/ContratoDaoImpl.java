@@ -11,16 +11,17 @@ import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 import com.intelligent.realestate.model.Contrato;
 
-public class ContratoDaoImpl implements ContratoDao{
+public class ContratoDaoImpl implements ContratoDao {
 	private Connection connection;
-	
+
 	public ContratoDaoImpl(Connection conn) {
 		this.connection = conn;
 	}
-	
+
 	@Override
 	public void guardarContrato(Contrato contrato) {
-		final String instruccionSQL = "INSERT INTO contrato " + "(id_arrendador, id_arrendatario, id_realestate, fecha_inicio, fecha_corte, costo)"
+		final String instruccionSQL = "INSERT INTO contrato "
+				+ "(id_arrendador, id_arrendatario, id_realestate, fecha_inicio, fecha_corte, costo)"
 				+ "VALUES ( ?, ?, ?, ?, ?, ?)";
 		insert(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setLong(1, contrato.getArrendador().getIdArrendador());
@@ -34,7 +35,7 @@ public class ContratoDaoImpl implements ContratoDao{
 				contrato.setIdContrato(rs.getLong(1));
 			}
 		});
-		
+
 	}
 
 	@Override

@@ -26,8 +26,8 @@ public class RealEstateDaoImpl implements RealEstateDao {
 		List<RealEstate> realestate = new ArrayList<RealEstate>();
 
 		final String instruccionSQL = "SELECT id_realestate, id_arrendador, id_type_realestate, "
-				+ "estatus, direccion1, direccion2, pais, ciudad, estado, cp , costo_min, costo_max " + "FROM real_estate "
-				+ "WHERE pais= ? AND ciudad= ? AND estatus= ?";
+				+ "estatus, direccion1, direccion2, pais, ciudad, estado, cp , costo_min, costo_max "
+				+ "FROM real_estate " + "WHERE pais= ? AND ciudad= ? AND estatus= ?";
 
 		select(connection, instruccionSQL, (rs) -> {
 
@@ -36,7 +36,7 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 			realestat.setIdRealEstate(rs.getLong(1));
 			realestat.setArrendadadorId(rs.getLong(2));
-			TypeRealEstate typeRealEstate[] = TypeRealEstate.values(); 
+			TypeRealEstate typeRealEstate[] = TypeRealEstate.values();
 			realestat.setRealEstateType(typeRealEstate[rs.getInt(3)]);
 			realestat.setEstatus(RealEstateEstatus.valueOf(rs.getString(4)));
 			realestat.getDireccion().setDireccion1(rs.getString(5));
@@ -47,7 +47,6 @@ public class RealEstateDaoImpl implements RealEstateDao {
 			realestat.getDireccion().setCodigoPostal(rs.getString(10));
 			realestat.setCostoMin(rs.getDouble(11));
 			realestat.setCostoMax(rs.getDouble(12));
-
 
 			realestate.add(realestat);
 

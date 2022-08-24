@@ -9,7 +9,9 @@ import com.intelligent.realestate.model.Contrato;
 public interface ContratoDao {
 
 	public void guardarContrato(Contrato contrato);
+
 	public List<Contrato> buscarPorArrendador(Arrendador arrendador);
+
 	public List<Contrato> buscarPorArrendatario(Arrendatario arrendatario);
 
 }

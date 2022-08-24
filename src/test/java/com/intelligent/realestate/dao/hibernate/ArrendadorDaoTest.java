@@ -4,7 +4,7 @@ import org.junit.Before;
 
 import com.intelligent.realestate.dao.ArrendadorDaoBase;
 
-public class ArrendadorDaoTest extends ArrendadorDaoBase{
+public class ArrendadorDaoTest extends ArrendadorDaoBase {
 
 	@Before
 	public void setup() {

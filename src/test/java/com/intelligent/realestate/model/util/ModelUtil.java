@@ -65,9 +65,8 @@ public class ModelUtil {
 		Arrendatario arrendatario = new Arrendatario();
 		Date date = new Date();
 		arrendatario.setNombre1("Test nombre1 " + date);
-		arrendatario.setNombre1("Test name ");
 		arrendatario.setNombre2("Test nombre2 ");
-		arrendatario.setApellidoPaterno("Test Apellido");
+		arrendatario.setApellidoPaterno("Test Apellido" + date.getTime());
 		arrendatario.setApellidoMaterno("Test materno");
 		arrendatario.setEdad(23);
 		arrendatario.setCorreo("test@gmail.com");

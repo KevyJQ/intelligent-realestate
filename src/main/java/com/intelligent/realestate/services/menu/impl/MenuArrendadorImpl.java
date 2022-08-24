@@ -21,8 +21,8 @@ public class MenuArrendadorImpl implements MenuService {
 		BUSCAR_ARRENDADOR, CREAR_ARRENDADOR, AGREGAR_REAL_ESTATE, SALIR
 	};
 
-	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, RealEstateDao realEstateDao, MenuBuscarService<Arrendador> menuBuscarArrendador,
-			ScannerService scannerService) {
+	public MenuArrendadorImpl(ArrendadorDao arrendadorDao, RealEstateDao realEstateDao,
+			MenuBuscarService<Arrendador> menuBuscarArrendador, ScannerService scannerService) {
 		this.arrendadorDao = arrendadorDao;
 		this.realEstateDao = realEstateDao;
 		this.menuBuscarArrendador = menuBuscarArrendador;

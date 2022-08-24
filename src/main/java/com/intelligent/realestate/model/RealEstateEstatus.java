@@ -1,9 +1,7 @@
 package com.intelligent.realestate.model;
 
 public enum RealEstateEstatus {
-	DISPONIBLE("Disponible"),
-	RENTADA("Rentada"),
-	NO_DISPONIBLE("No Disponible");
+	DISPONIBLE("Disponible"), RENTADA("Rentada"), NO_DISPONIBLE("No Disponible");
 
 	private String name;
 

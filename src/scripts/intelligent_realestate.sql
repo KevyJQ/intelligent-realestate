@@ -25,19 +25,19 @@ PRIMARY KEY (id_arrendador)
 
 CREATE TABLE arrendatario(
 id_arrendatario INTEGER NOT NULL AUTO_INCREMENT,
-nombre1 VARCHAR(30),
-nombre2 VARCHAR(30), 
-apellidoPaterno VARCHAR(30),
-apellidoMaterno VARCHAR(30),
-edad INTEGER,
-correo VARCHAR(50),
-celular VARCHAR(20),
-direccion1 VARCHAR(100),
-direccion2 VARCHAR(100),
-pais VARCHAR(100),
-ciudad VARCHAR(100),
-estado VARCHAR(100),
-cp VARCHAR(100),
+nombre1 VARCHAR(100) NOT NULL,
+nombre2 VARCHAR(100),
+apellidoPaterno VARCHAR(100) NOT NULL,
+apellidoMaterno VARCHAR(100) NOT NULL,
+edad INTEGER NOT NULL,
+correo VARCHAR(50) NOT NULL,
+celular VARCHAR(20) NOT NULL,
+direccion1 VARCHAR(100) NOT NULL DEFAULT '-',
+direccion2 VARCHAR(100) NOT NULL DEFAULT '-',
+pais VARCHAR(100) NOT NULL DEFAULT '-',
+ciudad VARCHAR(100) NOT NULL DEFAULT '-',
+estado VARCHAR(100) NOT NULL DEFAULT '-',
+cp VARCHAR(100) NOT NULL,
 PRIMARY KEY (id_arrendatario)
 );
 

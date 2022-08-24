@@ -72,7 +72,8 @@ public class MenuBuscarArrendadorServiceImpl implements MenuBuscarService<Arrend
 		String apellidoMaterno = scannerService.pedirString("Cual es tu apellido materno:",
 				"Proporciona apellido materno por favor");
 
-		List<Arrendador> arrendadores = arrendadorDao.buscarPorNombreApellidoMaternoApellidoPaterno(nombre1, apellidoMaterno, apellidoPaterno);
+		List<Arrendador> arrendadores = arrendadorDao.buscarPorNombreApellidoMaternoApellidoPaterno(nombre1,
+				apellidoMaterno, apellidoPaterno);
 
 		if (arrendadores.isEmpty()) {
 			return Optional.empty();

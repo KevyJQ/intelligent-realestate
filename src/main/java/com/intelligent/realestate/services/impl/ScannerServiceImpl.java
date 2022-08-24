@@ -188,7 +188,8 @@ public class ScannerServiceImpl implements ScannerService {
 	@Override
 	public Arrendatario pedirArrendatario() {
 		Arrendatario arrendatario = new Arrendatario();
-		boolean isDireccionMandator = false;
+		// TODO: Evaluar si se implementa la pregunta, si no eliminar.
+		boolean isDireccionMandator = true; 
 		llenarPersona(arrendatario, isDireccionMandator);
 		return arrendatario;
 	}

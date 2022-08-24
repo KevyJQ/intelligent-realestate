@@ -21,13 +21,10 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	public Arrendatario findById(long arrendatarioId) {
 		Arrendatario arrendatario = new Arrendatario();
-		
-		
+
 		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, " 
-				+ "direccion1, direccion2, pais, ciudad, estado, cp "
-				+ "FROM arrendatario "
-				+ "WHERE id_arrendatario = ? ";
+				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, cp "
+				+ "FROM arrendatario " + "WHERE id_arrendatario = ? ";
 
 		int resultados = select(connection, instruccionSQL, (rs) -> {
 			arrendatario.setDireccion(new Direccion());

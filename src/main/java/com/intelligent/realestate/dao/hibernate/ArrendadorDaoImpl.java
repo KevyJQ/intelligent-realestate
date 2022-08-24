@@ -24,18 +24,17 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	}
 
 	@Override
-	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno, String apellidoPaterno) {
+	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno,
+			String apellidoPaterno) {
 		List<Arrendador> arrendadores;
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
 		arrendadores = session
 				.createQuery("select a from Arrendador a where a.nombre1 = :nombre1 "
-						+ "and a.apellidoPaterno = :apellidoPaterno "
-						+ "and a.apellidoMaterno = :apellidoMaterno",
+						+ "and a.apellidoPaterno = :apellidoPaterno and a.apellidoMaterno = :apellidoMaterno",
 						Arrendador.class)
-				.setParameter("nombre1", nombre)
-				.setParameter("apellidoPaterno", apellidoPaterno)
+				.setParameter("nombre1", nombre).setParameter("apellidoPaterno", apellidoPaterno)
 				.setParameter("apellidoMaterno", apellidoMaterno).list();
 
 		session.getTransaction().commit();

@@ -27,15 +27,11 @@ public class RealEstateDaoImpl implements RealEstateDao {
 		List<RealEstate> realEstate;
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
-		
+
 		realEstate = session
 				.createQuery("select re from RealEstate re where re.direccion.pais =:pais "
-						+ "and re.direccion.ciudad = :ciudad "
-						+ "and re.estatus = :estatus",
-						RealEstate.class)
-				.setParameter("pais", pais)
-				.setParameter("ciudad", ciudad)
-				.setParameter("estatus", status).list();
+						+ "and re.direccion.ciudad = :ciudad " + "and re.estatus = :estatus", RealEstate.class)
+				.setParameter("pais", pais).setParameter("ciudad", ciudad).setParameter("estatus", status).list();
 		session.getTransaction().commit();
 		session.close();
 

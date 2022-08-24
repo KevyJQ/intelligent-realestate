@@ -9,7 +9,7 @@ import com.intelligent.realestate.dao.ContratoDao;
 import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.dao.hibernate.ArrendadorDaoImpl;
 import com.intelligent.realestate.dao.hibernate.RealEstateDaoImpl;
-import com.intelligent.realestate.dao.jdbc.ArrendatarioDaoImpl;
+import com.intelligent.realestate.dao.hibernate.ArrendatarioDaoImpl;
 import com.intelligent.realestate.dao.jdbc.ContratoDaoImpl;
 import com.intelligent.realestate.dao.jdbc.DbConnnection;
 import com.intelligent.realestate.dao.jdbc.util.JdbcUtil;
@@ -34,7 +34,7 @@ public class Main {
 		Connection connection = DbConnnection.getConnection();
 
 		ArrendadorDao arrendadorDao = new ArrendadorDaoImpl();
-		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl(connection);
+		ArrendatarioDao arrendatarioDao = new ArrendatarioDaoImpl();
 		ScannerService scannerService = new ScannerServiceImpl();
 		RealEstateDao realEstateDao = new RealEstateDaoImpl();
 		ContratoDao contratoDao = new ContratoDaoImpl(connection);

@@ -18,8 +18,9 @@
 		<property name="edad" column="edad"></property>
 		<property name="correo" column="correo"></property>
 		<property name="celular" column="celular"></property>
-		
-		<component name="direccion" class="com.intelligent.realestate.model.Direccion">
+
+		<component name="direccion"
+			class="com.intelligent.realestate.model.Direccion">
 			<property name="direccion1" column="direccion1"></property>
 			<property name="direccion2" column="direccion2"></property>
 			<property name="pais" column="pais"></property>
@@ -27,8 +28,7 @@
 			<property name="estado" column="estado"></property>
 			<property name="codigoPostal" column="cp"></property>
 		</component>
-		
-		
+
 	</class>
 
 </hibernate-mapping>

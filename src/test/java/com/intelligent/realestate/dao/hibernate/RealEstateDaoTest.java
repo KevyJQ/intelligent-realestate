@@ -63,9 +63,8 @@ public class RealEstateDaoTest {
 
 		assertNotNull(realEstate.getIdRealEstate());
 
-		List<RealEstate> re = realEstateDao.selectRealEstate(
-				realEstate.getDireccion().getPais(), realEstate.getDireccion().getCiudad(),
-				realEstate.getEstatus());
+		List<RealEstate> re = realEstateDao.selectRealEstate(realEstate.getDireccion().getPais(),
+				realEstate.getDireccion().getCiudad(), realEstate.getEstatus());
 		assertEquals(re.size(), 1);
 
 	}

@@ -26,8 +26,7 @@ public class MenuArrendatarioImp implements MenuService {
 	};
 
 	public MenuArrendatarioImp(ArrendatarioDao arrendatarioDao, MenuBuscarService<Arrendatario> menuBuscarArrendatario,
-			MenuBuscarService<RealEstate> meBuscarRealEstate, ContratoDao contratoDao,
-			ScannerService scannerService) {
+			MenuBuscarService<RealEstate> meBuscarRealEstate, ContratoDao contratoDao, ScannerService scannerService) {
 		this.arrendatarioDao = arrendatarioDao;
 		this.menuBuscarArrendatarios = menuBuscarArrendatario;
 		this.menuBuscarRealEstate = meBuscarRealEstate;

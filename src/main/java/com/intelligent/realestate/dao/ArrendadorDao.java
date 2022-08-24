@@ -8,7 +8,8 @@ public interface ArrendadorDao { // Interface ArrendadorDao que nos permitira us
 
 	public Arrendador buscarPorId(long arrendadorId);
 
-	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apelledoMaterno, String apellidoPaterno);
+	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apelledoMaterno,
+			String apellidoPaterno);
 
 	public void guardarArrendador(Arrendador arrendador);
 }

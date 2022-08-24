@@ -20,7 +20,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 	}
 
 	public Arrendador buscarPorId(long arrendadorId) {
-		Arrendador arrendador = new Arrendador();;
+		Arrendador arrendador = new Arrendador();
+		;
 
 		final String instruccionSQL = "SELECT id_arrendador, nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, cp "
@@ -47,13 +48,13 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 		return resultados > 0 ? arrendador : null;
 	}
 
-	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno, String apellidoPaterno) {
+	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno,
+			String apellidoPaterno) {
 		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
 
 		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
 				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, cp "
-				+ "FROM arrendador "
-				+ "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
+				+ "FROM arrendador " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
 		select(connection, instruccionSQL, (rs) -> {
 			Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
