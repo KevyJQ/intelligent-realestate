@@ -34,7 +34,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	@Override
 	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno) {
 		List<Arrendatario> arrendatario;
-		Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();	//Spring
+		//Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
 		arrendatario = session

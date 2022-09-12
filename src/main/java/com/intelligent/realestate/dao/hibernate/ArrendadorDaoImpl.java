@@ -33,7 +33,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno,
 			String apellidoPaterno) {
 		List<Arrendador> arrendadores;
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession();	//Spring
+		//Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		arrendadores = session

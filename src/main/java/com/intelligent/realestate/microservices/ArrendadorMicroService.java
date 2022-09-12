@@ -1,5 +1,7 @@
 package com.intelligent.realestate.microservices;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +31,12 @@ public class ArrendadorMicroService {
 	@GetMapping(value = "arrendador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Arrendador buscarPorIdE(@PathVariable("id") String id) {
 		Arrendador arrendador = arrendadorDao.buscarPorId(Long.parseLong(id));
+		return arrendador;
+	}
+
+	@GetMapping(value = "arrendador/{nombre}/{apellido_paterno}/{apellido_materno}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(@PathVariable String nombre,@PathVariable String apellido_paterno,@PathVariable String apellido_materno) {
+		List<Arrendador> arrendador = arrendadorDao.buscarPorNombreApellidoMaternoApellidoPaterno(nombre,apellido_materno,apellido_paterno);
 		return arrendador;
 	}
 }
