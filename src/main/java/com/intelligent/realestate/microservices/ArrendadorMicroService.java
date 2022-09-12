@@ -25,11 +25,10 @@ public class ArrendadorMicroService {
 		return "Real Estate Intelligence";
 	}
 
-	// curl -X GET localhost:8080/arrendador/12 -H 'Content-type:application/json'
+	// curl -X GET localhost:8080/arrendador/1 -H 'Content-type:application/json'
 	@GetMapping(value = "arrendador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Arrendador buscarPorIdE(@PathVariable("id") String id) {
 		Arrendador arrendador = arrendadorDao.buscarPorId(Long.parseLong(id));
-
 		return arrendador;
 	}
 }
