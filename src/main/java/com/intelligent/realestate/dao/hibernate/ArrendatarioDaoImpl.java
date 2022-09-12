@@ -34,8 +34,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 						"select a from Arrendatario a where a.nombre1 = :nombre1 "
 								+ "and a.apellidoPaterno = :apellidoPaterno and a.apellidoMaterno = :apellidoMaterno",
 						Arrendatario.class)
-				.setParameter("nombre1", name)
-				.setParameter("apellidoPaterno", apellidoPaterno)
+				.setParameter("nombre1", name).setParameter("apellidoPaterno", apellidoPaterno)
 				.setParameter("apellidoMaterno", apellidoMaterno).list();
 
 		session.getTransaction().commit();

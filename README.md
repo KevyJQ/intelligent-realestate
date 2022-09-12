@@ -77,3 +77,19 @@ $ mysqld &
 # Stop server
 $ mysqladmin -u root -p shutdown
 ```
+## Build and start spring-boot
+
+```shell
+# Build the project
+$ mvn compile
+
+# Start spring boot
+$ mvn spring-boot:run
+
+# Probar microservices
+$ curl -X GET localhost:8080 -H 'Content-type:application/json'
+Real Estate Intelligence
+
+$ curl -X GET localhost:8080/arrendador/12 -H 'Content-type:application/json'
+{"nombre1":"Test","nombre2":"Test nombre2 Sun Sep 11 15:32:29 PDT 2022","apellidoMaterno":"Test materno","apellidoPaterno":"Test Apellido 1662935549051","edad":23,"correo":"test@gmail.com","celular":"659 864 9454","direccion":null,"realEstate":null,"idArrendador":12,"realEstates":[]}
+```

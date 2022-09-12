@@ -3,16 +3,22 @@ package com.intelligent.realestate.dao.hibernate;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
-import com.intelligent.realestate.dao.hibernate.util.HibernateUtil;
 import com.intelligent.realestate.model.Arrendador;
 
+@Repository
 public class ArrendadorDaoImpl implements ArrendadorDao {
+
+	@Autowired
+	protected SessionFactory sessionFactory;
 
 	@Override
 	public Arrendador buscarPorId(long arrendadorId) {
-		Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		Arrendador arrendador = session.find(Arrendador.class, arrendadorId);
@@ -27,7 +33,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno,
 			String apellidoPaterno) {
 		List<Arrendador> arrendadores;
-		Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		arrendadores = session
@@ -45,7 +51,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 
 	@Override
 	public void guardarArrendador(Arrendador arrendador) {
-		Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
 		session.save(arrendador);
