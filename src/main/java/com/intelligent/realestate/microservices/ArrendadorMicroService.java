@@ -1,12 +1,17 @@
 package com.intelligent.realestate.microservices;
 
+import java.rmi.ServerException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,14 +34,37 @@ public class ArrendadorMicroService {
 
 	// curl -X GET localhost:8080/arrendador/1 -H 'Content-type:application/json'
 	@GetMapping(value = "arrendador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Arrendador buscarPorIdE(@PathVariable("id") String id) {
+	public Arrendador buscarPorId(@PathVariable("id") String id) {
 		Arrendador arrendador = arrendadorDao.buscarPorId(Long.parseLong(id));
 		return arrendador;
 	}
 
+	// http://localhost:8080/arrendador/D/AP/AM
 	@GetMapping(value = "arrendador/{nombre}/{apellido_paterno}/{apellido_materno}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(@PathVariable String nombre,@PathVariable String apellido_paterno,@PathVariable String apellido_materno) {
-		List<Arrendador> arrendador = arrendadorDao.buscarPorNombreApellidoMaternoApellidoPaterno(nombre,apellido_materno,apellido_paterno);
+	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(@PathVariable String nombre,
+			@PathVariable String apellido_paterno, @PathVariable String apellido_materno) {
+		List<Arrendador> arrendador = arrendadorDao.buscarPorNombreApellidoMaternoApellidoPaterno(nombre,
+				apellido_materno, apellido_paterno);
 		return arrendador;
+	}
+
+	/*
+	 * Metodo para guardar usamos el POST y para correrlo usamos el sig. comando
+	 * 
+	 * 		curl -i -H "Accept: application/json" -H "Content-Type:application/json" -X \
+	 * 		POST --data \
+	 * 		'{"nombre1":"K1","nombre2":"B1","apellidoMaterno":"Q1","apellidoPaterno":"J",
+	 * 		"edad":29,"correo":"KD","celular":"celD","direccion":{"direccion1":"D1",
+	 * 		"direccion2":"D2","pais":"P","ciudad":"C","estado":"E","codigoPostal":"CP"},
+	 * 		"realEstate":null,"realEstates":[]}' http://localhost:8080/arrendador
+	 */
+	@PostMapping(path = "arrendador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Arrendador> guardarArrendador(@RequestBody Arrendador arrendador) throws ServerException {
+		if (arrendador == null) {
+			throw new ServerException("Arrendador vacio, por favor llenalo");
+		} else {
+			arrendadorDao.guardarArrendador(arrendador);
+			return new ResponseEntity<>(arrendador, HttpStatus.CREATED);
+		}
 	}
 }
