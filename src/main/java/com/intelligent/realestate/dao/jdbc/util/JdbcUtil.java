@@ -63,6 +63,21 @@ public class JdbcUtil {
 		return numInserts;
 	}
 
+	public static int update(Connection conn, String sql, PreparedStatementParamProcessor paramProcessor) {
+		int numUpdates = 0;
+		try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			// Sets los parametros.
+			paramProcessor.process(ps);
+			numUpdates = ps.executeUpdate();
+
+		} catch (SQLException ex) {
+			throw new DbException(ex);
+		}
+
+		return numUpdates;
+	}
+
 	public static void close(Connection conn) {
 		try {
 			conn.close();

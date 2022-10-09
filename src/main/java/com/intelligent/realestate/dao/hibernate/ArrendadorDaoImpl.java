@@ -33,13 +33,13 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 	public List<Arrendador> buscarPorNombreApellidoMaternoApellidoPaterno(String nombre, String apellidoMaterno,
 			String apellidoPaterno) {
 		List<Arrendador> arrendadores;
-		Session session = sessionFactory.openSession();	//Spring
-		//Session session = sessionFactory.openSession();
+		Session session = sessionFactory.openSession(); // Spring
 		session.beginTransaction();
 
 		arrendadores = session
-				.createQuery("select a from Arrendador a where a.nombre1 = :nombre1 "
-						+ "and a.apellidoPaterno = :apellidoPaterno and a.apellidoMaterno = :apellidoMaterno",
+				.createQuery(
+						"select a from Arrendador a where a.nombre1 = :nombre1 "
+								+ "and a.apellidoPaterno = :apellidoPaterno and a.apellidoMaterno = :apellidoMaterno",
 						Arrendador.class)
 				.setParameter("nombre1", nombre).setParameter("apellidoPaterno", apellidoPaterno)
 				.setParameter("apellidoMaterno", apellidoMaterno).list();
@@ -56,6 +56,17 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		session.beginTransaction();
 
 		session.save(arrendador);
+
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	@Override
+	public void actualizarArrendador(Arrendador arrendador) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		session.update(arrendador);
 
 		session.getTransaction().commit();
 		session.close();

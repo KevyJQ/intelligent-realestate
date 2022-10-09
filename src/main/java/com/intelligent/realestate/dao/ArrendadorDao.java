@@ -12,4 +12,6 @@ public interface ArrendadorDao { // Interface ArrendadorDao que nos permitira us
 			String apellidoPaterno);
 
 	public void guardarArrendador(Arrendador arrendador);
+	
+	public void actualizarArrendador(Arrendador arrendador);
 }
