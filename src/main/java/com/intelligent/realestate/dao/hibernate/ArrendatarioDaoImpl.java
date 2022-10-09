@@ -19,8 +19,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	@Override
 	public Arrendatario findById(long arrendatarioId) {
-		Session session = sessionFactory.openSession();	//Spring
-		//Session session = HibernateUtil.getSession();	//Hibernate
+		Session session = sessionFactory.openSession(); // Spring
+		// Session session = HibernateUtil.getSession(); //Hibernate
 		session.beginTransaction();
 
 		Arrendatario arrendatario = session.find(Arrendatario.class, arrendatarioId);
@@ -34,8 +34,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	@Override
 	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno) {
 		List<Arrendatario> arrendatario;
-		Session session = sessionFactory.openSession();	//Spring
-		//Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession(); // Spring
+		// Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
 		arrendatario = session
@@ -54,7 +54,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	@Override
 	public void insertArrendatario(Arrendatario arrendatario) {
-		Session session = HibernateUtil.getSession();
+		Session session = sessionFactory.openSession();
+		// Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 
 		session.save(arrendatario);

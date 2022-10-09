@@ -3,7 +3,12 @@ package com.intelligent.realestate.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 public class Arrendador extends Persona {
+
 	private Long idArrendador;
 	private Set<RealEstate> realEstates = new HashSet<>();
 

@@ -115,7 +115,8 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 				+ "nombre1 = ?, nombre2 = ?, apellidoPaterno = ?, apellidoMaterno = ?, edad = ?, correo = ?, celular= ?, "
 				+ "direccion1 = ?, direccion2 = ?, pais = ?, ciudad = ?, estado = ?, cp = ?"
 				+ "WHERE id_arrendador = ?";
-		update(connection,instruccionSQL,(pstmt)->{
+
+		update(connection, instruccionSQL, (pstmt) -> {
 			pstmt.setString(1, arrendador.getNombre1());
 			pstmt.setString(2, arrendador.getNombre2());
 			pstmt.setString(3, arrendador.getApellidoPaterno());

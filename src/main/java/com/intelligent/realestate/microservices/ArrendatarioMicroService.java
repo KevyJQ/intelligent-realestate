@@ -21,6 +21,7 @@ import com.intelligent.realestate.model.Arrendatario;
 @CrossOrigin(origins = "*")
 @RestController
 public class ArrendatarioMicroService {
+	
 	@Autowired
 	private ArrendatarioDao arrendatarioDao;
 
