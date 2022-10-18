@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link th:href="@{/resources/styles.css}" rel="stylesheet">
+<title th:text="#{label.titulo.realestate}"></title>
+</head>
+<body>
+	<h3 class="text-center">
+		<span th:text="#{label.titulo.aplicacion}"></span>
+	</h3>
+	<div class="text-center">
+		<a class="btn btn-primary" th:href="@{/arrendador/1}"
+			role="button"> <span th:text="#{label.titulo.navegar.arrendatarios}"></span>
+		</a>
+	</div>
+</body>
+</html>

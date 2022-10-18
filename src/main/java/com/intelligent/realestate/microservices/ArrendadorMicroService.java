@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
@@ -26,12 +25,6 @@ public class ArrendadorMicroService {
 	// TODO: Inyectar Hibernate DAO class ArrendadorDaoImpl aqui.
 	@Autowired
 	private ArrendadorDao arrendadorDao;
-
-	// curl -X GET localhost:8080/ -H 'Content-type:application/json'
-	@RequestMapping("/")
-	public String welcomeHome() {
-		return "Real Estate Intelligence";
-	}
 
 	// curl -X GET localhost:8080/arrendador/1 -H 'Content-type:application/json'
 	@GetMapping(value = "arrendador/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
