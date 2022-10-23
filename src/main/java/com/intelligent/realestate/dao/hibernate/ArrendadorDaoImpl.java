@@ -71,4 +71,17 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 		session.getTransaction().commit();
 		session.close();
 	}
+
+	@Override
+	public List<Arrendador> findAll() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		List<Arrendador> arrendadores = session.createQuery("select a from Arrendador a").list();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return arrendadores;
+	}
 }

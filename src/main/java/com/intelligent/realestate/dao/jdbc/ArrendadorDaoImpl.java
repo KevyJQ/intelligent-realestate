@@ -133,4 +133,36 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 			pstmt.setLong(14, arrendador.getIdArrendador());
 		});
 	}
+
+	@Override
+	public List<Arrendador> findAll() {
+		List<Arrendador> arrendadores = new ArrayList<Arrendador>(); // Creamos un arreglo de Arrendador
+
+		final String instruccionSQL = "SELECT id_arrendador,nombre1,nombre2,apellidoPaterno,"
+				+ "apellidoMaterno,edad,correo,celular, direccion1, direccion2, pais, ciudad, estado, cp "
+				+ "FROM arrendador";
+
+		select(connection, instruccionSQL, (rs) -> {
+			Arrendador arrendador = new Arrendador(); // Creamos un nuevo objeto de tipo Arrendador
+			arrendador.setDireccion(new Direccion()); // Al objeto Arrendador le creamos una nueva Direccion
+			arrendador.setIdArrendador(rs.getLong(1));
+			arrendador.setNombre1(rs.getString(2));
+			arrendador.setNombre2(rs.getString(3));
+			arrendador.setApellidoPaterno(rs.getString(4));
+			arrendador.setApellidoMaterno(rs.getString(5));
+			arrendador.setEdad(rs.getInt(6));
+			arrendador.setCorreo(rs.getString(7));
+			arrendador.setCelular(rs.getString(8));
+			arrendador.getDireccion().setDireccion1(rs.getString(9));
+			arrendador.getDireccion().setDireccion2(rs.getString(10));
+			arrendador.getDireccion().setPais(rs.getNString(11));
+			arrendador.getDireccion().setCiudad(rs.getString(12));
+			arrendador.getDireccion().setEstado(rs.getString(13));
+			arrendador.getDireccion().setCodigoPostal(rs.getString(14));
+
+			arrendadores.add(arrendador);
+		});
+
+		return arrendadores; // regresamos el arreglo lleno
+	}
 }
