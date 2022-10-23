@@ -165,4 +165,13 @@ public class ArrendadorDaoImpl implements ArrendadorDao { // Clase ArrendadorDao
 
 		return arrendadores; // regresamos el arreglo lleno
 	}
+
+	@Override
+	public void delete(Arrendador arrendador) {
+		final String instruccionSQL = "delete from arrendador where id_arrendador = ? ";
+
+		update(connection, instruccionSQL, (pstmt) -> {
+			pstmt.setLong(1, arrendador.getIdArrendador());
+		});
+	}
 }

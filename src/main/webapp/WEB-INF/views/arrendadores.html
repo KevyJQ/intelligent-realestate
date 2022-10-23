@@ -47,6 +47,9 @@
 						<td th:text="${arrendador.direccion.ciudad}" />
 						<td th:text="${arrendador.direccion.estado}" />
 						<td th:text="${arrendador.direccion.codigoPostal}" />
+
+						<td><a class="btn btn-danger btn-sm"
+							th:href="@{/eliminarArrendador/{idArrendador} (idArrendador=${arrendador.idArrendador})}">Eliminar</a></td>
 					</tr>
 
 					<tr>
