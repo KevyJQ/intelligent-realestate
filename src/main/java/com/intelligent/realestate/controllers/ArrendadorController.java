@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,19 @@ public class ArrendadorController {
 	@RequestMapping(value = "/guardarCambioArrendador", method = RequestMethod.POST)
 	public String guardarArrendador(@ModelAttribute("arrendador") Arrendador arrendador) {
 		arrendadorDao.actualizarArrendador(arrendador);
+		return "redirect:/arrendadores";
+	}
+	
+	@RequestMapping("/crearArrendador")
+	public String CrearArrendador(Model model) {
+		Arrendador arrendador = new Arrendador();
+		model.addAttribute("arrendador", arrendador);
+		return "crearArrendador";
+	}
+	
+	@RequestMapping(value = "/guardarNuevoArrendador", method = RequestMethod.POST)
+	public String guardarNuevoArrendador(@ModelAttribute("arrendador") Arrendador arrendador) {
+		arrendadorDao.guardarArrendador(arrendador);
 		return "redirect:/arrendadores";
 	}
 }
