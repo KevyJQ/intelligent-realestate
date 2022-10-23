@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
@@ -37,5 +39,19 @@ public class ArrendadorController {
 		}
 		return "redirect:/arrendadores";
 		
+	}
+	
+	@RequestMapping("/editarArrendador/{idArrendador}")
+	public ModelAndView EditarArrendador(@PathVariable(name = "idArrendador")Long idArrendador){
+		ModelAndView model = new ModelAndView("actualizarArrendador");
+		Arrendador arrendador = arrendadorDao.buscarPorId(idArrendador);
+		model.addObject("arrendador", arrendador);
+		return model;
+	}
+		
+	@RequestMapping(value = "/guardarCambioArrendador", method = RequestMethod.POST)
+	public String guardarArrendador(@ModelAttribute("arrendador") Arrendador arrendador) {
+		arrendadorDao.actualizarArrendador(arrendador);
+		return "redirect:/arrendadores";
 	}
 }

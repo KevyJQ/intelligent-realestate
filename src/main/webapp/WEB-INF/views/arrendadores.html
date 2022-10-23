@@ -28,6 +28,7 @@
 						<th><span th:text="#{label.arrendador.correo}"></span></th>
 						<th><span th:text="#{label.arrendador.celular}"></span></th>
 						<th><span th:text="#{label.arrendador.direccion1}"></span></th>
+						<th><span th:text="#{label.arrendador.direccion2}"></span></th>
 						<th><span th:text="#{label.arrendador.pais}"></span></th>
 						<th><span th:text="#{label.arrendador.ciudad}"></span></th>
 						<th><span th:text="#{label.arrendador.estado}"></span></th>
@@ -45,6 +46,7 @@
 						<td th:text="${arrendador.correo}" />
 						<td th:text="${arrendador.celular}" />
 						<td th:text="${arrendador.direccion.direccion1}" />
+						<td th:text="${arrendador.direccion.direccion2}" />
 						<td th:text="${arrendador.direccion.pais}" />
 						<td th:text="${arrendador.direccion.ciudad}" />
 						<td th:text="${arrendador.direccion.estado}" />
@@ -52,6 +54,8 @@
 
 						<td><a class="btn btn-danger btn-sm"
 							th:href="@{/eliminarArrendador/{idArrendador} (idArrendador=${arrendador.idArrendador})}">Eliminar</a></td>
+						<td><a class="btn btn-danger btn-sm"
+							th:href="@{/editarArrendador/{idArrendador} (idArrendador=${arrendador.idArrendador})}">Actualizar</a></td>
 					</tr>
 
 					<tr>
