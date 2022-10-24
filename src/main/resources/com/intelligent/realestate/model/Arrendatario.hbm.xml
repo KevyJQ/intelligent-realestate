@@ -13,8 +13,8 @@
 
 		<property name="nombre1" column="nombre1"></property>
 		<property name="nombre2" column="nombre2"></property>
-		<property name="apellidoMaterno" column="apellidoMaterno"></property>
-		<property name="apellidoPaterno" column="apellidoPaterno"></property>
+		<property name="apellidoMaterno" column="apellido_materno"></property>
+		<property name="apellidoPaterno" column="apellido_paterno"></property>
 		<property name="edad" column="edad"></property>
 		<property name="correo" column="correo"></property>
 		<property name="celular" column="celular"></property>

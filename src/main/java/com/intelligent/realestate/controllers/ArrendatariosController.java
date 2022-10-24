@@ -23,7 +23,7 @@ public class ArrendatariosController {
 	public ModelAndView arrendadores(HttpServletResponse response) throws IOException {
 
 		List<Arrendatario> arrendatarios = arrendatarioDao.findAll();
-		ModelAndView model = new ModelAndView("arrendadores");
+		ModelAndView model = new ModelAndView("arrendatarios");
 		model.addObject("arrendatarios", arrendatarios);
 		return model;
 	}

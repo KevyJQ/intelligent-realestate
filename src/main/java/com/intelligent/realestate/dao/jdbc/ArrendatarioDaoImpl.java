@@ -22,8 +22,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	public Arrendatario findById(long arrendatarioId) {
 		Arrendatario arrendatario = new Arrendatario();
 
-		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellidoPaterno,"
-				+ "apellidoMaterno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, cp "
+		final String instruccionSQL = "SELECT id_arrendatario,nombre1,nombre2,apellido_paterno,"
+				+ "apellido_materno,edad,correo,celular, " + "direccion1, direccion2, pais, ciudad, estado, cp "
 				+ "FROM arrendatario " + "WHERE id_arrendatario = ? ";
 
 		int resultados = select(connection, instruccionSQL, (rs) -> {
@@ -50,8 +50,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno) {
 		List<Arrendatario> arrendatarios = new ArrayList<Arrendatario>();
 
-		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellidoPaterno, "
-				+ "apellidoMaterno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
+		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellido_paterno, "
+				+ "apellido_materno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
 				+ "FROM arrendatario " + "WHERE nombre1= ? AND apellidoPaterno= ? AND apellidoMaterno= ?";
 
 		select(connection, instruccionSQL, (rs) -> {
@@ -82,7 +82,7 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 	public void insertArrendatario(Arrendatario arrendatario) {
 		final String instruccionSQL = "INSERT INTO arrendatario"
-				+ "(nombre1, nombre2, apellidoPaterno, apellidoMaterno, edad, correo, celular, "
+				+ "(nombre1, nombre2, apellido_paterno, apellido_materno, edad, correo, celular, "
 				+ "direccion1, direccion2, pais, ciudad, estado, CP) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -112,8 +112,8 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 	public List<Arrendatario> findAll() {
 		List<Arrendatario> arrendatarios = new ArrayList<Arrendatario>();
 
-		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellidoPaterno, "
-				+ "apellidoMaterno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
+		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellido_paterno, "
+				+ "apellido_materno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
 				+ "FROM arrendatario";
 
 		select(connection, instruccionSQL, (rs) -> {
