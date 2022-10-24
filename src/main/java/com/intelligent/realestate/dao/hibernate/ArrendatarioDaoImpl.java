@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
 import com.intelligent.realestate.dao.hibernate.util.HibernateUtil;
+import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 
 @Repository
@@ -62,5 +63,18 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 		session.getTransaction().commit();
 		session.close();
+	}
+
+	@Override
+	public List<Arrendatario> findAll() {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		List<Arrendatario> arrendatarios = session.createQuery("select a from Arrendatario a").list();
+
+		session.getTransaction().commit();
+		session.close();
+
+		return arrendatarios;
 	}
 }

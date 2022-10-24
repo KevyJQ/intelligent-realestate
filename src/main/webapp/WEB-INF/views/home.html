@@ -11,14 +11,20 @@
 <title th:text="#{label.titulo.realestate}"></title>
 </head>
 <body>
-	
+	&nbsp;
 	<h3 class="text-center">
 		<span th:text="#{label.titulo.aplicacion}"></span>
 	</h3>
-
+	&nbsp;
 	<div class="text-center">
 		<a class="btn btn-primary" th:href="@{/arrendadores}" role="button">
 			<span th:text="#{label.titulo.navegar.arrendadores}"></span>
+		</a>
+	</div>
+	&nbsp;
+	<div class="text-center">
+		<a class="btn btn-primary" th:href="@{/arrendatarios}" role="button">
+			<span th:text="#{label.titulo.navegar.arrendatarios}"></span>
 		</a>
 	</div>
 </body>

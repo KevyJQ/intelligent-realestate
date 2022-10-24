@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title th:text="#{label.titulo.aplicacion}"></title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-offset-1 col-md-10">
+			<h3 class="text-center">
+				<span th:text="#{label.arrendatario.titulo.arrendatarios}"></span>
+			</h3>
+			<div class="panel-body">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th><span th:text="#{label.arrendatario.nombre1}"></span></th>
+						<th><span th:text="#{label.arrendatario.nombre2}"></span></th>
+						<th><span th:text="#{label.arrendatario.apellido_paterno}"></span></th>
+						<th><span th:text="#{label.arrendatario.apellido_materno}"></span></th>
+						<th><span th:text="#{label.arrendatario.edad}"></span></th>
+						<th><span th:text="#{label.arrendatario.correo}"></span></th>
+						<th><span th:text="#{label.arrendatario.celular}"></span></th>
+						<th><span th:text="#{label.arrendatario.direccion1}"></span></th>
+						<th><span th:text="#{label.arrendatario.direccion2}"></span></th>
+						<th><span th:text="#{label.arrendatario.pais}"></span></th>
+						<th><span th:text="#{label.arrendatario.ciudad}"></span></th>
+						<th><span th:text="#{label.arrendatario.estado}"></span></th>
+						<th><span th:text="#{label.arrendatario.cp}"></span></th>
+						<th><span th:text="#{label.arrendatario.eliminar}"></span></th>
+						<th><span th:text="#{label.arrendatario.actualizar}"></span></th>
+					</tr>
+
+					<tr th:each="arrendatario: ${arrendatarioes}">
+						<td th:text="${arrendatario.nombre1}" />
+						<td th:text="${arrendatario.nombre2}" />
+						<td th:text="${arrendatario.apellidoPaterno}" />
+						<td th:text="${arrendatario.apellidoMaterno}" />
+						<td th:text="${arrendatario.edad}" />
+						<td th:text="${arrendatario.correo}" />
+						<td th:text="${arrendatario.celular}" />
+						<td th:text="${arrendatario.direccion.direccion1}" />
+						<td th:text="${arrendatario.direccion.direccion2}" />
+						<td th:text="${arrendatario.direccion.pais}" />
+						<td th:text="${arrendatario.direccion.ciudad}" />
+						<td th:text="${arrendatario.direccion.estado}" />
+						<td th:text="${arrendatario.direccion.codigoPostal}" />
+
+					</tr>
+
+					<tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

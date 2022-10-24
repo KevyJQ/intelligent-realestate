@@ -108,4 +108,36 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 		});
 	}
 
+	@Override
+	public List<Arrendatario> findAll() {
+		List<Arrendatario> arrendatarios = new ArrayList<Arrendatario>();
+
+		final String instruccionSQL = "SELECT id_arrendatario, nombre1, nombre2, apellidoPaterno, "
+				+ "apellidoMaterno, edad, correo, celular, direccion1, direccion2, pais, ciudad, estado, CP "
+				+ "FROM arrendatario";
+
+		select(connection, instruccionSQL, (rs) -> {
+			Arrendatario arrendatario = new Arrendatario();
+			arrendatario.setDireccion(new Direccion());
+			arrendatario.setIdArrendatario(rs.getLong(1));
+			arrendatario.setNombre1(rs.getString(2));
+			arrendatario.setNombre2(rs.getString(3));
+			arrendatario.setApellidoPaterno(rs.getString(4));
+			arrendatario.setApellidoMaterno(rs.getString(5));
+			arrendatario.setEdad(rs.getInt(6));
+			arrendatario.setCorreo(rs.getString(7));
+			arrendatario.setCelular(rs.getString(8));
+			arrendatario.getDireccion().setDireccion1(rs.getString(9));
+			arrendatario.getDireccion().setDireccion1(rs.getString(10));
+			arrendatario.getDireccion().setPais(rs.getString(11));
+			arrendatario.getDireccion().setCiudad(rs.getString(12));
+			arrendatario.getDireccion().setEstado(rs.getString(13));
+			arrendatario.getDireccion().setCodigoPostal(rs.getString(14));
+
+			arrendatarios.add(arrendatario);
+		});
+
+		return arrendatarios;
+	}
+
 }
