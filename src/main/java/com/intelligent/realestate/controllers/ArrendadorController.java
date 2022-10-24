@@ -33,36 +33,35 @@ public class ArrendadorController {
 	}
 
 	@RequestMapping("/eliminarArrendador/{idArrendador}")
-	public String EliminarArrendador(@PathVariable(name = "idArrendador")Long idArrendador){
+	public String EliminarArrendador(@PathVariable(name = "idArrendador") Long idArrendador) {
 		Arrendador arrendador = arrendadorDao.buscarPorId(idArrendador);
-		if(arrendador != null) {
+		if (arrendador != null) {
 			arrendadorDao.delete(arrendador);
 		}
 		return "redirect:/arrendadores";
-		
 	}
-	
+
 	@RequestMapping("/editarArrendador/{idArrendador}")
-	public ModelAndView EditarArrendador(@PathVariable(name = "idArrendador")Long idArrendador){
+	public ModelAndView EditarArrendador(@PathVariable(name = "idArrendador") Long idArrendador) {
 		ModelAndView model = new ModelAndView("actualizarArrendador");
 		Arrendador arrendador = arrendadorDao.buscarPorId(idArrendador);
 		model.addObject("arrendador", arrendador);
 		return model;
 	}
-		
+
 	@RequestMapping(value = "/guardarCambioArrendador", method = RequestMethod.POST)
 	public String guardarArrendador(@ModelAttribute("arrendador") Arrendador arrendador) {
 		arrendadorDao.actualizarArrendador(arrendador);
 		return "redirect:/arrendadores";
 	}
-	
+
 	@RequestMapping("/crearArrendador")
 	public String CrearArrendador(Model model) {
 		Arrendador arrendador = new Arrendador();
 		model.addAttribute("arrendador", arrendador);
 		return "crearArrendador";
 	}
-	
+
 	@RequestMapping(value = "/guardarNuevoArrendador", method = RequestMethod.POST)
 	public String guardarNuevoArrendador(@ModelAttribute("arrendador") Arrendador arrendador) {
 		arrendadorDao.guardarArrendador(arrendador);

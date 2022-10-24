@@ -2,6 +2,7 @@ package com.intelligent.realestate.dao.jdbc;
 
 import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.insert;
 import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.select;
+import static com.intelligent.realestate.dao.jdbc.util.JdbcUtil.update;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -138,6 +139,40 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 		});
 
 		return arrendatarios;
+	}
+
+	@Override
+	public void delete(Arrendatario arrendatario) {
+		final String instruccionSQL = "delete from arrendatario where id_arrendatario = ? ";
+
+		update(connection, instruccionSQL, (pstmt) -> {
+			pstmt.setLong(1, arrendatario.getIdArrendatario());
+		});
+	}
+
+	@Override
+	public void actualizarArrendatario(Arrendatario arrendatario) {
+		final String instruccionSQL = "Update arrendatario SET "
+				+ "nombre1 = ?, nombre2 = ?, apellido_paterno = ?, apellido_materno = ?, edad = ?, correo = ?, celular= ?, "
+				+ "direccion1 = ?, direccion2 = ?, pais = ?, ciudad = ?, estado = ?, cp = ?"
+				+ "WHERE id_arrendatario = ?";
+
+		update(connection, instruccionSQL, (pstmt) -> {
+			pstmt.setString(1, arrendatario.getNombre1());
+			pstmt.setString(2, arrendatario.getNombre2());
+			pstmt.setString(3, arrendatario.getApellidoPaterno());
+			pstmt.setString(4, arrendatario.getApellidoMaterno());
+			pstmt.setInt(5, arrendatario.getEdad());
+			pstmt.setString(6, arrendatario.getCorreo());
+			pstmt.setString(7, arrendatario.getCelular());
+			pstmt.setString(8, arrendatario.getDireccion().getDireccion1());
+			pstmt.setString(9, arrendatario.getDireccion().getDireccion2());
+			pstmt.setString(10, arrendatario.getDireccion().getPais());
+			pstmt.setString(11, arrendatario.getDireccion().getCiudad());
+			pstmt.setString(12, arrendatario.getDireccion().getEstado());
+			pstmt.setString(13, arrendatario.getDireccion().getCodigoPostal());
+			pstmt.setLong(14, arrendatario.getIdArrendatario());
+		});
 	}
 
 }

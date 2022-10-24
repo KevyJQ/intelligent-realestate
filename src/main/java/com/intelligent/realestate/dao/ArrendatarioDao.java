@@ -8,9 +8,13 @@ public interface ArrendatarioDao { // Interface ArrendatarioDao que nos permitir
 
 	public List<Arrendatario> findAll();
 	
+	public void delete(Arrendatario arrendatario);
+	
 	public Arrendatario findById(long arrendatarioId);
 
 	public List<Arrendatario> findByNameAndLasName(String name, String apellidoPaterno, String apellidoMaterno);
 
 	public void insertArrendatario(Arrendatario arrendatario);
+	
+	public void actualizarArrendatario(Arrendatario arrendatario);
 }

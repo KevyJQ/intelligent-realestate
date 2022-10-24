@@ -77,4 +77,28 @@ public class ArrendatarioDaoImpl implements ArrendatarioDao {
 
 		return arrendatarios;
 	}
+
+	@Override
+	public void delete(Arrendatario arrendatario) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		Arrendatario arrenda = session.find(Arrendatario.class, arrendatario.getIdArrendatario());
+		session.delete(arrenda);
+
+		session.getTransaction().commit();
+		session.close();
+
+	}
+
+	@Override
+	public void actualizarArrendatario(Arrendatario arrendatario) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		session.update(arrendatario);
+
+		session.getTransaction().commit();
+		session.close();
+	}
 }
