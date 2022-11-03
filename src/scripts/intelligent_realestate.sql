@@ -1,5 +1,3 @@
-# SQL script para generar la base de datos intelligen_realestate.
-
 DROP DATABASE intelligent_realestate;
 CREATE DATABASE intelligent_realestate;
 
@@ -22,6 +20,11 @@ estado VARCHAR(100) NOT NULL,
 cp VARCHAR(100) NOT NULL,
 PRIMARY KEY (id_arrendador)
 );
+INSERT INTO arrendador VALUE(NULL,'K','B','J','Q',23,'KB','cel','D1','D2','P','C','E','CP');
+INSERT INTO arrendador VALUE(NULL,'D','M','AP','AM',21,'KB','cel','D1','D2','P','C','E','CP');
+INSERT INTO arrendador VALUE(NULL,'D1','M1','AP1','AM1',24,'KB1','cel1','D11','D21','P1','C1','E1','CP1');
+INSERT INTO arrendador VALUE(NULL,'D2','M2','AP2','AM2',25,'KB2','cel2','D12','D22','P2','C2','E2','CP2');
+INSERT INTO arrendador VALUE(NULL,'D3','M3','AP3','AM3',26,'KB3','cel3','D13','D23','P3','C3','E3','CP3');
 
 CREATE TABLE arrendatario(
 id_arrendatario INTEGER NOT NULL AUTO_INCREMENT,
@@ -40,6 +43,11 @@ estado VARCHAR(100) NOT NULL DEFAULT '-',
 cp VARCHAR(100) NOT NULL,
 PRIMARY KEY (id_arrendatario)
 );
+INSERT INTO arrendatario VALUE(NULL,'K','B','J','Q',23,'KB','cel','D1','D2','P','C','E','CP');
+INSERT INTO arrendatario VALUE(NULL,'D','M','AP','AM',23,'KB','cel','D1','D2','P','C','E','CP');
+INSERT INTO arrendatario VALUE(NULL,'D1','M1','AP1','AM1',24,'KB1','cel1','D11','D21','P1','C1','E1','CP1');
+INSERT INTO arrendatario VALUE(NULL,'D2','M2','AP2','AM2',25,'KB2','cel2','D12','D22','P2','C2','E2','CP2');
+INSERT INTO arrendatario VALUE(NULL,'D3','M3','AP3','AM3',26,'KB3','cel3','D13','D23','P3','C3','E3','CP3');
 
 CREATE TABLE type_realestate(
 id_type_real_estate INTEGER,
