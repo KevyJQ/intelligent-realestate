@@ -18,6 +18,7 @@ public class SpringBootMain {
 
 	public static void main(String[] args) {
 		System.out.println("Initializando Spring-Boot");
+		System.out.println("---- Inicializando Main SpringBootMain ----");
 		SpringApplication.run(SpringBootMain.class, args);
 	}
 }

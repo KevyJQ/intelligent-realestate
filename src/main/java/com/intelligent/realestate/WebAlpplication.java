@@ -18,6 +18,7 @@ public class WebAlpplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(WebAlpplication.class, args);
+		System.out.println("---- Main WebApplication ----");
 	}
 
 	@Bean

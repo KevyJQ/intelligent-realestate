@@ -12,12 +12,13 @@ import com.intelligent.realestate.model.Arrendador;
 
 @Repository
 public class ArrendadorDaoImpl implements ArrendadorDao {
-
+	
 	@Autowired
 	protected SessionFactory sessionFactory;
 
 	@Override
 	public Arrendador buscarPorId(long arrendadorId) {
+		//System.out.println("--- Usando DAO de hibernate ---\n");
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
@@ -63,6 +64,7 @@ public class ArrendadorDaoImpl implements ArrendadorDao {
 
 	@Override
 	public void actualizarArrendador(Arrendador arrendador) {
+		System.out.println("--- Usando ActualizarDAO de hibernate ---\n");
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
