@@ -80,4 +80,28 @@ public class RealEstateDaoImpl implements RealEstateDao {
 			}
 		});
 	}
+
+	@Override
+	public List<RealEstate> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(RealEstate realEstate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizarRealEstate(RealEstate realEstate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public RealEstate findById(long realEstateId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

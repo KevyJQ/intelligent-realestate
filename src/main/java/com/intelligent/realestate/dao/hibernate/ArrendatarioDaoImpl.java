@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.intelligent.realestate.dao.ArrendatarioDao;
-import com.intelligent.realestate.dao.hibernate.util.HibernateUtil;
-import com.intelligent.realestate.model.Arrendador;
 import com.intelligent.realestate.model.Arrendatario;
 
 @Repository
