@@ -91,6 +91,7 @@ public class RealEstateDaoImpl implements RealEstateDao {
 
 		session.beginTransaction().commit();
 		session.close();
+		
 		return realEstate;
 	}
 

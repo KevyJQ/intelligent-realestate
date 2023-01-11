@@ -15,13 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
+import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Arrendador;
+import com.intelligent.realestate.model.RealEstate;
 
 @Controller
 public class ArrendadorController {
 
 	@Autowired
 	private ArrendadorDao arrendadorDao;
+	@Autowired
+	private RealEstateDao realEstateDao;
 
 	@RequestMapping("/arrendadores")
 	public ModelAndView arrendadores(HttpServletResponse response) throws IOException {
