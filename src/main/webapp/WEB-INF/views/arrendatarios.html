@@ -22,6 +22,7 @@
 			<div class="panel-body">
 				<table class="table table-striped table-bordered">
 					<tr>
+						<th><span th:text="#{label.arrendatario.idArrendatario}"></span></th>
 						<th><span th:text="#{label.arrendatario.nombre1}"></span></th>
 						<th><span th:text="#{label.arrendatario.nombre2}"></span></th>
 						<th><span th:text="#{label.arrendatario.apellido_paterno}"></span></th>
@@ -40,19 +41,20 @@
 					</tr>
 
 					<tr th:each="arrendatario: ${arrendatarios}">
-						<td th:text="${arrendatario.nombre1}" />
-						<td th:text="${arrendatario.nombre2}" />
-						<td th:text="${arrendatario.apellidoPaterno}" />
-						<td th:text="${arrendatario.apellidoMaterno}" />
-						<td th:text="${arrendatario.edad}" />
-						<td th:text="${arrendatario.correo}" />
-						<td th:text="${arrendatario.celular}" />
-						<td th:text="${arrendatario.direccion.direccion1}" />
-						<td th:text="${arrendatario.direccion.direccion2}" />
-						<td th:text="${arrendatario.direccion.pais}" />
-						<td th:text="${arrendatario.direccion.ciudad}" />
-						<td th:text="${arrendatario.direccion.estado}" />
-						<td th:text="${arrendatario.direccion.codigoPostal}" />
+						<td align="center" th:text="${arrendatario.idArrendatario}" />
+						<td align="center" th:text="${arrendatario.nombre1}" />
+						<td align="center" th:text="${arrendatario.nombre2}" />
+						<td align="center" th:text="${arrendatario.apellidoPaterno}" />
+						<td align="center" th:text="${arrendatario.apellidoMaterno}" />
+						<td align="center" th:text="${arrendatario.edad}" />
+						<td align="center" th:text="${arrendatario.correo}" />
+						<td align="center" th:text="${arrendatario.celular}" />
+						<td align="center" th:text="${arrendatario.direccion.direccion1}" />
+						<td align="center" th:text="${arrendatario.direccion.direccion2}" />
+						<td align="center" th:text="${arrendatario.direccion.pais}" />
+						<td align="center" th:text="${arrendatario.direccion.ciudad}" />
+						<td align="center" th:text="${arrendatario.direccion.estado}" />
+						<td align="center" th:text="${arrendatario.direccion.codigoPostal}" />
 
 						<td><a class="btn btn-danger btn-sm"
 							th:href="@{/eliminarArrendatario/{idArrendatario} (idArrendatario=${arrendatario.idArrendatario})}">Eliminar</a></td>

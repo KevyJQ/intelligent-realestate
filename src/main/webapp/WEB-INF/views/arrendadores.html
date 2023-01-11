@@ -16,15 +16,14 @@
 			<h3 class="text-center">
 				<span th:text="#{label.arrendador.titulo.arrendadores}"></span>
 			</h3>
-			<a class="btn btn-info btn-sm" th:href="@{/}">Menu Principal</a>
-			<a class="btn btn-success btn-sm" th:href="@{/crearArrendador}">Crear
+			<a class="btn btn-info btn-sm" th:href="@{/}">Menu Principal</a> <a
+				class="btn btn-success btn-sm" th:href="@{/crearArrendador}">Crear
 				Arrendador</a>
-				<a class="btn btn-success btn-sm" th:href="@{/crearRealEstate}">Crear
-				Real Estate</a>
 
 			<div class="panel-body">
 				<table class="table table-striped table-bordered">
 					<tr>
+						<th><span th:text="#{label.arrendador.idArrendador}"></span></th>
 						<th><span th:text="#{label.arrendador.nombre1}"></span></th>
 						<th><span th:text="#{label.arrendador.nombre2}"></span></th>
 						<th><span th:text="#{label.arrendador.apellido_paterno}"></span></th>
@@ -44,19 +43,20 @@
 					</tr>
 
 					<tr th:each="arrendador: ${arrendadores}">
-						<td th:text="${arrendador.nombre1}" />
-						<td th:text="${arrendador.nombre2}" />
-						<td th:text="${arrendador.apellidoPaterno}" />
-						<td th:text="${arrendador.apellidoMaterno}" />
-						<td th:text="${arrendador.edad}" />
-						<td th:text="${arrendador.correo}" />
-						<td th:text="${arrendador.celular}" />
-						<td th:text="${arrendador.direccion.direccion1}" />
-						<td th:text="${arrendador.direccion.direccion2}" />
-						<td th:text="${arrendador.direccion.pais}" />
-						<td th:text="${arrendador.direccion.ciudad}" />
-						<td th:text="${arrendador.direccion.estado}" />
-						<td th:text="${arrendador.direccion.codigoPostal}" />
+						<td align="center" th:text="${arrendador.idArrendador}">
+						<td align="center" th:text="${arrendador.nombre1}" />
+						<td align="center" th:text="${arrendador.nombre2}" />
+						<td align="center" th:text="${arrendador.apellidoPaterno}" />
+						<td align="center" th:text="${arrendador.apellidoMaterno}" />
+						<td align="center" th:text="${arrendador.edad}" />
+						<td align="center" th:text="${arrendador.correo}" />
+						<td align="center" th:text="${arrendador.celular}" />
+						<td align="center" th:text="${arrendador.direccion.direccion1}" />
+						<td align="center" th:text="${arrendador.direccion.direccion2}" />
+						<td align="center" th:text="${arrendador.direccion.pais}" />
+						<td align="center" th:text="${arrendador.direccion.ciudad}" />
+						<td align="center" th:text="${arrendador.direccion.estado}" />
+						<td align="center" th:text="${arrendador.direccion.codigoPostal}" />
 
 						<td><a class="btn btn-danger btn-sm"
 							th:href="@{/eliminarArrendador/{idArrendador} (idArrendador=${arrendador.idArrendador})}">Eliminar</a></td>
