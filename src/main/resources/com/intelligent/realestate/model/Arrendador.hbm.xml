@@ -30,7 +30,7 @@
 			<property name="codigoPostal" column="CP"></property>
 		</component>
 
-		<set name="realEstates" table="real_estate" lazy="false">
+		<set name="realEstates" table="real_estate" lazy="false" cascade="all">
 			<key column="id_arrendador"/>
 			<one-to-many class="com.intelligent.realestate.model.RealEstate" />
 		</set>

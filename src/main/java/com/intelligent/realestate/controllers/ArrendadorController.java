@@ -15,17 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.intelligent.realestate.dao.ArrendadorDao;
-import com.intelligent.realestate.dao.RealEstateDao;
 import com.intelligent.realestate.model.Arrendador;
-import com.intelligent.realestate.model.RealEstate;
 
 @Controller
 public class ArrendadorController {
 
 	@Autowired
 	private ArrendadorDao arrendadorDao;
-	@Autowired
-	private RealEstateDao realEstateDao;
 
 	@RequestMapping("/arrendadores")
 	public ModelAndView arrendadores(HttpServletResponse response) throws IOException {
@@ -38,8 +34,11 @@ public class ArrendadorController {
 
 	@RequestMapping("/eliminarArrendador/{idArrendador}")
 	public String EliminarArrendador(@PathVariable(name = "idArrendador") Long idArrendador) {
+		System.out.println("Eliminar arrendador con el ID: " + idArrendador);
 		Arrendador arrendador = arrendadorDao.buscarPorId(idArrendador);
 		if (arrendador != null) {
+			System.out.println(
+					"ArrendadorController.EliminarArrendador() Borrando arrendador" + arrendador.getIdArrendador());
 			arrendadorDao.delete(arrendador);
 		}
 		return "redirect:/arrendadores";
